@@ -92,6 +92,9 @@
 
                 <div class="single-section" v-for="divs,index in size_divs">
                     <h5>Product Size @{{ index + 1 }}</h5>
+                    <input type="file" class="filepond" multiple name='images[]'>
+
+
                     <div class="col-sm-3 my-1">
                         <label class="sr-only" for="product_description"
                             >Size Title</label
@@ -219,7 +222,9 @@
         },
     });
 </script>
-
+<script>
+  FilePond.parse(document.body);
+  </script>
 <style>
     .single-section {
         background-color: white;

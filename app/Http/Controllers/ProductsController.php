@@ -92,11 +92,12 @@ class ProductsController extends Controller
                 $sizeDetails->SPN=$data['size_SPN'][$key];
                 $sizeDetails->save();
                 //Adding Images in size.
-                $insertedsizeId=ProductSize::where(['Id'=> $sizeDetails->Id])->first();
-                $productImage=new ProductImage;
+                // $insertedsizeId=ProductSize::where(['id'=> $sizeDetails->Id])->first();
+                $insertedsizeId= $sizeDetails->id;
+                $productImage = new ProductsImage;
                 foreach ($data['images'] as $image_key=>$image_val)
                 {
-                    $imageDetails=new ProductImage;
+                    $imageDetails= new ProductsImage;
                     $image_tmp=$data['images'][$image_key];
                     if ($image_tmp->isValid())
                     {
@@ -109,7 +110,7 @@ class ProductsController extends Controller
                         $imageDetails->image = $fileName; 
 
                     }
-                    $imageDetails->productSize_id=$insertedsizeId;
+                    $imageDetails->productSize_id = $insertedsizeId;
                     $imageDetails->save();
                 }
 
@@ -127,7 +128,7 @@ class ProductsController extends Controller
 		// 	$categories_drop_down .= "<option value='".$cat->id."'>".$cat->name."</option>";
 		// 	$sub_categories = Category::where(['parent_id' => $cat->id])->get();
         //     foreach($sub_categories as $sub_cat)
-        //     {
+        //     { 
 		// 		$categories_drop_down .= "<option value='".$sub_cat->id."'>&nbsp;&nbsp;--&nbsp;".$sub_cat->name."</option>";	
 		// 	}	
 		// }
