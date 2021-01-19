@@ -80,22 +80,39 @@ class ProductsController extends Controller
             $product->slug=SlugService::createslug(Product::class,'slug',$data['product_name']);
             //echo "<pre>";print_r($product);die;
             $product->save();
-            //dd($product);die;
+            
             //Adding Sizes
             
-            $addedProduct=Product::where(['slug'=>$product->slug])->first();
-            $addedproductId= $addedProduct->id;
-            //$sizes=toArray($data['size_title']);
+            $addedproductId= $product->id;
             foreach($data['size_title'] as $key=>$val)
             {
                 $sizeDetails=new ProductSize;
                 $sizeDetails->product_id=$addedproductId;
                 $sizeDetails->title=$data['size_title'][$key];
                 $sizeDetails->SPN=$data['size_SPN'][$key];
-                //echo "<pre>";print_r($sizeDetails);die;
-                //DB::enableQueryLog();
-                //dd(DB::getQueryLog());
                 $sizeDetails->save();
+                //Adding Images in size.
+                $insertedsizeId=ProductSize::where(['Id'=> $sizeDetails->Id])->first();
+                $productImage=new ProductImage;
+                foreach ($data['images'] as $image_key=>$image_val)
+                {
+                    $imageDetails=new ProductImage;
+                    $image_tmp=$data['images'][$image_key];
+                    if ($image_tmp->isValid())
+                    {
+                        
+                        $extension = $image_tmp->getClientOriginalExtension();
+                        $fileName = rand(111,99999).'.'.$extension;
+                        $image_path = 'images/backend_images/product/large'.'/'.$fileName;
+                        
+                        Image::make($image_tmp)->save($image_path);
+                        $imageDetails->image = $fileName; 
+
+                    }
+                    $imageDetails->productSize_id=$insertedsizeId;
+                    $imageDetails->save();
+                }
+
             }
                
 			return redirect()->back()->with('flash_message_success', 'Product has been added successfully');
