@@ -31,15 +31,13 @@ class ProductsController extends Controller
             //     'product_part'=>'required'
             // ]);
             
-        
-            
             $data = $request->all();
 			//echo "<pre>"; print_r($data); die;
             
 			$product = new Product;
 			$product->category_id = $data['product_category'];
 			$product->product_name = $data['product_name'];
-            //echo "<pre>"; print_r($data); die;
+            
 			if(!empty($data['product_description'])){
 				$product->description = $data['product_description'];
 			}else{
@@ -52,69 +50,55 @@ class ProductsController extends Controller
                 $status='1';
             }
 			$product->price = $data['product_price'];
-
-			/* // Upload Image
-            if($request->hasFile('image'))
-            {
-            	$image_tmp = $request->file('image');
-                if ($image_tmp->isValid())
-                {
-                    // Upload Images after Resize
-                    $extension = $image_tmp->getClientOriginalExtension();
-	                $fileName = rand(111,99999).'.'.$extension;
-                    $large_image_path = 'images/backend_images/product/large'.'/'.$fileName;
-                    $medium_image_path = 'images/backend_images/product/medium'.'/'.$fileName;  
-                    $small_image_path = 'images/backend_images/product/small'.'/'.$fileName;  
-
-	                Image::make($image_tmp)->save($large_image_path);
- 					Image::make($image_tmp)->resize(600, 600)->save($medium_image_path);
-     				Image::make($image_tmp)->resize(300, 300)->save($small_image_path);
-
-     				$product->image = $fileName; 
-
-                }
-            } */
             $product->shape=$data['product_shape'];
             $product->partNo=$data['product_part'];
             $product->status = $status;
             $product->slug=SlugService::createslug(Product::class,'slug',$data['product_name']);
             //echo "<pre>";print_r($product);die;
-            $product->save();
+            //$product->save();
             
             //Adding Sizes
             
-            $addedproductId= $product->id;
+            //$addedproductId= $product->id;
+            
             foreach($data['size_title'] as $key=>$val)
             {
                 $sizeDetails=new ProductSize;
-                $sizeDetails->product_id=$addedproductId;
+                //$sizeDetails->product_id=$addedproductId;
                 $sizeDetails->title=$data['size_title'][$key];
                 $sizeDetails->SPN=$data['size_SPN'][$key];
-                $sizeDetails->save();
+                //$sizeDetails->save();
+                
                 //Adding Images in size.
-                // $insertedsizeId=ProductSize::where(['id'=> $sizeDetails->Id])->first();
+                
                 $insertedsizeId= $sizeDetails->id;
                 $productImage = new ProductsImage;
-                foreach ($data['images'] as $image_key=>$image_val)
+                $images=$request->file('images');
+                echo "<pre>";print_r($images);die;
+                $num=1;
+                foreach ($images as $image)
                 {
+                    /*
                     $imageDetails= new ProductsImage;
-                    $image_tmp=$data['images'][$image_key];
-                    if ($image_tmp->isValid())
-                    {
-                        
+                    $image_tmp=$image;
+                    //$image_tmp = $request->file('images');
+                    //if ($image_tmp->isValid())
+                    //{
                         $extension = $image_tmp->getClientOriginalExtension();
                         $fileName = rand(111,99999).'.'.$extension;
                         $image_path = 'images/backend_images/product/large'.'/'.$fileName;
-                        
                         Image::make($image_tmp)->save($image_path);
                         $imageDetails->image = $fileName; 
 
-                    }
-                    $imageDetails->productSize_id = $insertedsizeId;
-                    $imageDetails->save();
-                }
+                    //}
+                    //$imageDetails->productSize_id = $insertedsizeId;
+                    //$imageDetails->save();
+                    echo $fileName;
+                    */
+                        $num++;
+                } 
 
-            }
+            }echo $num;die;
                
 			return redirect()->back()->with('flash_message_success', 'Product has been added successfully');
            

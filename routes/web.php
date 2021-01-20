@@ -14,20 +14,11 @@ use App\Http\Controllers\IndexController;
 |
 */
 
-Route::get('/',function()
-{
-    return view('auth/login');
-});
-Route::get('/admin',[ProductsController::class,'viewProducts'])->middleware('auth');
-/*
-Route::get('/dashboard', function ()
-{
-    return view('dashboard');
-    
-})->middleware(['auth'])->name('dashboard');
-*/
+Route::get('/',[IndexController::class,'home']);
+Route::get('all',[IndexController::class,'categoriesApi']);
+Route::get('category/{slug}',[IndexController::class,'showCategoryProducts']);
+Route::get('product/{slug}',[IndexController::class,'showProduct']);
+
 //require __DIR__.'/auth.php';
 //Auth::routes(['register'=>false]);
-Route::get('all',[IndexController::class,'categoriesApi']);
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/admin/view-products',[ProductsController::class,'viewProducts'])->middleware('auth')->name('view-products');
+
