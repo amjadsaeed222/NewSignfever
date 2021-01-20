@@ -34,9 +34,11 @@ Route::group(['middleware'=>'auth:api'],function(){
     Route::match(['get', 'post'], '/admin/edit-category/{slug}',[CategoryController::class,'editCategory'])->middleware('web');
     Route::match(['get', 'post'], '/admin/delete-category/{id}',[CategoryController::class,'deleteCategory']);
     Route::get('/admin/view-categories',[CategoryController::class,'viewCategories'])->name('view-categories');
-
+    
     // Admin Products Routes
+    Route::match(['get','post'],'/admin/add-material',[ProductsController::class,'addmaterial']);
     Route::match(['get','post'],'/admin/add-product',[ProductsController::class,'addProduct'])->middleware('web');
+    
     Route::match(['get','post'],'/admin/edit-product/{slug}',[ProductsController::class,'editProduct'])->middleware('web');
     Route::get('/admin/delete-product/{id}',[ProductsController::class,'deleteProduct']);
     Route::get('/admin/view-products',[ProductsController::class,'viewProducts'])->name('viewproducts');

@@ -73,8 +73,8 @@ class ProductsController extends Controller
                 
                 $insertedsizeId= $sizeDetails->id;
                 $productImage = new ProductsImage;
-                $images=$request->file('images');
-                echo "<pre>";print_r($images);die;
+                $images=$data['images'];
+                
                 $num=1;
                 foreach ($images as $image)
                 {
@@ -121,7 +121,28 @@ class ProductsController extends Controller
 
 		return view('admin.products.add_product');
 	}  
+    public function addmaterial(Request $request)
+    {
+        $data=$request->all();
+        $material=new ProductMaterial;
+        $material->title=$data['title'];
+        $material->sizeId=$data['sizeId'];
+        $material->description=$data['description'];
+        $image_tmp = $data('images');
+        if ($image_tmp->isValid())
+        {
+            $extension = $image_tmp->getClientOriginalExtension();
+            $fileName = rand(111,99999).'.'.$extension;
+            $image_path = 'images/backend_images/product/large'.'/'.$fileName;
+            Image::make($image_tmp)->save($image_path);
+            $material->configImage = $fileName; 
 
+        }
+        
+        $material->save();
+        $request->session()->flash('alert-success', 'Material successful added!');
+        return redirect()->back();
+    }
 	public function editProduct(Request $request,$slug=null,$id=null){
 
         if($request->isMethod('post'))
