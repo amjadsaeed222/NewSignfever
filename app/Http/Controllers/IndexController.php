@@ -90,8 +90,6 @@ class IndexController extends Controller
 
         return view('frontend.category', compact('category','products'));
         
-        
-        
         // $product=Product::where(['slug'=>$slug])->first();        
         // $product->category_name = $category_name->name;
         // $attributes=ProductsAttribute::where(['product_id' => $product->id])->get();
