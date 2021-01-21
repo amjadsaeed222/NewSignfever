@@ -42,9 +42,6 @@
                 </div>
               </div>
               
-              
-              
-              
               <div class="control-group">
                 <label class="control-label">Price</label>
                 <div class="controls">

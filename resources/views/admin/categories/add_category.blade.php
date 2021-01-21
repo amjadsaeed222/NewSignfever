@@ -26,7 +26,7 @@
             <h5>Add Category</h5>
           </div>
           <div class="widget-content nopadding">
-            <form class="form-horizontal" method="post" action="{{ url('api/admin/add-category') }}" name="add_category" id="add_category" novalidate="novalidate">{{ csrf_field() }}
+            <form class="form-horizontal" method="post" action="{{ url('api/admin/add-category') }}" name="add_category" id="add_category" enctype="multipart/form-data">{{ csrf_field() }}
               <div class="control-group">
                 <label class="control-label">Category Name</label>
                 <div class="controls">
@@ -45,6 +45,11 @@
                   </select>
                   <span style="color: red">@error('parent_id'){{$message}}@enderror</span>
                 </div>
+                <div class="control-group">
+                  <div class="controls">
+                  <input name="image" id="image" type="file" multiple="multiple">
+                </div>
+              </div>
               </div>
               <div class="control-group">
                 <label class="control-label">Description</label>

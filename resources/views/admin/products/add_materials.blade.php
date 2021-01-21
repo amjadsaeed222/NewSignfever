@@ -90,7 +90,7 @@
                                         name="material_description"
                                         type="text"
                                         class="form-control"
-                                        id="material_description"
+                                        id="description"
                                         placeholder="Part#"
                                     />
                                 </div>
@@ -158,6 +158,13 @@
                     this.allSizes = newRes;
                     console.log(this.allSizes)
                     this.productFound = true;
+                    // Rich Text Editor
+                    ClassicEditor
+                    .create( document.querySelector( '#description' ) )
+                    .catch( error => {
+                    console.error( error );
+                    } );
+                    //
                 });
             }
         },

@@ -82,7 +82,7 @@
                                     name="product_description"
                                     type="text"
                                     class="form-control"
-                                    id="product_description"
+                                    id="description"
                                     placeholder="Product Description"
                                 />
                             </div>
@@ -96,7 +96,7 @@
                      
 
                     <div class="col-sm-3 my-1">
-                        <label class="sr-only" for="product_description"
+                        <label class="sr-only" for="size_title"
                             >Size Title</label
                         >
                         <div class="input-group">
@@ -104,13 +104,13 @@
                                 name="size_title[]"
                                 type="text"
                                 class="form-control"
-                                id="product_description"
+                                id="size_title"
                                 placeholder="2x2"
                             />
                         </div>
                     </div>
                     <div class="col-sm-3 my-1">
-                        <label class="sr-only" for="product_description"
+                        <label class="sr-only" for="SPN"
                             >SPN#</label
                         >
                         <div class="input-group">
@@ -118,43 +118,12 @@
                                 name="size_SPN[]"
                                 type="text"
                                 class="form-control"
-                                id="product_description"
+                                id="size_SPN"
                                 placeholder="GA-356"
                             />
                         </div>
                     </div>
 
-                    <!-- <h5>Product Material</h5>
-                    <div class="product-material">
-                        <div class="col-sm-3 my-1">
-                            <label class="sr-only" for="product_description"
-                                >Material Title</label
-                            >
-                            <div class="input-group">
-                                <input
-                                    name="material_title[]"
-                                    type="text"
-                                    class="form-control"
-                                    id="product_description"
-                                    placeholder="Plastic"
-                                />
-                            </div>
-                        </div>
-                        <div class="col-sm-3 my-1">
-                            <label class="sr-only" for="product_description"
-                                >Material Description</label
-                            >
-                            <div class="input-group">
-                                <input
-                                    name="material_description[]"
-                                    type="text"
-                                    class="form-control"
-                                    id="product_description"
-                                    placeholder="Material Description"
-                                />
-                            </div>
-                        </div>
-                    </div> -->
                 </div>
 
                 <div class="col-auto my-1">

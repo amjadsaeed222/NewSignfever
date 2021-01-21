@@ -26,7 +26,7 @@
             <h5>Edit Category</h5>
           </div>
           <div class="widget-content nopadding">
-            <form class="form-horizontal" method="post" action="{{ url('/api/admin/edit-category/'.$categoryDetails->slug) }}" name="add_category" id="add_category" novalidate="novalidate">{{ csrf_field() }}
+            <form class="form-horizontal" method="post" action="{{ url('/api/admin/edit-category/'.$categoryDetails->slug) }}" name="add_category" id="add_category" enctype="multipart/form-data">{{ csrf_field() }}
               <div class="control-group">
                 <label class="control-label">Category Name</label>
                 <div class="controls">
@@ -36,27 +36,35 @@
               <div class="control-group">
                 <label class="control-label">Category Level</label>
                 <div class="controls">
-                  <select name="parent_id" style="width:220px;">
+                  <select name="parent_id" id="parent_id" style="width:220px;">
                     <option value="0">Main Category</option>
                     @foreach($levels as $val)
-                    <option value="{{ $val->id }}" @if($val->id==$categoryDetails->parent_id) selected @endif>{{ $val->name }}</option>
+                    <option value="{{ $val->id }}"
+                      @php
+                          if($val->id==$categoryDetails->parent_id)
+                          {
+                            echo "Selected";
+                          }
+                      @endphp >{{ $val->name }}</option>
                     @endforeach
                   </select>
                 </div>
               </div>
               <div class="control-group">
+                <div class="controls">
+                <input name="image" id="image" type="file">
+                @if(!empty($categoryDetails->image))
+                   <input type="hidden" name="current_image" value="{{ $categoryDetails->image }}"> 
+                @endif
+              </div>
+            </div>
+              <div class="control-group">
                 <label class="control-label">Description</label>
                 <div class="controls">
-                  <textarea name="description" id="description">@php echo strip_tags(htmlspecialchars_decode($categoryDetails->description));
-                  @endphp</textarea>
+                  <textarea name="description" id="description">{{$categoryDetails->description}}</textarea>
                 </div>
               </div>
-              <div class="control-group">
-                <label class="control-label">URL</label>
-                <div class="controls">
-                  <input type="text" name="url" id="url" value="{{ $categoryDetails->url }}">
-                </div>
-              </div>
+              
               <div class="control-group">
                 <label class="control-label">Enable</label>
                 <div class="controls">
