@@ -17,8 +17,6 @@ class ProductsController extends Controller
     
     public function addProduct(Request $request)
     {
-        
-
         if($request->isMethod('post'))
         {
             
@@ -38,15 +36,20 @@ class ProductsController extends Controller
 			$product->category_id = $data['product_category'];
 			$product->product_name = $data['product_name'];
             
-			if(!empty($data['product_description'])){
+            if(!empty($data['product_description']))
+            {
 				$product->description = $data['product_description'];
-			}else{
+            }
+            else
+            {
 				$product->description = '';	
 			}
             
-            if(empty($data['status'])){
+            if(empty($data['status']))
+            {
                 $status='0';
-            }else{
+            }else
+            {
                 $status='1';
             }
 			$product->price = $data['product_price'];
@@ -55,69 +58,47 @@ class ProductsController extends Controller
             $product->status = $status;
             $product->slug=SlugService::createslug(Product::class,'slug',$data['product_name']);
             //echo "<pre>";print_r($product);die;
-            //$product->save();
+            $product->save();
             
             //Adding Sizes
             
-            //$addedproductId= $product->id;
+            $addedproductId= $product->id;
             
             foreach($data['size_title'] as $key=>$val)
             {
                 $sizeDetails=new ProductSize;
-                //$sizeDetails->product_id=$addedproductId;
+                $sizeDetails->product_id=$addedproductId;
                 $sizeDetails->title=$data['size_title'][$key];
                 $sizeDetails->SPN=$data['size_SPN'][$key];
-                //$sizeDetails->save();
+                $sizeDetails->save();
                 
                 //Adding Images in size.
                 
                 $insertedsizeId= $sizeDetails->id;
                 $productImage = new ProductsImage;
                 $images=$data['images'];
-                
-                $num=1;
-                foreach ($images as $image)
+                $img_len=count($images);
+                for($i=0; $i<$img_len; $i++)
                 {
-                    /*
+                    $extension = $images[$i]->getClientOriginalExtension();
+                    $fileName = rand(111,99999).'.'.$extension;
+                    $image_path = 'images/backend_images/product/large'.'/'.$fileName;
+                    Image::make($images[$i])->save($image_path);
                     $imageDetails= new ProductsImage;
-                    $image_tmp=$image;
-                    //$image_tmp = $request->file('images');
-                    //if ($image_tmp->isValid())
-                    //{
-                        $extension = $image_tmp->getClientOriginalExtension();
-                        $fileName = rand(111,99999).'.'.$extension;
-                        $image_path = 'images/backend_images/product/large'.'/'.$fileName;
-                        Image::make($image_tmp)->save($image_path);
-                        $imageDetails->image = $fileName; 
+                    $imageDetails->productSize_id = $insertedsizeId;
+                    $imageDetails->image = $fileName;
+                    $imageDetails->save();
+                }                   
+                    
+            }     
 
-                    //}
-                    //$imageDetails->productSize_id = $insertedsizeId;
-                    //$imageDetails->save();
-                    echo $fileName;
-                    */
-                        $num++;
-                } 
-
-            }echo $num;die;
+        
                
 			return redirect()->back()->with('flash_message_success', 'Product has been added successfully');
            
         }
 
-		// $categories = Category::where(['parent_id' => 0])->get();
-
-		// $categories_drop_down = "<option value='' selected disabled>Select</option>";
-        // foreach($categories as $cat)
-        // {
-		// 	$categories_drop_down .= "<option value='".$cat->id."'>".$cat->name."</option>";
-		// 	$sub_categories = Category::where(['parent_id' => $cat->id])->get();
-        //     foreach($sub_categories as $sub_cat)
-        //     { 
-		// 		$categories_drop_down .= "<option value='".$sub_cat->id."'>&nbsp;&nbsp;--&nbsp;".$sub_cat->name."</option>";	
-		// 	}	
-		// }
-         
-		//echo "<pre>"; print_r($categories_drop_down); die;
+		
 
 		return view('admin.products.add_product');
 	}  
