@@ -5,6 +5,8 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductsAttribute;
 use App\Models\ProductsImage;
+use App\Models\ProductSize;
+
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
@@ -97,6 +99,22 @@ class IndexController extends Controller
         // return view('frontend.productDetails', compact('product'));
         
     }
+
+
+    public function getSize($productId)
+    {
+        $size=ProductSize::where(['product_id'=>$productId])->first();
+   
+
+        return $size;
+        // $product=Product::where(['slug'=>$slug])->first();        
+        // $product->category_name = $category_name->name;
+        // $attributes=ProductsAttribute::where(['product_id' => $product->id])->get();
+        // $product->designs = $attributes;
+        // return view('frontend.productDetails', compact('product'));
+        
+    }
+
 
     public function showProduct($slug)
     {

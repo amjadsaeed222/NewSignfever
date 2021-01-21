@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\ProductsAttribute;
 use App\Models\ProductsImage;
 use App\Models\ProductSize;
+use App\Models\ProductMaterial;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Response;
 
@@ -101,9 +102,13 @@ class ProductsController extends Controller
 		
 
 		return view('admin.products.add_product');
-	}  
+    }  
+    
     public function addmaterial(Request $request)
     {
+        if($request->isMethod('post'))
+        {
+
         $data=$request->all();
         $material=new ProductMaterial;
         $material->title=$data['title'];
@@ -124,6 +129,12 @@ class ProductsController extends Controller
         $request->session()->flash('alert-success', 'Material successful added!');
         return redirect()->back();
     }
+        $products=Product::all();
+		return view('admin.products.add_materials', compact('products'));
+        
+    }
+
+  
 	public function editProduct(Request $request,$slug=null,$id=null){
 
         if($request->isMethod('post'))

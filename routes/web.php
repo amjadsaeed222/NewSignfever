@@ -14,11 +14,16 @@ use App\Http\Controllers\IndexController;
 |
 */
 
+
+Route::get("/admin-login", function(){
+    return view('auth/login');
+});
+
 Route::get('/',[IndexController::class,'home']);
 Route::get('all',[IndexController::class,'categoriesApi']);
 Route::get('category/{slug}',[IndexController::class,'showCategoryProducts']);
 Route::get('product/{slug}',[IndexController::class,'showProduct']);
-
+Route::get('get-size/{sizeId}',[IndexController::class,'getSize']);
 //require __DIR__.'/auth.php';
 //Auth::routes(['register'=>false]);
 

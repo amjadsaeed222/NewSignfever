@@ -16,7 +16,7 @@
     </ul>
   </div>
 </nav> -->
-<div class="custom-nav" id="nav-el">
+<!-- <div class="custom-nav" id="nav-el">
       <div>
       <ul class="">
         <li class="">
@@ -27,7 +27,7 @@
         </li>
       </ul>
     </div>
-</div>
+</div> -->
 <div class="learn-more text-center">
       <i><u>Social Distancing Signs</u> – Learn More</i>
 </div>
