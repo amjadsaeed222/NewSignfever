@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\ProductsAttribute;
 use App\Models\ProductsImage;
 use App\Models\ProductSize;
+use App\Models\ProductMaterial;
 
 use Illuminate\Http\Request;
 
@@ -103,7 +104,7 @@ class IndexController extends Controller
 
     public function getSize($productId)
     {
-        $size=ProductSize::where(['product_id'=>$productId])->first();
+        $size=ProductSize::where(['product_id'=>$productId])->get();
    
 
         return $size;
@@ -121,14 +122,27 @@ class IndexController extends Controller
         $product=Product::where(['slug'=>$slug])->first();        
         $category_name = Category::where(['id' => $product->category_id])->first();
         $product->category_name = $category_name->name;
-        $attributes=ProductsAttribute::where(['product_id' => $product->id])->get();
-        foreach($attributes as $attribute)
-        {
-            $images = ProductsImage::where(['productAttribute_id' => $attribute->id])->get();
-            $attribute->images = $images;
+        $sizes=ProductSize::where(['product_id'=>$product->id])->get();
+        foreach($sizes as $size)
+        {   
+            $images = ProductsImage::where(['productSize_id'=>$size->id])->get();
+            $materials=ProductMaterial::where(['sizeId'=>$size->id])->get();
+            $size->materials=$materials;
+            $size->images=$images;
         }
-        $product->designs = $attributes;
-        return view('frontend.productDetails', compact('product'));
+        $product->sizes = $sizes;
+
+        
+        
+        // $attributes=ProductsAttribute::where(['product_id' => $product->id])->get();
+        // foreach($attributes as $attribute)
+        // {
+        //     $images = ProductsImage::where(['productAttribute_id' => $attribute->id])->get();
+        //     $attribute->images = $images;
+        // }
+        // $product->designs = $attributes;
+        return $product;
+        // return view('frontend.productDetails', compact('product'));
         
     }
 

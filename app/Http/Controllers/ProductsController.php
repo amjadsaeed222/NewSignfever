@@ -111,19 +111,19 @@ class ProductsController extends Controller
 
         $data=$request->all();
         $material=new ProductMaterial;
-        $material->title=$data['title'];
-        $material->sizeId=$data['sizeId'];
-        $material->description=$data['description'];
-        $image_tmp = $data('images');
-        if ($image_tmp->isValid())
-        {
-            $extension = $image_tmp->getClientOriginalExtension();
-            $fileName = rand(111,99999).'.'.$extension;
-            $image_path = 'images/backend_images/product/large'.'/'.$fileName;
-            Image::make($image_tmp)->save($image_path);
-            $material->configImage = $fileName; 
+        $material->title=$data['material_title'];
+        $material->sizeId=$data['product_size'];
+        $material->description=$data['material_description'];
+        // $image_tmp = $data('images');
+        // if ($image_tmp->isValid())
+        // {
+        //     $extension = $image_tmp->getClientOriginalExtension();
+        //     $fileName = rand(111,99999).'.'.$extension;
+        //     $image_path = 'images/backend_images/product/large'.'/'.$fileName;
+        //     Image::make($image_tmp)->save($image_path);
+        //     $material->configImage = $fileName; 
 
-        }
+        // }
         
         $material->save();
         $request->session()->flash('alert-success', 'Material successful added!');

@@ -11,6 +11,7 @@
        <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>Products</span> <span class="label label-important"></span></a>
         <ul>
           <li><a href="{{ url('/api/admin/add-product')}}">Add Product</a></li>
+          <li><a href="{{ url('/api/admin/add-material')}}">Add Product Material</a></li>
           <li><a href="{{ url('/api/admin/view-products')}}">View Products</a></li>
         </ul>
       </li>

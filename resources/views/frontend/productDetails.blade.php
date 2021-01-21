@@ -86,7 +86,7 @@
         product_name: "Pool Chemical",
         shape: "Vertical",
         partNo: "PART-34",
-        product_description:
+        description:
             "A custom danger sign indicates information about specific hazardous conditions that a standard sign cannot always relay. Add your choice of text to this template to create a unique safety sign. For immediate use of your customized design, download a free PDF and print on your inkjet or laser printer.",
         sizes: [
             {

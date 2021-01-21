@@ -31,7 +31,9 @@ class CategoryController extends Controller
     		$category = new Category;
     		$category->name = $data['category_name'];
             $category->parent_id = $data['parent_id'];
-    		$category->description = $data['description'];
+            $category->description = $data['description'];
+    		// $category->image = $data['image'];
+            
     		//$category->url = $data['url'];
             $category->status = $status;
             $category->slug=SlugService::createslug(Category::class,'slug',$data['category_name']);
