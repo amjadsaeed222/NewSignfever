@@ -10,7 +10,7 @@ class Category extends Model
 {
     use sluggable;
     use HasFactory;
-    protected $fillable=['status','name','description','url','slug'];
+    protected $fillable=['status','name','description','parent_id','slug','image'];
      public function product()
      {
          //return $this->hasMany('App\Models\Product','id');

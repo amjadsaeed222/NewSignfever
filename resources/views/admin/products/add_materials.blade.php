@@ -86,13 +86,14 @@
                                     >Material Description</label
                                 >
                                 <div class="input-group">
-                                    <input
+                                    <textarea
                                         name="material_description"
                                         type="text"
                                         class="form-control"
                                         id="description"
                                         placeholder="Part#"
-                                    />
+                                        
+                                    ></textarea>
                                 </div>
                             </div>
                         </div>
@@ -158,13 +159,7 @@
                     this.allSizes = newRes;
                     console.log(this.allSizes)
                     this.productFound = true;
-                    // Rich Text Editor
-                    ClassicEditor
-                    .create( document.querySelector( '#description' ) )
-                    .catch( error => {
-                    console.error( error );
-                    } );
-                    //
+                    
                 });
             }
         },
