@@ -75,7 +75,7 @@ class CategoryController extends Controller
                     $extension = $image_tmp->getClientOriginalExtension();
 	                $fileName = rand(111,99999).'.'.$extension;
                     $large_image_path = 'images/backend_images/product/large'.'/'.$fileName;
-                    //Image::make($image_tmp)->save($large_image_path);
+                    Image::make($image_tmp)->save($large_image_path);
  				}
             }
             else if(!empty($data['current_image']))

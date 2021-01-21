@@ -39,7 +39,7 @@
                   <th>Category ID</th>
                   <th>Category Name</th>
                   <th>Level</th>
-                  <th>Category URL</th>
+                  <th>Image</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -49,7 +49,7 @@
                   <td class="center">{{ $category->id }}</td>
                   <td class="center">{{ $category->name }}</td>
                   <td class="center">{{ $category->parent_id }}</td>
-                  <td class="center">{{ $category->url }}</td>
+                  <td class="center"><img src="{{ asset('/images/backend_images/product/large/'.$category->image) }}" style="float:right;width:25px;height:25px"></td>
                   <td class="center">
                     <a href="{{ url('/api/admin/edit-category/'.$category->slug) }}" class="btn btn-primary btn-mini">Edit</a> 
                     <a <?php /* id="delCat" href="{{ url('/api/admin/delete-category/'.$category->id) }}" */ ?> rel="{{ $category->id }}" rel1="delete-category" href="javascript:" class="btn btn-danger btn-mini deleteRecord">Delete</a></td>
