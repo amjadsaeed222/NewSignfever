@@ -93,7 +93,7 @@
     </div>
 </div>
 
-<div class="middle-nav-mobile">
+<div class="middle-nav-mobile mobile-only">
     <div class="search col-md-5">
         <div class="input-group mb-3">
             <div class="input-group-append">

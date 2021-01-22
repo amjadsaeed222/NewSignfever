@@ -38,7 +38,7 @@ class CategoryController extends Controller
             //Storing Image
             $extension = $image->getClientOriginalExtension();
             $fileName = rand(111,99999).'.'.$extension;
-            $image_path = 'images/backend_images/product/large'.'/'.$fileName;
+            $image_path = 'images/backend_images/category'.'/'.$fileName;
             Image::make($image)->save($image_path);
             
             $category->image = $fileName;
