@@ -1,46 +1,267 @@
 @extends('layouts.frontendLayout.frontend_design') @section('content')
-<div id="home-page" class="row no-gutters">
-    <div class="col-12" id="categories_row">
-        <h5>Categories You Might Like:</h5>
-        <div class="col-md-2">
-            <a href="/category/medical-safety">
-                <div class="card" style="width: 100%">
+
+<div id="home-page">
+    <!-- Desktop Version -->
+
+    <div class="desktop-only mx-2">
+        <!-- Category Row -->
+        <div class="row my-2 mx-4">
+            <div class="col-2 .col-md-offset-2 mx-2 home__category">
+                <a href="/category/social-distancing"
+                    ><h5 class="category__heading">
+                        <b> > </b> Social Distancing Signs
+                    </h5>
                     <img
-                        class="card-img-top"
-                        src="{{
-                            asset(
-                                '/images/frontend_images/home/medical_safety.png'
-                            )
-                        }}"
-                        alt="Card image cap"
-                        stlye="width:100%"
-                    />
-                    <div class="card-body">
-                        <p class="card-text">Medical Safety</p>
-                    </div>
-                </div>
-            </a>
+                        class="d-block mx-auto"
+                        src="/images/frontend/home/categories/social-distancing-200.png"
+                        alt=""
+                        srcset=""
+                /></a>
+            </div>
+            <div class="col-2 .col-md-offset-2 mx-2 home__category">
+                <a href="/category/social-distancing"
+                    ><h5 class="category__heading">
+                        <b> > </b> Social Distancing Signs
+                    </h5>
+                    <img
+                        class="d-block mx-auto"
+                        src="/images/frontend/home/categories/social-distancing-200.png"
+                        alt=""
+                        srcset=""
+                /></a>
+            </div>
+            <div class="col-2 .col-md-offset-2 mx-2 home__category">
+                <a href="/category/social-distancing"
+                    ><h5 class="category__heading">
+                        <b> > </b> Social Distancing Signs
+                    </h5>
+                    <img
+                        class="d-block mx-auto"
+                        src="/images/frontend/home/categories/social-distancing-200.png"
+                        alt=""
+                        srcset=""
+                /></a>
+            </div>
+            <div class="col-2 .col-md-offset-2 mx-2 home__category">
+                <a href="/category/social-distancing"
+                    ><h5 class="category__heading">
+                        <b> > </b> Social Distancing Signs
+                    </h5>
+                    <img
+                        class="d-block mx-auto"
+                        src="/images/frontend/home/categories/social-distancing-200.png"
+                        alt=""
+                        srcset=""
+                /></a>
+            </div>
+            <div class="col-2 .col-md-offset-2 mx-2 home__category">
+                <a href="/category/social-distancing"
+                    ><h5 class="category__heading">
+                        <b> > </b> Social Distancing Signs
+                    </h5>
+                    <img
+                        class="d-block mx-auto"
+                        src="/images/frontend/home/categories/social-distancing-200.png"
+                        alt=""
+                        srcset=""
+                /></a>
+            </div>
         </div>
-        <div class="col-md-2">
-            <a href="/category/social-distances">
-                <div class="card" style="width: 100%">
-                    <img
-                        class="card-img-top"
-                        src="{{
-                            asset(
-                                '/images/frontend_images/home/social_distancing.jpg'
-                            )
-                        }}"
-                        alt="Card image cap"
-                        stlye="width:100%"
-                    />
-                    <div class="card-body">
-                        <p class="card-text">Social Distancing</p>
+
+        <!-- Row - Two -->
+        <div class="row my-2 mx-2">
+            <!-- Carousel -->
+
+            <div class="col-3 text-center carousel-div">
+                <div
+                    id="carouselExampleIndicators"
+                    class="carousel slide"
+                    data-ride="carousel"
+                >
+                    <ol class="carousel-indicators">
+                        <li
+                            data-target="#carouselExampleIndicators"
+                            data-slide-to="0"
+                            class="active"
+                        ></li>
+                        <li
+                            data-target="#carouselExampleIndicators"
+                            data-slide-to="1"
+                        ></li>
+                        <li
+                            data-target="#carouselExampleIndicators"
+                            data-slide-to="2"
+                        ></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img
+                                src="/images/frontend_images/carousel-images/1.png"
+                                class="d-block carousel-img"
+                                alt="..."
+                            />
+                        </div>
+                        <div class="carousel-item">
+                            <img
+                                src="/images/frontend_images/carousel-images/2.png"
+                                class="d-block carousel-img"
+                                alt="..."
+                            />
+                        </div>
+                        <div class="carousel-item">
+                            <img
+                                src="/images/frontend_images/carousel-images/3.png"
+                                class="d-block carousel-img"
+                                alt="..."
+                            />
+                        </div>
+                    </div>
+                    <a
+                        class="carousel-control-prev"
+                        href="#carouselExampleIndicators"
+                        role="button"
+                        data-slide="prev"
+                    >
+                        <span
+                            class="carousel-control-prev-icon"
+                            aria-hidden="true"
+                        ></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a
+                        class="carousel-control-next"
+                        href="#carouselExampleIndicators"
+                        role="button"
+                        data-slide="next"
+                    >
+                        <span
+                            class="carousel-control-next-icon"
+                            aria-hidden="true"
+                        ></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Popular Custom Template -->
+            <div class="col-md-8 mx-auto">
+                <h5>Popular Custom Templates</h5>
+                <p>
+                    Our Affordable custom products feature 3M inks and films.
+                    The overlaminate protects signs for over 10 years.
+                </p>
+                <div class="row cards_row">
+                    <div class="col-3 custom_card">
+                        <a href="#">
+                            <div class="custom_header">
+                                <h5 class="">Danger</h5>
+                            </div>
+                            <img
+                                src="/images/frontend/home/custom_templates/danger-120.jpg"
+                                alt=""
+                                class="d-block mx-auto"
+                            />
+                        </a>
+                    </div>
+                    <div class="col-3 custom_card">
+                        <a href="#">
+                            <div class="custom_header">
+                                <h5 class="">Danger</h5>
+                            </div>
+                            <img
+                                src="/images/frontend/home/custom_templates/danger-120.jpg"
+                                alt=""
+                                class="d-block mx-auto"
+                            />
+                        </a>
+                    </div>
+                    <div class="col-3 custom_card">
+                        <a href="#">
+                            <div class="custom_header">
+                                <h5 class="">Danger</h5>
+                            </div>
+                            <img
+                                src="/images/frontend/home/custom_templates/danger-120.jpg"
+                                alt=""
+                                class="d-block mx-auto"
+                            />
+                        </a>
                     </div>
                 </div>
-            </a>
+            </div>
+        </div>
+        <div class="row my-2 mx-2">
+            <div class="col-md-12">
+                <h5>Choose By Header: Danger, Warning, Caution or Notice</h5>
+                <p>
+                    When do you need to use danger, warning, caution or notice
+                    designs? Learn more about the important standards and
+                    definitions for each.
+                </p>
+            </div>
+            <div class="col-2 mx-3 mx-2 custom_card">
+                <a href="#">
+                    <div class="custom_header">
+                        <h5 class="">Danger</h5>
+                    </div>
+                    <img
+                        src="/images/frontend/home/custom_templates/danger-120.jpg"
+                        alt=""
+                        class="d-block mx-auto"
+                    />
+                </a>
+            </div>
+            <div class="col-2 mx-3 custom_card">
+                <a href="#">
+                    <div class="custom_header">
+                        <h5 class="">Danger</h5>
+                    </div>
+                    <img
+                        src="/images/frontend/home/custom_templates/danger-120.jpg"
+                        alt=""
+                        class="d-block mx-auto"
+                    />
+                </a>
+            </div>
+            <div class="col-2 mx-3 custom_card">
+                <a href="#">
+                    <div class="custom_header">
+                        <h5 class="">Danger</h5>
+                    </div>
+                    <img
+                        src="/images/frontend/home/custom_templates/danger-120.jpg"
+                        alt=""
+                        class="d-block mx-auto"
+                    />
+                </a>
+            </div>
+            <div class="col-2 mx-3 custom_card">
+                <a href="#">
+                    <div class="custom_header">
+                        <h5 class="">Danger</h5>
+                    </div>
+                    <img
+                        src="/images/frontend/home/custom_templates/danger-120.jpg"
+                        alt=""
+                        class="d-block mx-auto"
+                    />
+                </a>
+            </div>
+            <div class="col-2 mx-3 custom_card">
+                <a href="#">
+                    <div class="custom_header">
+                        <h5 class="">Danger</h5>
+                    </div>
+                    <img
+                        src="/images/frontend/home/custom_templates/danger-120.jpg"
+                        alt=""
+                        class="d-block mx-auto"
+                    />
+                </a>
+            </div>
         </div>
     </div>
+
     <!-- <div class="col-12 text-center carousel-div">
         <div
             id="carouselExampleSlidesOnly"
@@ -72,120 +293,123 @@
             </div>
         </div>
     </div> -->
-    <div class="col-12 text-center carousel-div">
-        <div
-            id="carouselExampleIndicators"
-            class="carousel slide"
-            data-ride="carousel"
-        >
-            <ol class="carousel-indicators">
-                <li
-                    data-target="#carouselExampleIndicators"
-                    data-slide-to="0"
-                    class="active"
-                ></li>
-                <li
-                    data-target="#carouselExampleIndicators"
-                    data-slide-to="1"
-                ></li>
-                <li
-                    data-target="#carouselExampleIndicators"
-                    data-slide-to="2"
-                ></li>
-            </ol>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img
-                        src="/images/frontend_images/carousel-images/1.png"
-                        class="d-block carousel-img"
-                        alt="..."
-                    />
+
+    <!-- Mobile Version -->
+    <div class="mobile-only">
+        <div class="col-md-12 text-center carousel-div">
+            <div
+                id="carouselExampleIndicators"
+                class="carousel slide"
+                data-ride="carousel"
+            >
+                <ol class="carousel-indicators">
+                    <li
+                        data-target="#carouselExampleIndicators"
+                        data-slide-to="0"
+                        class="active"
+                    ></li>
+                    <li
+                        data-target="#carouselExampleIndicators"
+                        data-slide-to="1"
+                    ></li>
+                    <li
+                        data-target="#carouselExampleIndicators"
+                        data-slide-to="2"
+                    ></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img
+                            src="/images/frontend_images/carousel-images/1.png"
+                            class="d-block carousel-img"
+                            alt="..."
+                        />
+                    </div>
+                    <div class="carousel-item">
+                        <img
+                            src="/images/frontend_images/carousel-images/2.png"
+                            class="d-block carousel-img"
+                            alt="..."
+                        />
+                    </div>
+                    <div class="carousel-item">
+                        <img
+                            src="/images/frontend_images/carousel-images/3.png"
+                            class="d-block carousel-img"
+                            alt="..."
+                        />
+                    </div>
                 </div>
-                <div class="carousel-item">
-                    <img
-                        src="/images/frontend_images/carousel-images/2.png"
-                        class="d-block carousel-img"
-                        alt="..."
-                    />
-                </div>
-                <div class="carousel-item">
-                    <img
-                        src="/images/frontend_images/carousel-images/3.png"
-                        class="d-block carousel-img"
-                        alt="..."
-                    />
-                </div>
+                <a
+                    class="carousel-control-prev"
+                    href="#carouselExampleIndicators"
+                    role="button"
+                    data-slide="prev"
+                >
+                    <span
+                        class="carousel-control-prev-icon"
+                        aria-hidden="true"
+                    ></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a
+                    class="carousel-control-next"
+                    href="#carouselExampleIndicators"
+                    role="button"
+                    data-slide="next"
+                >
+                    <span
+                        class="carousel-control-next-icon"
+                        aria-hidden="true"
+                    ></span>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
-            <a
-                class="carousel-control-prev"
-                href="#carouselExampleIndicators"
-                role="button"
-                data-slide="prev"
-            >
-                <span
-                    class="carousel-control-prev-icon"
+        </div>
+        <!-- ICONS (MOBILE ONLY) -->
+
+        <div class="row no-gutters col-12" id="icons">
+            <div>
+                <i
+                    class="icon rounded-circle fa fa-phone phone-icon"
                     aria-hidden="true"
-                ></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a
-                class="carousel-control-next"
-                href="#carouselExampleIndicators"
-                role="button"
-                data-slide="next"
-            >
-                <span
-                    class="carousel-control-next-icon"
-                    aria-hidden="true"
-                ></span>
-                <span class="sr-only">Next</span>
-            </a>
-        </div>
-    </div>
-    <!-- ICONS (MOBILE ONLY) -->
+                ></i>
+                <p class="icon-text">Call us</p>
+            </div>
 
-    <div class="row no-gutters col-12" id="icons">
-        <div>
-            <i
-                class="icon rounded-circle fa fa-phone phone-icon"
-                aria-hidden="true"
-            ></i>
-            <p class="icon-text">Call us</p>
+            <div class="">
+                <i class="icon rounded-circle fas fa-video"></i>
+                <p class="icon-text">Watch Video</p>
+            </div>
+            <div class="">
+                <i class="icon rounded-circle fas fa-edit"></i>
+                <p class="icon-text">Customize</p>
+            </div>
         </div>
 
-        <div class="">
-            <i class="icon rounded-circle fas fa-video"></i>
-            <p class="icon-text">Watch Video</p>
+        <div class="row no-gutters mx-1" id="free-shipping">
+            <div class="col-2">
+                <img
+                    src="/images/frontend_images/home/quick-turnaround-time-icon.svg"
+                    alt=""
+                    width="100%"
+                    class=""
+                />
+            </div>
+            <div class="col-10">
+                <b>Ships Tomorrow. </b> Order within
+                <span class="highlighted-text">1 day 7 hrs</span> Get your signs
+                on Wednesday. Free shipping for orders over $29.95. Orders over
+                $100 ship <b>UPS/Expendited 2nd Day</b> for free. Details:
+            </div>
         </div>
-        <div class="">
-            <i class="icon rounded-circle fas fa-edit"></i>
-            <p class="icon-text">Customize</p>
-        </div>
-    </div>
 
-    <div class="row no-gutters mx-1" id="free-shipping">
-        <div class="col-2">
-            <img
-                src="/images/frontend_images/home/quick-turnaround-time-icon.svg"
-                alt=""
-                width="100%"
-                class=""
-            />
+        <!-- CHOOSE BY HEADER -->
+        <!-- <div class="mx-2"> -->
+        <div class="col-12 my-2 mx-2">
+            <h4 class="red-heading">Choose By Header:</h4>
         </div>
-        <div class="col-10">
-            <b>Ships Tomorrow. </b> Order within
-            <span class="highlighted-text">1 day 7 hrs</span> Get your signs on
-            Wednesday. Free shipping for orders over $29.95. Orders over $100
-            ship <b>UPS/Expendited 2nd Day</b> for free. Details:
-        </div>
-    </div>
-
-    <!-- CHOOSE BY HEADER -->
-    <!-- <div class="mx-2"> -->
-    <div class="col-12 my-2 mx-2">
-        <h4 class="red-heading">Choose By Header:</h4>
-    </div>
-    <!-- <div
+        <!-- <div
         class="col-md-2 col-6 col-xs-6 product text-center"
         v-for="product in allProducts"
     >
@@ -198,56 +422,57 @@
             <p>@{{ product.product_name }}</p>
         </a>
     </div> -->
-    <div class="row mx-2">
-        <div class="col-md-2 col-6 col-xs-6 product text-center">
-            <a href="/category/danger-sign">
-                <img
-                    src="/images/frontend_images/home/danger-header-signs.jpg"
-                    class="sign-img"
-                    alt="Danger Sign"
-                />
-                <p>Danger Signs</p>
-            </a>
-        </div>
-        <div class="col-md-2 col-6 col-xs-6 product text-center">
-            <a href="/category/danger-sign">
-                <img
-                    src="/images/frontend_images/home/danger-header-signs.jpg"
-                    class="sign-img"
-                    alt="Danger Sign"
-                />
-                <p>Danger Signs</p>
-            </a>
-        </div>
-        <div class="col-md-2 col-6 col-xs-6 product text-center">
-            <a href="/category/danger-sign">
-                <img
-                    src="/images/frontend_images/home/danger-header-signs.jpg"
-                    class="sign-img"
-                    alt="Danger Sign"
-                />
-                <p>Danger Signs</p>
-            </a>
-        </div>
-        <div class="col-md-2 col-6 col-xs-6 product text-center">
-            <a href="/category/danger-sign">
-                <img
-                    src="/images/frontend_images/home/danger-header-signs.jpg"
-                    class="sign-img"
-                    alt="Danger Sign"
-                />
-                <p>Danger Signs</p>
-            </a>
-        </div>
-        <div class="col-md-2 col-6 col-xs-6 product text-center">
-            <a href="/category/danger-sign">
-                <img
-                    src="/images/frontend_images/home/danger-header-signs.jpg"
-                    class="sign-img"
-                    alt="Danger Sign"
-                />
-                <p>Danger Signs</p>
-            </a>
+        <div class="row mx-2">
+            <div class="col-md-2 col-6 col-xs-6 product text-center">
+                <a href="/category/danger-sign">
+                    <img
+                        src="/images/frontend_images/home/danger-header-signs.jpg"
+                        class="sign-img"
+                        alt="Danger Sign"
+                    />
+                    <p>Danger Signs</p>
+                </a>
+            </div>
+            <div class="col-md-2 col-6 col-xs-6 product text-center">
+                <a href="/category/danger-sign">
+                    <img
+                        src="/images/frontend_images/home/danger-header-signs.jpg"
+                        class="sign-img"
+                        alt="Danger Sign"
+                    />
+                    <p>Danger Signs</p>
+                </a>
+            </div>
+            <div class="col-md-2 col-6 col-xs-6 product text-center">
+                <a href="/category/danger-sign">
+                    <img
+                        src="/images/frontend_images/home/danger-header-signs.jpg"
+                        class="sign-img"
+                        alt="Danger Sign"
+                    />
+                    <p>Danger Signs</p>
+                </a>
+            </div>
+            <div class="col-md-2 col-6 col-xs-6 product text-center">
+                <a href="/category/danger-sign">
+                    <img
+                        src="/images/frontend_images/home/danger-header-signs.jpg"
+                        class="sign-img"
+                        alt="Danger Sign"
+                    />
+                    <p>Danger Signs</p>
+                </a>
+            </div>
+            <div class="col-md-2 col-6 col-xs-6 product text-center">
+                <a href="/category/danger-sign">
+                    <img
+                        src="/images/frontend_images/home/danger-header-signs.jpg"
+                        class="sign-img"
+                        alt="Danger Sign"
+                    />
+                    <p>Danger Signs</p>
+                </a>
+            </div>
         </div>
     </div>
 </div>
@@ -276,6 +501,61 @@
 
         })
 </script>
+
+<!-- Desktop Styling -->
+
+<style>
+    .home__category {
+        padding: 25px 5px;
+        border: 1px solid #d3d3d3;
+        border-radius: 5px;
+        /* -webkit-box-shadow: 0px 5px 5px 0px rgba(50, 50, 50, 0.36);
+        -moz-box-shadow: 0px 5px 5px 0px rgba(50, 50, 50, 0.36);
+        box-shadow: 0px 5px 5px 0px rgba(50, 50, 50, 0.36); */
+    }
+    .home__category img {
+        width: 100%;
+    }
+    .category__heading {
+        font-size: 1.1rem;
+        color: #1d50c7;
+        font-weight: 400;
+    }
+    a:hover {
+        text-decoration: none;
+    }
+
+    /* Row Two */
+
+    .custom_card {
+        border: #cccccc 1px solid;
+        border-radius: 2px;
+        padding: 0;
+    }
+    .custom_card img {
+        padding: 30px;
+        width: 75%;
+    }
+
+    .custom_header {
+        width: 100%;
+        background-color: #f0f0f0;
+        padding: 3px 0;
+        border-bottom: solid 1px #cccccc;
+        font-size: 1.1rem;
+        color: #1d50c7;
+        font-weight: 600;
+    }
+    .custom_header h5 {
+        margin-left: 10px;
+    }
+    .cards_row {
+        display: flex;
+        justify-content: space-around;
+    }
+</style>
+
+<!-- Mobile Styling -->
 <style>
     .red-heading {
         font-size: 1.1rem;

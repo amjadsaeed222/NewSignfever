@@ -12,6 +12,30 @@
     <title>Sign Fever</title>
 </head>
 <body>
+    <style>
+        .mobile-only 
+        {
+        display: none;
+        }
+        @media only screen and (max-width: 768px) 
+        {
+            #categories_row 
+            {
+                display: none;
+            }
+
+            .mobile-only 
+            {
+                display: block;
+            }
+
+            .desktop-only 
+            {
+                display: none;
+            }
+        }
+    
+    </style>
     @include('layouts.frontendLayout.frontend_header')
     @yield('content')
 </body>
