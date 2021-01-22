@@ -38,7 +38,7 @@
                 <tr>
                   <th>Category ID</th>
                   <th>Category Name</th>
-                  <th>Level</th>
+                  <th>Parent Category</th>
                   <th>Image</th>
                   <th>Actions</th>
                 </tr>
@@ -48,7 +48,21 @@
                 <tr class="gradeX">
                   <td class="center">{{ $category->id }}</td>
                   <td class="center">{{ $category->name }}</td>
-                  <td class="center">{{ $category->parent_id }}</td>
+                  <td class="center">@php
+                      if($category->parent_id==0)
+                      {
+                        echo "Main Category";
+                      }
+                        
+                      else 
+                      {
+                        foreach ($categories as $list) {
+                          if($list->id==$category->parent_id)
+                            echo $list->name;
+                        }      
+                      }
+                      
+                  @endphp</td>
                   <td class="center"><img src="{{ asset('/images/backend_images/product/large/'.$category->image) }}" style="float:right;width:25px;height:25px"></td>
                   <td class="center">
                     <a href="{{ url('/api/admin/edit-category/'.$category->slug) }}" class="btn btn-primary btn-mini">Edit</a> 
