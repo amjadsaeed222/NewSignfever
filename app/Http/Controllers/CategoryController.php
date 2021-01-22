@@ -7,6 +7,8 @@ use Session;
 use App\Models\Category;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use DB;
+use File;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -73,7 +75,11 @@ class CategoryController extends Controller
                 {
                     // Upload Images after Resize
                     $extension = $image_tmp->getClientOriginalExtension();
-	                $fileName = rand(111,99999).'.'.$extension;
+                    $fileName = rand(111,99999).'.'.$extension;
+                    
+                    if(isset($data['current_image']))
+                        File::delete(public_path('images/backend_images/product/large/'. $data['current_image']));
+                    
                     $large_image_path = 'images/backend_images/product/large'.'/'.$fileName;
                     Image::make($image_tmp)->save($large_image_path);
  				}
