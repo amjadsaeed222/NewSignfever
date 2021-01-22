@@ -88,13 +88,12 @@
                         >Description</label
                     >
                     <div class="input-group">
-                        <input
+                        <textarea
                             name="product_description"
-                            type="text"
                             class="form-control d-block w-100"
                             id="description"
-                            placeholder="Product Description"
-                        />
+                            
+                        ></textarea>
                     </div>
                 </div>
             </div>

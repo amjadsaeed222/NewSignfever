@@ -10,7 +10,7 @@ class Product extends Model
 {
     use sluggable;
     use HasFactory;
-    protected $fillable=['status','product_name','slug','price','category_id','shape','partNo'];
+    protected $fillable=['status','product_name','slug','price','category_id','shape','partNo','description'];
     public function attributes()
     {
         return $this->hasMany(ProductsAttribute::class);

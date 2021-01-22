@@ -91,7 +91,7 @@
                                         type="text"
                                         class="form-control"
                                         id="description"
-                                        placeholder="Part#"
+                                        placeholder="Description"
                                         
                                     ></textarea>
                                 </div>

@@ -37,7 +37,7 @@ use App\Models\Category;
                   <th>Category Name</th>
                   <th>Product Name</th>
                   <th>Price</th>
-                  <th>Image</th>
+                  
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -50,15 +50,11 @@ use App\Models\Category;
                   <td class="center">{{ $product->product_name }}</td>
                   
                   <td class="center">{{ $product->price }}</td>
+                  
                   <td class="center">
-                    @if(!empty($product->image))
-                    <img src="{{ asset('/images/backend_images/product/small/'.$product->image) }}" style="width:50px;">
-                    @endif
-                  </td>
-                  <td class="center">
-                    <a href="#myModal{{ $product->id }}" data-toggle="modal" class="btn btn-success btn-mini">View</a> 
+                    {{-- <a href="#myModal{{ $product->id }}" data-toggle="modal" class="btn btn-success btn-mini">View</a>  --}}
                     <a href="{{ url('/api/admin/edit-product/'.$product->slug) }}" class="btn btn-primary btn-mini">Edit</a> 
-                    <a href="{{ url('/api/admin/add-attributes/'.$product->id) }}" class="btn btn-success btn-mini">Add Attribute</a>
+                    {{-- <a href="{{ url('/api/admin/add-attributes/'.$product->id) }}" class="btn btn-success btn-mini">Add Attribute</a> --}}
                     {{-- <a href="{{ url('/api/admin/add-images/'.$product->id) }}" class="btn btn-info btn-mini">Add</a> --}}
                     <a id="delProduct" rel="{{ $product->id }}" rel1="delete-product" href="javascript:"  class="btn btn-danger btn-mini deleteRecord">Delete</a>
  
