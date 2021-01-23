@@ -165,9 +165,22 @@ class ProductsController extends Controller
             {
                 foreach($data['size_title'] as $key=> $val)
                 {
-                    $sizeDetails=ProductSize::where(['id'=> $data['sizeId'][$key]])->first();
-        
-                    $sizeDetails->Update(['title'=> $data['size_title'][$key],'SPN'=> $data['size_SPN'][$key]]);
+                    
+                    $existingsize=ProductSize::where('title',$data['size_title'][$key])->first();
+                    if(!empty($existingsize))
+                    {
+                        $sizeDetails=ProductSize::where(['id'=> $data['sizeId'][$key]])->first();
+                        $sizeDetails->Update(['title'=> $data['size_title'][$key],'SPN'=> $data['size_SPN'][$key]]);
+                    }
+                    else
+                    {
+                        $newSize=new ProductSize;
+                        $newSize->product_id=$data['product_id'][$key];
+                        $newSize->title=$data['size_title'][$key];
+                        $newSize->SPN=$data['size_SPN'][$key];
+                        $newSize->save();
+                    }
+                    
                     
                     //Update Images in size.
                     

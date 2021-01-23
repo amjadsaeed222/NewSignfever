@@ -117,6 +117,7 @@
                     name="images[]"
                 />
                 <input type="hidden" name="sizeId[]" value="{{$size->id}}"/>
+                <input type="hidden" name="product_id[]" value="{{$size->product_id}}"/>
                 <input type="hidden" name="current_image[]" value="{{$size->image}}"/>
                 <div class="col-sm-3 my-1">
                     <label class="sr-only" for="size_title">Size Title</label>
