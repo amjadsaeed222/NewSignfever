@@ -92,7 +92,6 @@
                             name="product_description"
                             class="form-control d-block w-100"
                             id="description"
-                            
                         ></textarea>
                     </div>
                 </div>
@@ -103,12 +102,8 @@
             <p class="lead">You may add multiple sizes for a product</p>
             <div class="single-section" v-for="divs,index in size_divs">
                 <h5>Product Size @{{ index + 1 }}</h5>
-                <input
-                    type="file"
-                    id="images"
-                    multiple="multiple"
-                    name="images[]"
-                />
+                <input type="file" id="images" multiple="multiple" />
+                <!-- :name="'images_' + + '[]'" -->
 
                 <div class="col-sm-3 my-1">
                     <label class="sr-only" for="size_title">Size Title</label>
@@ -172,6 +167,7 @@
         data: {
             // sizes: [{}],
             size_divs: 1,
+            allSizes: [],
             allCats: [],
         },
         mounted() {
@@ -185,6 +181,18 @@
                 .then((newRes) => {
                     this.allCats = newRes;
                     console.log(this.allCats);
+                });
+
+            fetch("/all-sizes", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            })
+                .then((res) => res.json())
+                .then((newRes) => {
+                    this.allSizes = newRes;
+                    console.log(this.allSizes);
                 });
         },
         beforeCreate() {},

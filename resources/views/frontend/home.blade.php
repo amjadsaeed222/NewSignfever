@@ -3,7 +3,7 @@
 <div id="home-page">
     <!-- Desktop Version -->
 
-    <div class="desktop-only mx-2">
+    <div class="desktop-only container-fluid">
         <!-- Category Row -->
         <div class="row my-2 mx-4">
             <div class="col-2 .col-md-offset-2 mx-2 home__category">
@@ -18,14 +18,28 @@
                         srcset=""
                 /></a>
             </div>
+
             <div class="col-2 .col-md-offset-2 mx-2 home__category">
                 <a href="/category/social-distancing"
                     ><h5 class="category__heading">
-                        <b> > </b> Social Distancing Signs
+                        <b> > </b> Mask Required Signs
                     </h5>
                     <img
                         class="d-block mx-auto"
-                        src="/images/frontend/home/categories/social-distancing-200.png"
+                        src="/images/frontend/home/categories/mask-required-signs-200.png"
+                        alt=""
+                        srcset=""
+                /></a>
+            </div>
+
+            <div class="col-2 .col-md-offset-2 mx-2 home__category">
+                <a href="/category/social-distancing-floor-signs"
+                    ><h5 class="category__heading">
+                        <b> > </b> Floor Signs and Tapes
+                    </h5>
+                    <img
+                        class="d-block mx-auto"
+                        src="/images/frontend/home/categories/social-distancing-floor-signs-200.png"
                         alt=""
                         srcset=""
                 /></a>
@@ -33,50 +47,58 @@
             <div class="col-2 .col-md-offset-2 mx-2 home__category">
                 <a href="/category/social-distancing"
                     ><h5 class="category__heading">
-                        <b> > </b> Social Distancing Signs
+                        <b> > </b> Coronavirus Symptoms Signs
                     </h5>
                     <img
                         class="d-block mx-auto"
-                        src="/images/frontend/home/categories/social-distancing-200.png"
+                        src="/images/frontend/home/categories/corona-virus-signs-200.png"
                         alt=""
                         srcset=""
                 /></a>
             </div>
-            <div class="col-2 .col-md-offset-2 mx-2 home__category">
-                <a href="/category/social-distancing"
-                    ><h5 class="category__heading">
-                        <b> > </b> Social Distancing Signs
-                    </h5>
-                    <img
-                        class="d-block mx-auto"
-                        src="/images/frontend/home/categories/social-distancing-200.png"
-                        alt=""
-                        srcset=""
-                /></a>
-            </div>
-            <div class="col-2 .col-md-offset-2 mx-2 home__category">
-                <a href="/category/social-distancing"
-                    ><h5 class="category__heading">
-                        <b> > </b> Social Distancing Signs
-                    </h5>
-                    <img
-                        class="d-block mx-auto"
-                        src="/images/frontend/home/categories/social-distancing-200.png"
-                        alt=""
-                        srcset=""
-                /></a>
+            <div class="col-3">
+                <div class="shipping_card">
+                    <div class="col-12 text-center">
+                        <img
+                            src="/images/frontend_images/home/quick-turnaround-time-icon.svg"
+                            alt=""
+                            width="50%"
+                            class=""
+                        />
+                        <p style="border-bottom: 1px solid #cccccc">
+                            <b>Ships Today.</b>
+                            Order Within
+                            <br />
+                            <b>1 hr 26 mins</b>
+                        </p>
+                        <h2 class="capatalize" style="font-size: 1.2rem">
+                            <span style="color: #0057ba">FREE</span
+                            ><span style="color: #cc0000"> SHIPPING</span>
+                        </h2>
+                        <div class="text-left">
+                            <ul>
+                                <li>Orders over $29.95.</li>
+                                <li>
+                                    Sign orders over $100 ship UPS/Expedited 2nd
+                                    Day for free. Get your signs on Monday!
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
         <!-- Row - Two -->
-        <div class="row my-2 mx-2">
+        <div class="row my-2 no-gutters">
             <!-- Carousel -->
 
-            <div class="col-3 text-center carousel-div">
+            <div class="col-3 text-center no-gutters carousel-div">
                 <div
                     id="carouselExampleIndicators"
                     class="carousel slide"
                     data-ride="carousel"
+                    class="col-12"
                 >
                     <ol class="carousel-indicators">
                         <li
@@ -152,7 +174,7 @@
                 </p>
                 <div class="row cards_row">
                     <div class="col-3 custom_card">
-                        <a href="#">
+                        <a href="/category/custom-danger-signs">
                             <div class="custom_header">
                                 <h5 class="">Danger</h5>
                             </div>
@@ -164,24 +186,24 @@
                         </a>
                     </div>
                     <div class="col-3 custom_card">
-                        <a href="#">
+                        <a href="/category/custom-warning-signs">
                             <div class="custom_header">
-                                <h5 class="">Danger</h5>
+                                <h5 class="">Warning</h5>
                             </div>
                             <img
-                                src="/images/frontend/home/custom_templates/danger-120.jpg"
+                                src="/images/frontend/home/custom_templates/warning-header-signs.jpg"
                                 alt=""
                                 class="d-block mx-auto"
                             />
                         </a>
                     </div>
                     <div class="col-3 custom_card">
-                        <a href="#">
+                        <a href="/category/custom-caution-signs">
                             <div class="custom_header">
-                                <h5 class="">Danger</h5>
+                                <h5 class="">Caution</h5>
                             </div>
                             <img
-                                src="/images/frontend/home/custom_templates/danger-120.jpg"
+                                src="/images/frontend/home/custom_templates/caution-header-signs.jpg"
                                 alt=""
                                 class="d-block mx-auto"
                             />
@@ -190,6 +212,8 @@
                 </div>
             </div>
         </div>
+
+        <!-- Related -->
         <div class="row my-2 mx-2">
             <div class="col-md-12">
                 <h5>Choose By Header: Danger, Warning, Caution or Notice</h5>
@@ -200,7 +224,7 @@
                 </p>
             </div>
             <div class="col-2 mx-3 mx-2 custom_card">
-                <a href="#">
+                <a href="/category/custom-danger-signs">
                     <div class="custom_header">
                         <h5 class="">Danger</h5>
                     </div>
@@ -212,30 +236,42 @@
                 </a>
             </div>
             <div class="col-2 mx-3 custom_card">
-                <a href="#">
+                <a href="/category/custom-caution-signs">
                     <div class="custom_header">
-                        <h5 class="">Danger</h5>
+                        <h5 class="">Caution</h5>
                     </div>
                     <img
-                        src="/images/frontend/home/custom_templates/danger-120.jpg"
+                        src="/images/frontend/home/custom_templates/custom-caution-ansi-signs-120.jpg"
                         alt=""
                         class="d-block mx-auto"
                     />
                 </a>
             </div>
             <div class="col-2 mx-3 custom_card">
-                <a href="#">
+                <a href="/category/custom-warning-signs">
                     <div class="custom_header">
-                        <h5 class="">Danger</h5>
+                        <h5 class="">Warning</h5>
                     </div>
                     <img
-                        src="/images/frontend/home/custom_templates/danger-120.jpg"
+                        src="/images/frontend/home/custom_templates/custom-warning-ansi-signs-120.jpg"
                         alt=""
                         class="d-block mx-auto"
                     />
                 </a>
             </div>
             <div class="col-2 mx-3 custom_card">
+                <a href="/category/custom-notice-signs">
+                    <div class="custom_header">
+                        <h5 class="">Notice</h5>
+                    </div>
+                    <img
+                        src="/images/frontend/home/custom_templates/custom-notice-ansi-signs-120.jpg"
+                        alt=""
+                        class="d-block mx-auto"
+                    />
+                </a>
+            </div>
+            <!-- <div class="col-2 mx-3 custom_card">
                 <a href="#">
                     <div class="custom_header">
                         <h5 class="">Danger</h5>
@@ -246,53 +282,9 @@
                         class="d-block mx-auto"
                     />
                 </a>
-            </div>
-            <div class="col-2 mx-3 custom_card">
-                <a href="#">
-                    <div class="custom_header">
-                        <h5 class="">Danger</h5>
-                    </div>
-                    <img
-                        src="/images/frontend/home/custom_templates/danger-120.jpg"
-                        alt=""
-                        class="d-block mx-auto"
-                    />
-                </a>
-            </div>
+            </div> -->
         </div>
     </div>
-
-    <!-- <div class="col-12 text-center carousel-div">
-        <div
-            id="carouselExampleSlidesOnly"
-            class="text-center carousel slide"
-            data-ride="carousel"
-        >
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img
-                        src="/images/frontend_images/carousel-images/1.png"
-                        class="d-block carousel-img"
-                        alt="..."
-                    />
-                </div>
-                <div class="carousel-item">
-                    <img
-                        src="/images/frontend_images/carousel-images/2.png"
-                        class="d-block carousel-img"
-                        alt="..."
-                    />
-                </div>
-                <div class="carousel-item">
-                    <img
-                        src="/images/frontend_images/carousel-images/3.png"
-                        class="d-block carousel-img"
-                        alt="..."
-                    />
-                </div>
-            </div>
-        </div>
-    </div> -->
 
     <!-- Mobile Version -->
     <div class="mobile-only">
@@ -424,7 +416,7 @@
     </div> -->
         <div class="row mx-2">
             <div class="col-md-2 col-6 col-xs-6 product text-center">
-                <a href="/category/danger-sign">
+                <a href="/category/danger-signs">
                     <img
                         src="/images/frontend_images/home/danger-header-signs.jpg"
                         class="sign-img"
@@ -436,41 +428,22 @@
             <div class="col-md-2 col-6 col-xs-6 product text-center">
                 <a href="/category/danger-sign">
                     <img
-                        src="/images/frontend_images/home/danger-header-signs.jpg"
+                        src="/images/frontend/home/custom_templates/warning-header-signs.jpg"
                         class="sign-img"
                         alt="Danger Sign"
                     />
-                    <p>Danger Signs</p>
+                    <p>Warning Signs</p>
                 </a>
             </div>
+
             <div class="col-md-2 col-6 col-xs-6 product text-center">
-                <a href="/category/danger-sign">
+                <a href="/category/custom-caution-signs">
                     <img
-                        src="/images/frontend_images/home/danger-header-signs.jpg"
+                        src="/images/frontend/home/custom_templates/caution-header-signs.jpg"
                         class="sign-img"
                         alt="Danger Sign"
                     />
-                    <p>Danger Signs</p>
-                </a>
-            </div>
-            <div class="col-md-2 col-6 col-xs-6 product text-center">
-                <a href="/category/danger-sign">
-                    <img
-                        src="/images/frontend_images/home/danger-header-signs.jpg"
-                        class="sign-img"
-                        alt="Danger Sign"
-                    />
-                    <p>Danger Signs</p>
-                </a>
-            </div>
-            <div class="col-md-2 col-6 col-xs-6 product text-center">
-                <a href="/category/danger-sign">
-                    <img
-                        src="/images/frontend_images/home/danger-header-signs.jpg"
-                        class="sign-img"
-                        alt="Danger Sign"
-                    />
-                    <p>Danger Signs</p>
+                    <p>Caution Signs</p>
                 </a>
             </div>
         </div>
@@ -552,6 +525,16 @@
     .cards_row {
         display: flex;
         justify-content: space-around;
+    }
+
+    .shipping_card {
+        border: 1px #e3e3e3 solid;
+        border-radius: 5px;
+    }
+    .shipping_card ul {
+        list-style: disc;
+        display: grid;
+        font-size: 0.9rem;
     }
 </style>
 

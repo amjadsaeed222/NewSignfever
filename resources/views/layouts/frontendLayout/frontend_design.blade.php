@@ -39,5 +39,6 @@
     @include('layouts.frontendLayout.frontend_header')
     @yield('content')
 </body>
+@include('layouts.frontendLayout.frontend_footer')
 
 </html>

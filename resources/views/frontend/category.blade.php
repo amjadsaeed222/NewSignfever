@@ -61,8 +61,8 @@
                 <!-- <div class="col-12"> -->
                 <a :href="'/product/' + product.slug ">
                     <img
-                        src="https://images.mysafetysign.com/img/md/S/countertop-desktop-cut-out-pass-through-barrier-panel-s2-4673.png"
-                        alt=""
+                        :src="'/images/backend_images/product/large/' + getProductImage(product)"
+                        :alt="product.slug"
                         class="d-block mx-auto w-100"
                     />
                     <!-- :src=" '/images/backend_images/large/' + product.product_name " -->
@@ -116,20 +116,22 @@
                 class="row no-gutters my-3 mx-1 mobile-only"
                 id="free-shipping"
             >
-                <div class="col-2">
+                <div class="row no-gutters">
                     <img
+                        class="col-2 d-block w-100 no-gutters"
                         src="/images/frontend_images/home/quick-turnaround-time-icon.svg"
                         alt="free_shipping_timer"
                         width="100%"
                         class=""
                     />
-                </div>
-                <div class="col-10">
-                    <b>Ships Tomorrow. </b> Order within
-                    <span class="highlighted-text">1 day 7 hrs</span> Get your
-                    signs on Wednesday. Free shipping for orders over $29.95.
-                    Orders over $100 ship <b>UPS/Expendited 2nd Day</b> for
-                    free. Details:
+
+                    <div class="col-9 text-left">
+                        <b>Ships Tomorrow. </b> Order within
+                        <span class="highlighted-text">1 day 7 hrs</span> Get
+                        your signs on Wednesday. Free shipping for orders over
+                        $29.95. Orders over $100 ship
+                        <b>UPS/Expendited 2nd Day</b> for free. Details:
+                    </div>
                 </div>
             </div>
             <div v-if="products.length > 0" class="my-2 mx-3">
@@ -282,7 +284,8 @@
 </script>
 
 <style>
-    #category-page ul {
+    #category-page ul 
+    {
         list-style: disc;
         display: grid;
     }

@@ -172,7 +172,8 @@ class IndexController extends Controller
 
 
 
-    public function allProducts(Request $request){
+    public function allProducts(Request $request)
+    {
         $products = Product::get();
         foreach($products as $key => $val)
         {
@@ -185,7 +186,12 @@ class IndexController extends Controller
         $products = json_decode($products);
         return $products;
         //echo "<pre>";print_r($products);die;
-	}
+    }
+    
+    public function shoppingCart() 
+    {
+        return view('frontend.shoppingCart');
+    }
 
     
 }
