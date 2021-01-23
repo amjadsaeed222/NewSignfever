@@ -51,7 +51,16 @@ Route::group(['middleware'=>'auth:api'],function(){
     Route::match(['get', 'post'], '/admin/add-attributes/{id}',[ProductsController::class,'addAttributes']);
     Route::match(['get', 'post'], '/admin/edit-attributes/{id}',[ProductsController::class,'editAttributes']);
     Route::get('/admin/delete-attribute/{id}',[ProductsController::class,'deleteAttribute']);
-
+    //Product Sizes Routes
+    Route::match(['get','post'],'/admin/add-size',[ProductsController::class,'AddSize']);
+    Route::match(['get','post'],'/admin/view-size',[ProductsController::class,'ViewSize']);
+    Route::match(['get','post'],'/admin/edit-size/{id}',[ProductsController::class,'EditSize']);
+    Route::get('/admin/delete-size/{id}',[ProductsController::class,'deleteSize']);
+    //Product Material Routes
+    Route::match(['get','post'],'/admin/add-material',[ProductsController::class,'AddMaterial']);
+    Route::match(['get','post'],'/admin/view-material',[ProductsController::class,'ViewMaterial']);
+    Route::match(['get','post'],'/admin/edit-material/{id}',[ProductsController::class,'EditMaterial']);
+    Route::get('/admin/delete-material/{id}',[ProductsController::class,'deleteMaterial']);
 });
 
 

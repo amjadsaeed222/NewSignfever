@@ -12,6 +12,9 @@
         <ul>
           <li><a href="{{ url('/api/admin/add-product')}}">Add Product</a></li>
           <li><a href="{{ url('/api/admin/add-material')}}">Add Product Material</a></li>
+          <li><a href="{{ url('/api/admin/view-material')}}">View Product Material</a></li>
+          <li><a href="{{ url('/api/admin/add-size')}}">Add New Size</a></li>
+          <li><a href="{{ url('/api/admin/view-size')}}">View Size</a></li>
           <li><a href="{{ url('/api/admin/view-products')}}">View Products</a></li>
         </ul>
       </li>

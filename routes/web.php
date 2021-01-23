@@ -25,6 +25,7 @@ Route::get('category/{slug}',[IndexController::class,'showCategoryProducts']);
 Route::get('product/{slug}',[IndexController::class,'showProduct']);
 Route::get('get-size/{productId}',[IndexController::class,'getSize']);
 Route::get('shopping-cart',[IndexController::class,'shoppingCart']);
+Route::post('/find/{searchString}',[ProductsController::class,'search']);
 
 
 //require __DIR__.'/auth.php';

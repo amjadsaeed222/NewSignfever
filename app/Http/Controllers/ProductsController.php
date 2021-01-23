@@ -104,7 +104,7 @@ class ProductsController extends Controller
 		return view('admin.products.add_product');
     }  
     
-    public function addmaterial(Request $request)
+    /* public function addmaterial(Request $request)
     {
         if($request->isMethod('post'))
         {
@@ -119,9 +119,9 @@ class ProductsController extends Controller
         return redirect()->back();
         }
         $products=Product::all();
-		return view('admin.products.add_materials', compact('products'));
+		return view('admin.products.add_materials', compact('products')); 
         
-    }
+    }*/
 
   
     public function editProduct(Request $request,$slug=null,$id=null)
@@ -652,5 +652,132 @@ class ProductsController extends Controller
 
         }
     }
-
+    public function Search(Request $request)
+    {
+        $products=Product::where ('product_name','LIKE',"%Input::get('search')%")->orWhere('description','LIKE',"%Input::get('search')%")->get();
+       // $categories=Category::where ('name','LIKE',"%Input::get('search')%")->orWhere('description','LIKE',"%Input::get('search')%")->get();
+        
+        /* if(!empty($categories))
+        {
+            foreach($categories as $category)
+            {
+                $products=Product::where(['parent_id'=>$category->id])->get();
+            }
+            return view('viewProducts')->with(compact('products'));
+        } */
+        if(!empty($products))
+        {
+            foreach($products as $product)
+            {
+                $category=Category::where(['id'=> $product->parent_id])->first();
+                $products->category_name=$category->name;
+                $products->category_slug=$category->slug;
+                $products->category_image=$category->image;
+            }   
+            return view('viewProducts')->with(compact('products'));
+        }
+        else
+        {
+            return redirect()->back()->with('msg',"Product Not Found!");
+        }
+    }
+    public function AddSize(Request $request)
+    {
+        if($request->isMethod('post'))
+        {
+            $data=$request->all();
+            
+            $sizeDetails=new ProductSize;
+            $sizeDetails->title=$data['size_title'];
+            $sizeDetails->SPN=$data['size_SPN'];
+            $sizeDetails->save();
+        }
+        
+		return view('admin.products.add_size');
+        
+    }
+    public function ViewSize()
+    {
+        $sizes=ProductSize::all();
+        return view('admin.products.view_size')->with(compact('sizes'));
+        
+    }
+    public function EditSize(Request $request,$id)
+    {
+        if($request->isMethod('post'))
+        {
+            $data=$request->all();
+            $sizeDetails=ProductSize::where(['id'=> $id])->first();
+            $sizeDetails->update(['title'=>$data['size_title'],'SPN'=> $data['size_SPN']]);
+            
+            return redirect('api/admin/view-size')->with('msg','Size updated successfully');
+        }
+        $size=ProductSize::where(['id'=>$id])->first();
+        return view('admin.products.edit_size')->with(compact('size'));
+    }
+    public function deleteSize($id = null)
+    {
+        ProductSize::where(['id'=>$id])->delete();
+        return redirect()->back()->with('flash_message_success', 'Size has been deleted successfully');
+    }
+    //Product Materials
+    public function AddMaterial(Request $request)
+    {
+        if($request->isMethod('post'))
+        {
+            $data=$request->all();
+            
+            $MaterialDetails=new ProductMaterial;
+            $MaterialDetails->title=$data['material_title'];
+            $MaterialDetails->description=$data['description'];
+            
+            $extension = $data['image']->getClientOriginalExtension();
+            $fileName = rand(111,99999).'.'.$extension;
+            $image_path = 'images/backend_images/product/large'.'/'.$fileName;
+            Image::make($data['image'])->save($image_path);
+            
+            $MaterialDetails->configImage = $fileName;
+            $MaterialDetails->save();            
+            
+        }
+        
+		return view('admin.products.add_materials');
+        
+    }
+    public function ViewMaterial()
+    {
+        $materials=ProductMaterial::all();
+        return view('admin.products.view_material')->with(compact('materials'));
+        
+    }
+    public function EditMaterial(Request $request,$id)
+    {
+        if($request->isMethod('post'))
+        {
+            $data=$request->all();
+            $MaterialDetails=ProductMaterial::where(['id'=> $id])->first();
+            if(empty($data['image']))
+            {
+                $fileName=$data['current_image'];
+            }
+            else
+            {
+                $extension = $data['image']->getClientOriginalExtension();
+                $fileName = rand(111,99999).'.'.$extension;
+                $image_path = 'images/backend_images/product/large'.'/'.$fileName;
+                Image::make($data['image'])->save($image_path);
+            }
+            
+            $MaterialDetails->update(['title'=>$data['material_title'],'SPN'=> $data['description'],'configImage'=>$fileName]);
+            
+            return redirect('api/admin/view-material')->with('msg','Material updated successfully');
+        }
+        $material=ProductMaterial::where(['id'=>$id])->first();
+        return view('admin.products.edit_material')->with(compact('material'));
+    }
+    public function deleteMaterial($id = null)
+    {
+        ProductMaterial::where(['id'=>$id])->delete();
+        return redirect()->back()->with('flash_message_success', 'Material has been deleted successfully');
+    }
 }
