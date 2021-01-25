@@ -102,10 +102,36 @@
             <p class="lead">You may add multiple sizes for a product</p>
             <div class="single-section" v-for="divs,index in size_divs">
                 <h5>Product Size @{{ index + 1 }}</h5>
-                <input type="file" id="images" multiple="multiple" />
+
                 <!-- :name="'images_' + + '[]'" -->
 
-                <div class="col-sm-3 my-1">
+                <div class="form-group">
+                    <label for="product_size">Product Size</label>
+                    <select
+                        class="form-control"
+                        name="product_sizes[]"
+                        id="product_size"
+                        class="d-block w-100"
+                        v-on:change="changeSize(event, index)"
+                    >
+                        <option
+                            v-for="size in allSizes"
+                            key="size.id"
+                            :value="size.id"
+                        >
+                            @{{ size.title }}
+                        </option>
+                    </select>
+                    <input
+                        type="file"
+                        multiple
+                        :name="'image_' + size_inputs[index].size_id + '[]'"
+                        id=""
+                    />
+                    <!-- :name="'image_' + size_inputs[index].size_id + '[]'" -->
+                </div>
+
+                <!-- <div class="col-sm-3 my-1">
                     <label class="sr-only" for="size_title">Size Title</label>
                     <div class="input-group">
                         <input
@@ -128,7 +154,7 @@
                             placeholder="GA-356"
                         />
                     </div>
-                </div>
+                </div> -->
             </div>
 
             <div class="col-auto my-1">
@@ -162,13 +188,21 @@
 </div>
 
 <script>
+    var sizes = {!! $sizes !!}
+    console.log(sizes)
+
+
     new Vue({
         el: "#add-product-page",
         data: {
-            // sizes: [{}],
+            size_inputs: [],
             size_divs: 1,
             allSizes: [],
             allCats: [],
+            selectedSize:0,
+        },
+        beforeCreate(){
+
         },
         mounted() {
             fetch("/all", {
@@ -180,31 +214,42 @@
                 .then((res) => res.json())
                 .then((newRes) => {
                     this.allCats = newRes;
-                    console.log(this.allCats);
+                    // console.log(this.allCats);
                 });
 
-            fetch("/all-sizes", {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            })
-                .then((res) => res.json())
-                .then((newRes) => {
-                    this.allSizes = newRes;
-                    console.log(this.allSizes);
-                });
+                this.allSizes = sizes
+                // console.log(this.allSizes)
+                this.selectedSize = this.allSizes[0].id
+
+                this.size_inputs.push(
+                    {
+                        size_id: this.selectedSize
+                    }
+                )
+                console.log(this.size_inputs)
+
+
         },
-        beforeCreate() {},
         methods: {
             addSize() {
                 this.size_divs = this.size_divs + 1;
-                console.log(this.size_divs);
+                // console.log(this.size_divs);
+                this.size_inputs.push(
+                    {
+                        size_id:this.selectedSize
+                    }
+                )
             },
             removeSize() {
                 if (this.size_divs == 1) return;
                 this.size_divs = this.size_divs - 1;
             },
+            changeSize(e,i){
+                // this.selectedSize = e.target.value
+                this.size_inputs[i].size_id = e.target.value
+                console.log(this.size_inputs[i])
+            }
+
         },
     });
 </script>

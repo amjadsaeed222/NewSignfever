@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="{{ asset('css/backend_css/bootstrap.min.css') }}" />
 <link rel="stylesheet" href="{{ asset('css/backend_css/bootstrap-responsive.min.css') }}" />
 <!-- <link rel="stylesheet" href="{{ asset('css/backend_css/select2.css') }}" /> -->
-<link rel="stylesheet" href="{{ asset('css/backend_css/uniform.css') }}" />
+<!-- <link rel="stylesheet" href="{{ asset('css/backend_css/uniform.css') }}" /> -->
 <link rel="stylesheet" href="{{ asset('css/backend_css/fullcalendar.css') }}" />
 <link rel="stylesheet" href="{{ asset('css/backend_css/matrix-style.css') }}" />
 <link rel="stylesheet" href="{{ asset('css/backend_css/matrix-media.css') }}" />
@@ -37,7 +37,7 @@
 <script src="{{ asset('js/backend_js/jquery.min.js') }} "></script> 
 <!-- <script src="{{ asset('js/backend_js/jquery.ui.custom.js') }} "></script> --> 
 <script src="{{ asset('js/backend_js/bootstrap.min.js') }} "></script> 
-<script src="{{ asset('js/backend_js/jquery.uniform.js') }} "></script> 
+<!-- <script src="{{ asset('js/backend_js/jquery.uniform.js') }} "></script>  -->
 <!-- <script src="{{ asset('js/backend_js/select2.min.js') }} "></script>  -->
 <script src="{{ asset('js/backend_js/jquery.validate.js') }} "></script> 
 <script src="{{ asset('js/backend_js/jquery.dataTables.min.js') }} "></script> 

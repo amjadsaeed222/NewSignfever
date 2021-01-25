@@ -58,26 +58,29 @@ class ProductsController extends Controller
             $product->partNo=$data['product_part'];
             $product->status = $status;
             $product->slug=SlugService::createslug(Product::class,'slug',$data['product_name']);
-            //echo "<pre>";print_r($product);die;
-            $product->save();
+            // $product->save();
             
             //Adding Sizes
             
             $addedproductId= $product->id;
             
-            foreach($data['size_title'] as $key=>$val)
+            foreach($data['product_sizes'] as $size)
             {
                 $sizeDetails=new ProductSize;
                 $sizeDetails->product_id=$addedproductId;
-                $sizeDetails->title=$data['size_title'][$key];
-                $sizeDetails->SPN=$data['size_SPN'][$key];
-                $sizeDetails->save();
+                // $sizeDetails->title=$data['size_title'][$key];
+                // $sizeDetails->SPN=$data['size_SPN'][$key];
+
+                // $sizeDetails->save();
                 
                 //Adding Images in size.
+
                 
                 $insertedsizeId= $sizeDetails->id;
                 $productImage = new ProductsImage;
-                $images=$data['images'];
+                // $images=$data['images_' + is_numeric($val)   ];
+                $images=$data['image_'. $size];
+
                 $img_len=count($images);
                 for($i=0; $i<$img_len; $i++)
                 {
@@ -86,22 +89,22 @@ class ProductsController extends Controller
                     $image_path = 'images/backend_images/product/large'.'/'.$fileName;
                     Image::make($images[$i])->save($image_path);
                     $imageDetails= new ProductsImage;
-                    $imageDetails->productSize_id = $insertedsizeId;
+                    $imageDetails->productSize_id = $size;
                     $imageDetails->image = $fileName;
                     $imageDetails->save();
                 }                   
                     
             }     
 
-        
+            
                
-			return redirect()->back()->with('flash_message_success', 'Product has been added successfully');
+			// return redirect()->back()->with('flash_message_success', 'Product has been added successfully');
            
         }
 
-		
+		$sizes = ProductSize::all();
 
-		return view('admin.products.add_product');
+		return view('admin.products.add_product', compact('sizes'));
     }  
     
     /* public function addmaterial(Request $request)

@@ -77,9 +77,11 @@
         <div class="col-md-2 mt-2">
             <div class="row">
                 <div>
-                    <button class="btn btn-success main-green">
-                        <i class="fas fa-comment-dots"></i>
-                    </button>
+                    <a href="/shopping-cart">
+                        <button class="btn btn-success main-green">
+                            <i class="fas fa-comment-dots"></i>
+                        </button>
+                    </a>
                 </div>
                 <div class="ml-2 header-helpers">
                     <h6>Shopping Cart</h6>
