@@ -98,15 +98,14 @@
             </div>
 
             <h3 class="display-3">Product Basic Information</h3>
-            
-                <p class="lead">You may add multiple sizes for a product</p>
-            
-                
-                
-                <!-- :name="'images_' + + '[]'" -->
 
-                
-            
+            <p class="lead">You may add multiple sizes for a product</p>
+            <select name="size" id="size" onchange="SetImageName();">
+                <option disabled selected value> -- select an option -- </option>
+                @foreach ($sizes as $size) 
+                <option value="{{$size->id}}">{{$size->title}}</option>    
+            @endforeach
+            </select> 
             <div class="single-section" id="size_container"v-for="divs,index in size_divs">
                 <h5>Product Size @{{ index + 1 }}</h5>
                 <input type="file" id="images" name="images" multiple="multiple" />
@@ -115,15 +114,27 @@
                 <div class="col-sm-3 my-1">
                     <label class="sr-only" for="size_title">Size Title</label>
                     <div class="input-group">
-                        <select name="size_title[]" id="size_title" onchange="SetImageName()">
-                            <option disabled selected value> -- select an option -- </option>
-                            @foreach ($sizes as $size) 
-                                <option value="{{$size->id}}">{{$size->title}}</option>    
-                            @endforeach
-                        </select>
+                        <input
+                            name="size_title[]"
+                            type="text"
+                            class="form-control"
+                            id="size_title"
+                            placeholder="2x2"
+                        />
                     </div>
                 </div>
-                
+                <div class="col-sm-3 my-1">
+                    <label class="sr-only" for="SPN">SPN#</label>
+                    <div class="input-group">
+                        <input
+                            name="size_SPN[]"
+                            type="text"
+                            class="form-control"
+                            id="size_SPN"
+                            placeholder="GA-356"
+                        />
+                    </div>
+                </div>
             </div>
 
             <div class="col-auto my-1">
@@ -141,7 +152,12 @@
             <div class="col-auto my-1">
                 <!-- <div> -->
                 <a v-on:click="addSize()" class="btn btn-success"> Add Size </a>
-                <a v-on:click="removeSize()" v-if="size_divs != 1" class="btn btn-danger">Remove Size
+                <a
+                    v-on:click="removeSize()"
+                    v-if="size_divs != 1"
+                    class="btn btn-danger"
+                >
+                    Remove Size
                 </a>
 
                 <!-- </div> -->
@@ -201,14 +217,12 @@
 <script>
     FilePond.parse(document.body);
     
-    
     function SetImageName()
     {
-        var sizeId=document.getElementById("size_title").value;
-        
+        //alert("hello");
+        var sizeId=document.getElementById("size").value;
         var imageId=document.getElementById("images");
-        imageId.name="image_".concat(sizeId).concat('[]');
-        //alert(sizeId);
+        imageId.name="image_".concat(sizeId);
         
     }
 </script>

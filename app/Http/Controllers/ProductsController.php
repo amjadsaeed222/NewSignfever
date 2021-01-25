@@ -21,15 +21,6 @@ class ProductsController extends Controller
         if($request->isMethod('post'))
         {
             
-            // $request->validate([
-            //     'product_category'=> 'required',
-            //     'product_name'=>'required | regex:/^[\pL\s\-]+$/u',
-            //     'product_description'=>'required',
-            //     'product_price'=>'required | numeric',
-            //     'product_shape'=>'required',
-            //     'product_part'=>'required'
-            // ]);
-            
             $data = $request->all();
 			//echo "<pre>"; print_r($data); die;
             
@@ -65,19 +56,19 @@ class ProductsController extends Controller
             
             $addedproductId= $product->id;
             
-            foreach($data['size_title'] as $key=>$val)
+            foreach($data['size'] as $key=>$val)
             {
-                $sizeDetails=new ProductSize;
-                $sizeDetails->product_id=$addedproductId;
-                $sizeDetails->title=$data['size_title'][$key];
-                $sizeDetails->SPN=$data['size_SPN'][$key];
-                $sizeDetails->save();
-                
+                $attributes=new ProductsAttribute;
+                $attributes->product_id=$addedproductId;
+                $attributes->sizeId=$data['size'][$key];
+                $attributes->materialTypeId=$data['material'][$key];
+                $attributes->stock=$data['stock'][$key];
+                $attributes->save();
+                $attributeId=$attributes->id;                
                 //Adding Images in size.
                 
-                $insertedsizeId= $sizeDetails->id;
                 $productImage = new ProductsImage;
-                $images=$data['images'];
+                $images=$data['images_' . $data['size'][$key]];
                 $img_len=count($images);
                 for($i=0; $i<$img_len; $i++)
                 {
@@ -86,7 +77,7 @@ class ProductsController extends Controller
                     $image_path = 'images/backend_images/product/large'.'/'.$fileName;
                     Image::make($images[$i])->save($image_path);
                     $imageDetails= new ProductsImage;
-                    $imageDetails->productSize_id = $insertedsizeId;
+                    $imageDetails->attribute_id = $attributeId;
                     $imageDetails->image = $fileName;
                     $imageDetails->save();
                 }                   
@@ -98,10 +89,8 @@ class ProductsController extends Controller
 			return redirect()->back()->with('flash_message_success', 'Product has been added successfully');
            
         }
-
-		
-
-		return view('admin.products.add_product');
+        $sizes=ProductSize::all();
+		return view('admin.products.add_product')->with(compact('sizes'));
     }  
     
     /* public function addmaterial(Request $request)
