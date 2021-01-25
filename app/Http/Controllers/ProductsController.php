@@ -37,6 +37,8 @@ class ProductsController extends Controller
 			$product->category_id = $data['product_category'];
 			$product->product_name = $data['product_name'];
             
+            // Adding a static Material ID. We'll need to change DB later and can remove this
+            $product->materialTypeId = "5"; 
             if(!empty($data['product_description']))
             {
 				$product->description = $data['product_description'];
@@ -49,7 +51,8 @@ class ProductsController extends Controller
             if(empty($data['status']))
             {
                 $status='0';
-            }else
+            }
+            else
             {
                 $status='1';
             }
@@ -58,7 +61,7 @@ class ProductsController extends Controller
             $product->partNo=$data['product_part'];
             $product->status = $status;
             $product->slug=SlugService::createslug(Product::class,'slug',$data['product_name']);
-            // $product->save();
+            $product->save();
             
             //Adding Sizes
             
@@ -66,8 +69,8 @@ class ProductsController extends Controller
             
             foreach($data['product_sizes'] as $size)
             {
-                $sizeDetails=new ProductSize;
-                $sizeDetails->product_id=$addedproductId;
+                // $sizeDetails=new ProductSize;
+                // $sizeDetails->product_id=$addedproductId;
                 // $sizeDetails->title=$data['size_title'][$key];
                 // $sizeDetails->SPN=$data['size_SPN'][$key];
 
@@ -76,7 +79,7 @@ class ProductsController extends Controller
                 //Adding Images in size.
 
                 
-                $insertedsizeId= $sizeDetails->id;
+                // $insertedsizeId= $sizeDetails->id;
                 $productImage = new ProductsImage;
                 // $images=$data['images_' + is_numeric($val)   ];
                 $images=$data['image_'. $size];
@@ -98,7 +101,7 @@ class ProductsController extends Controller
 
             
                
-			// return redirect()->back()->with('flash_message_success', 'Product has been added successfully');
+			return redirect()->back()->with('flash_message_success', 'Product has been added successfully');
            
         }
 
