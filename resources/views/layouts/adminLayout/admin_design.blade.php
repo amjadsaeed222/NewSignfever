@@ -4,24 +4,35 @@
 <title>Admin</title>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="stylesheet" href="{{ asset('css/backend_css/bootstrap.min.css') }}" />
-<link rel="stylesheet" href="{{ asset('css/backend_css/bootstrap-responsive.min.css') }}" />
-<!-- <link rel="stylesheet" href="{{ asset('css/backend_css/select2.css') }}" /> -->
-<!-- <link rel="stylesheet" href="{{ asset('css/backend_css/uniform.css') }}" /> -->
-<link rel="stylesheet" href="{{ asset('css/backend_css/fullcalendar.css') }}" />
-<link rel="stylesheet" href="{{ asset('css/backend_css/matrix-style.css') }}" />
-<link rel="stylesheet" href="{{ asset('css/backend_css/matrix-media.css') }}" />
-<link rel="stylesheet" href="{{ asset('css/backend_css/sweetalert.css') }}" />
-<link href="{{ asset('css/backend_css/font-awesome.css') }}" rel="stylesheet" />
-<link rel="stylesheet" href="{{ asset('css/backend_css/jquery.gritter.css') }}" />
-<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
-
-<script src="https://unpkg.com/filepond/dist/filepond.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.min.js"></script>
-
+<script
+            src="https://code.jquery.com/jquery-3.5.1.min.js"
+            integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+            integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"
+            integrity="sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf"
+            crossorigin="anonymous"
+        ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.touchswipe/1.6.4/jquery.touchSwipe.min.js"></script>
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+            integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+            crossorigin="anonymous"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+            integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+            crossorigin="anonymous"
+        />
 </head>
 <body>
 
@@ -32,36 +43,5 @@
 @yield('content')
 
 @include('layouts.adminLayout.admin_footer')
-
-
-<script src="{{ asset('js/backend_js/jquery.min.js') }} "></script> 
-<!-- <script src="{{ asset('js/backend_js/jquery.ui.custom.js') }} "></script> --> 
-<script src="{{ asset('js/backend_js/bootstrap.min.js') }} "></script> 
-<!-- <script src="{{ asset('js/backend_js/jquery.uniform.js') }} "></script>  -->
-<!-- <script src="{{ asset('js/backend_js/select2.min.js') }} "></script>  -->
-<script src="{{ asset('js/backend_js/jquery.validate.js') }} "></script> 
-<script src="{{ asset('js/backend_js/jquery.dataTables.min.js') }} "></script> 
-<script src="{{ asset('js/backend_js/matrix.js') }} "></script> 
-<script src="{{ asset('js/backend_js/matrix.form_validation.js') }} "></script>
-<script src="{{ asset('js/backend_js/matrix.tables.js') }}"></script>
-<script src="{{ asset('js/backend_js/matrix.popover.js') }}"></script>
-<script src="{{ asset('js/backend_js/sweetalert.min.js') }}"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="https://cdn.ckeditor.com/ckeditor5/23.0.0/classic/ckeditor.js"></script>
-<script>
-    ClassicEditor
-    .create( document.querySelector( '#description' ) )
-    .catch( error => {
-    console.error( error );
-    } );
-</script>
-<script>
-        $(function(){
-            $("#expiry_date").datepicker({ 
-            	minDate: 0,
-            	dateFormat: 'yy-mm-dd'
-            });
-        });
-    </script>
 </body>
 </html>

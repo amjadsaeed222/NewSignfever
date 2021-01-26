@@ -756,6 +756,7 @@ class ProductsController extends Controller
         return view('admin.products.view_material')->with(compact('materials'));
         
     }
+
     public function EditMaterial(Request $request,$id)
     {
         if($request->isMethod('post'))
@@ -785,5 +786,12 @@ class ProductsController extends Controller
     {
         ProductMaterial::where(['id'=>$id])->delete();
         return redirect()->back()->with('flash_message_success', 'Material has been deleted successfully');
+    }
+    
+    public function addIndex()
+    {
+
+        return view('admin.products.add_index');
+        
     }
 }
