@@ -4,63 +4,63 @@
 </script>
 <div id="content">
     <div class="container">
-        <h5 class="text-center">Add A New Material</h5>
+        <h5 class="text-center">Add A New Product Index</h5>
         <div class="my-5" id="form">
             <form
                 enctype="multipart/form-data"
                 class="form-horizontal"
                 method="post"
-                action="{{ url('/admin/add-material') }}"
-                name="add_material"
-                id="add_material"
+                action="{{ url('/admin/add-index') }}"
+                name="add_index"
+                id="add_index"
                 class=""
             >
                 {{ csrf_field() }}
                 <div id="basic_info">
                     <div class="form-group row">
-                        <label
-                            for="material_title"
-                            class="col-sm-3 col-form-label"
-                            >Material Title</label
+                        <label for="index_title" class="col-sm-3 col-form-label"
+                            >Index Title</label
                         >
                         <div class="col-sm-9">
                             <input
                                 type="text"
                                 class="form-control"
-                                id="material_title"
-                                name="material_title"
-                                placeholder="Material Title"
+                                id="index_title"
+                                name="index_title"
+                                placeholder="Index Title"
                             />
                         </div>
                     </div>
                     <div class="form-group row">
                         <label
-                            for="material_description"
+                            for="index_description"
                             class="col-sm-3 col-form-label"
-                            >Material Description</label
+                            >Index Description</label
                         >
                         <div class="col-sm-9">
                             <textarea
+                                
                                 class="form-control"
-                                id="description"
                                 name="description"
-                                ></textarea>
+                                id="description"
+                                placeholder="Index Description"
+                            ></textarea>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <div class="col-sm-3">Config Image</div>
+                        <div class="col-sm-3">Image</div>
                         <div class="col-sm-9">
                             <div class="custom-file">
                                 <input
                                     type="file"
-                                    name="material_config_image"
+                                    name="index_image"
                                     class="custom-file-input"
-                                    id="material_config_image"
+                                    id="Index_image"
                                 />
                                 <label
                                     class="custom-file-label"
-                                    for="material_config_image"
-                                    >Choose A Config Image For Material</label
+                                    for="index_image"
+                                    >Choose An Image</label
                                 >
                             </div>
                         </div>
@@ -69,7 +69,7 @@
                 <div class="form-group row">
                     <div class="col-sm-10">
                         <button type="submit" class="btn btn-success">
-                            Add Material
+                            Add index
                         </button>
                     </div>
                 </div>

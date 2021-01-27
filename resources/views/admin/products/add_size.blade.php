@@ -1,55 +1,60 @@
-@extends('layouts.adminLayout.admin_design')
-@section('content')
+@extends('layouts.adminLayout.admin_design') @section('content')
 
-<div id="content">
-  <div id="content-header">
-    <div id="breadcrumb"> <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#">Products</a> <a href="#" class="current">Add Product</a> </div>
-    <h1>Products</h1>
-    @if(Session::has('flash_message_error'))
-            <div class="alert alert-error alert-block">
-                <button type="button" class="close" data-dismiss="alert">×</button> 
-                    <strong>{!! session('flash_message_error') !!}</strong>
-            </div>
-        @endif   
-        @if(Session::has('flash_message_success'))
-            <div class="alert alert-success alert-block">
-                <button type="button" class="close" data-dismiss="alert">×</button> 
-                    <strong>{!! session('flash_message_success') !!}</strong>
-            </div>
-        @endif
-  </div>
-  <div class="container-fluid"><hr>
-    <div class="row-fluid">
-      <div class="span12">
-        <div class="widget-box">
-          <div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
-            <h5>Add New Size</h5>
-          </div>
-          <div class="widget-content nopadding">
-            <form enctype="multipart/form-data" class="form-horizontal" method="post" action="{{ url('api/admin/add-size') }}" name="add_size" id="add_size" >{{ csrf_field() }}
-              
-              <div class="control-group">
-                <label class="control-label">Size Title</label>
-                <div class="controls">
-                  <input type="text" name="size_title" id="size_title">
+<div id="add-size">
+    <div class="container">
+        <div class="my-5" id="form">
+        <h5 class="text-center">Add A New Size</h5>
+
+            <form
+                enctype="multipart/form-data"
+                class="form-horizontal"
+                method="post"
+                action="{{ url('/admin/add-size') }}"
+                name="add_size"
+                id="add_size"
+                class=""
+            >
+                {{ csrf_field() }}
+                <div id="basic_info">
+                    <div class="form-group row">
+                        <label for="size_title" class="col-sm-3 col-form-label"
+                            >Size Title</label
+                        >
+                        <div class="col-sm-9">
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="size_title"
+                                name="size_title"
+                                placeholder="Size Title"
+                            />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="size_spn" class="col-sm-3 col-form-label"
+                            >Size SPN</label
+                        >
+                        <div class="col-sm-9">
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="size_spn"
+                                name="size_spn"
+                                placeholder="Size SPN"
+                            />
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <div class="control-group">
-                <label class="control-label">Size SPN</label>
-                <div class="controls">
-                  <input type="text" name="size_SPN" id="size_SPN">
+                <div class="form-group row">
+                    <div class="col-sm-10">
+                        <button type="submit" class="btn btn-success">
+                            Add Size
+                        </button>
+                    </div>
                 </div>
-              </div>
-              <div class="form-actions">
-                <input type="submit" value="Submit" class="btn btn-success">
-              </div>
             </form>
-
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
 
 @endsection

@@ -10,6 +10,7 @@ use App\Models\ProductsAttribute;
 use App\Models\ProductsImage;
 use App\Models\ProductSize;
 use App\Models\ProductMaterial;
+use App\Models\Index;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Response;
 
@@ -25,7 +26,7 @@ class ProductsController extends Controller
 			//echo "<pre>"; print_r($data); die;
             
 			$product = new Product;
-			$product->category_id = $data['product_category'];
+			$product->index_Id = $data['product_index'];
 			$product->product_name = $data['product_name'];
             
             if(!empty($data['product_description']))
@@ -37,7 +38,7 @@ class ProductsController extends Controller
 				$product->description = '';	
 			}
             
-            if(empty($data['status']))
+            if(empty($data['product_status']))
             {
                 $status='0';
             }else
@@ -46,7 +47,8 @@ class ProductsController extends Controller
             }
 			$product->price = $data['product_price'];
             $product->shape=$data['product_shape'];
-            $product->partNo=$data['product_part'];
+            $product->partNo=$data['product_part_no'];
+            $product->shape=$data['product_shape'];
             $product->status = $status;
             $product->slug=SlugService::createslug(Product::class,'slug',$data['product_name']);
             //echo "<pre>";print_r($product);die;
@@ -56,33 +58,44 @@ class ProductsController extends Controller
             
             $addedproductId= $product->id;
             
-            foreach($data['size'] as $key=>$val)
+            
+            foreach($data['product_sizes'] as $size)
             {
                 $attributes=new ProductsAttribute;
                 $attributes->product_id=$addedproductId;
-                $attributes->sizeId=$data['size'][$key];
-                $attributes->materialTypeId=$data['material'][$key];
-                $attributes->stock=$data['stock'][$key];
+                //Attribute type 1=size
+                $attributes->attribute_type=1;
+                $attributes->attribute_value=$size;
                 $attributes->save();
-                $attributeId=$attributes->id;                
+            }
+            //Adding Product Materials
+            foreach($data['product_materials'] as $material)
+            {
+                $attributes=new ProductsAttribute;
+                $attributes->product_id=$addedproductId;
+                //Attribute type 2=material
+                $attributes->attribute_type=2;
+                $attributes->attribute_value=$material;
+                $attributes->save();
+            }                    
                 //Adding Images in size.
+            foreach($data['product_images'] as $product_image)    
+            {
+                $extension = $product_image->getClientOriginalExtension();
+                $fileName = rand(111,99999).'.'.$extension;
+                $image_path = 'images/backend_images/product/large'.'/'.$fileName;
+                Image::make($product_image)->save($image_path);
+                $imageDetails= new ProductsImage;
+                $imageDetails->product_id = $addedproductId;
+                $imageDetails->image = $fileName;
+                $imageDetails->save();
+            }    
+            
                 
-                $productImage = new ProductsImage;
-                $images=$data['images_' . $data['size'][$key]];
-                $img_len=count($images);
-                for($i=0; $i<$img_len; $i++)
-                {
-                    $extension = $images[$i]->getClientOriginalExtension();
-                    $fileName = rand(111,99999).'.'.$extension;
-                    $image_path = 'images/backend_images/product/large'.'/'.$fileName;
-                    Image::make($images[$i])->save($image_path);
-                    $imageDetails= new ProductsImage;
-                    $imageDetails->attribute_id = $attributeId;
-                    $imageDetails->image = $fileName;
-                    $imageDetails->save();
-                }                   
+                
+                                   
                     
-            }     
+                
 
         
                
@@ -90,7 +103,9 @@ class ProductsController extends Controller
            
         }
         $sizes=ProductSize::all();
-		return view('admin.products.add_product')->with(compact('sizes'));
+        $materials=ProductMaterial::all();
+        $indexes=Index::all();
+		return view('admin.products.add_product')->with(compact('sizes','materials','indexes'));
     }  
     
     /* public function addmaterial(Request $request)
@@ -678,7 +693,7 @@ class ProductsController extends Controller
             
             $sizeDetails=new ProductSize;
             $sizeDetails->title=$data['size_title'];
-            $sizeDetails->SPN=$data['size_SPN'];
+            $sizeDetails->SPN=$data['size_spn'];
             $sizeDetails->save();
         }
         
@@ -720,10 +735,10 @@ class ProductsController extends Controller
             $MaterialDetails->title=$data['material_title'];
             $MaterialDetails->description=$data['description'];
             
-            $extension = $data['image']->getClientOriginalExtension();
+            $extension = $data['material_config_image']->getClientOriginalExtension();
             $fileName = rand(111,99999).'.'.$extension;
             $image_path = 'images/backend_images/product/large'.'/'.$fileName;
-            Image::make($data['image'])->save($image_path);
+            Image::make($data['material_config_image'])->save($image_path);
             
             $MaterialDetails->configImage = $fileName;
             $MaterialDetails->save();            
@@ -739,6 +754,7 @@ class ProductsController extends Controller
         return view('admin.products.view_material')->with(compact('materials'));
         
     }
+
     public function EditMaterial(Request $request,$id)
     {
         if($request->isMethod('post'))
@@ -768,5 +784,27 @@ class ProductsController extends Controller
     {
         ProductMaterial::where(['id'=>$id])->delete();
         return redirect()->back()->with('flash_message_success', 'Material has been deleted successfully');
+    }
+    
+    public function addIndex(Request $request)
+    {
+
+        if($request->isMethod('post'))
+        {
+            $data=$request->all();
+            $indexDetails=new Index;
+            $indexDetails->title=$data['index_title'];
+            $indexDetails->description=$data['description'];
+            $indexDetails->slug=SlugService::createslug(Index::class,'slug',$data['index_title']);
+            $extension = $data['index_image']->getClientOriginalExtension();
+            $fileName = rand(111,99999).'.'.$extension;
+            $image_path = 'images/backend_images/product/large'.'/'.$fileName;
+            Image::make($data['index_image'])->save($image_path);
+            $indexDetails->image=$fileName;
+            $indexDetails->save();
+            return redirect()->back();
+        }
+        return view('admin.products.add_index');
+        
     }
 }

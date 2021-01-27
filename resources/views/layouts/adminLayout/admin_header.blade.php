@@ -1,28 +1,23 @@
-<!--Header-part-->
-<div id="header">
-    <h1><a href="dashboard.html">Admin</a></h1>
-  </div>
-  <!--close-Header-part--> 
-  
-  
-  <!--top-Header-menu-->
-  <div id="user-nav" class="navbar navbar-inverse">
-    <ul class="nav">
-      {{-- <li class=""><a title="" href="{{ url('/admin/settings') }}"><i class="icon icon-cog"></i> <span class="text">Settings</span></a></li> --}}
-      <li class=""><a title="" href=""><i class="icon icon-share-alt"></i> <span class="text">{{Auth::user()->email}}</span></a></li>
-
-      <li class=""><a title="" href="{{ url('/logout') }}"  onclick="event.preventDefault();
-        document.getElementById('logout-form').submit();"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a>
-      <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-        @csrf
-    </form>  
-      </li>
-    </ul>
-  </div>
-  <!--close-top-Header-menu-->
-  <!--start-top-serch-->
-  {{-- <div id="search">
-    <input type="text" placeholder="Search here..."/>
-    <button type="submit" class="tip-bottom" title="Search"><i class="icon-search icon-white"></i></button>
-  </div> --}}
-  <!--close-top-serch-->
+<div class="container">
+    <h4 class="text-center">Welcome to Admin Dashboard</h4>
+    <div class="form-group row text-center">
+        <div class="col-auto">
+            <a href="/admin/add-product" class="btn btn-primary"
+                >Add New Product</a
+            >
+        </div>
+        <div class="col-auto">
+            <a href="/admin/add-index" class="btn btn-primary"
+                >Add New Product Index</a
+            >
+        </div>
+        <div class="col-auto">
+            <a href="/admin/add-material" class="btn btn-primary"
+                >Add New Material</a
+            >
+        </div>
+        <div class="col-auto">
+            <a href="/admin/add-size" class="btn btn-primary">Add New Size</a>
+        </div>
+    </div>
+</div>
