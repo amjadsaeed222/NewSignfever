@@ -1,4 +1,9 @@
 @extends('layouts.adminLayout.admin_design') @section('content')
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.ckeditor').ckeditor();
+    });
+</script>
 <div id="add-product-page">
     <div class="container">
         <div class="my-5" id="form">
@@ -60,13 +65,13 @@
                             >Product Description</label
                         >
                         <div class="col-sm-9">
-                            <input
-                                type="text"
-                                class="form-control"
+                            <textarea
+                                
+                                class="ckeditor form-control"
                                 id="description"
                                 name="description"
                                 placeholder="Product Description"
-                            />
+                            ></textarea>
                         </div>
                     </div>
                     <div class="form-group row">

@@ -3,8 +3,8 @@
 
 <div id="content">
   <div id="content-header">
-    <div id="breadcrumb"> <a href="" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#">Categories</a> <a href="#" class="current">View Categories</a> </div>
-    <h1>View Material</h1>
+    
+    <h1>Available Material</h1>
     @if(Session::has('flash_message_error'))
             <div class="alert alert-error alert-block">
                 <button type="button" class="close" data-dismiss="alert">×</button> 
@@ -52,7 +52,7 @@
                   
                   
                   <td class="center">
-                    <a href="{{ url('/api/admin/edit-material/'.$material->id) }}" class="btn btn-primary btn-mini">Edit</a> 
+                    <a href="{{ url('/admin/edit-material/'.$material->id) }}" class="btn btn-primary btn-mini">Edit</a> 
                 
                     <a id="delMaterial" rel="{{ $material->id }}" rel1="delete-material" href="javascript:"  class="btn btn-danger btn-mini deleteRecord">Delete</a>
                 </tr>

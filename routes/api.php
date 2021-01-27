@@ -66,6 +66,9 @@ Route::group(['middleware'=>'auth:api'],function(){
     Route::get('/delete-material/{id}',[ProductsController::class,'deleteMaterial']);
 
     Route::match(['get','post'],'/add-index',[ProductsController::class,'addIndex']);
+    Route::match(['get','post'],'/edit-index/{slug}',[ProductsController::class,'editIndex']);
+    Route::match(['get','post'],'/delete-index/{id}',[ProductsController::class,'deleteIndex']);
+    Route::match(['get','post'],'/view-index',[ProductsController::class,'viewIndex']);
 });
 
 

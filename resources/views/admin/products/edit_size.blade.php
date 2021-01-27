@@ -3,8 +3,8 @@
 
 <div id="content">
   <div id="content-header">
-    <div id="breadcrumb"> <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#">Products</a> <a href="#" class="current">Add Product</a> </div>
-    <h1>Products</h1>
+    
+    <h1>Edit Product</h1>
     @if(Session::has('flash_message_error'))
             <div class="alert alert-error alert-block">
                 <button type="button" class="close" data-dismiss="alert">×</button> 
@@ -26,7 +26,7 @@
             <h5>Edit Size</h5>
           </div>
           <div class="widget-content nopadding">
-            <form enctype="multipart/form-data" class="form-horizontal" method="post" action="{{ url('api/admin/edit-size/'. $size->id) }}" name="edit_size" id="edit_size" >{{ csrf_field() }}
+            <form enctype="multipart/form-data" class="form-horizontal" method="post" action="{{ url('admin/edit-size/'. $size->id) }}" name="edit_size" id="edit_size" >{{ csrf_field() }}
               
               <div class="control-group">
                 <label class="control-label">Size Title</label>

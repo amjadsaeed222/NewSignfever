@@ -1,11 +1,11 @@
 @extends('layouts.adminLayout.admin_design')
 @section('content')
 @php
-use App\Models\Category;
+use App\Models\Index;
 @endphp
 <div id="content">
   <div id="content-header">
-    <div id="breadcrumb"> <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#">Products</a> <a href="#" class="current">View Products</a> </div>
+    
     <h1>Products</h1>
     @if(Session::has('flash_message_error'))
             <div class="alert alert-error alert-block">
@@ -33,11 +33,9 @@ use App\Models\Category;
               <thead>
                 <tr>
                   <th>Product ID</th>
-                  <th>Category ID</th>
-                  <th>Category Name</th>
+                  <th>Index Name</th>
                   <th>Product Name</th>
                   <th>Price</th>
-                  
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -45,17 +43,14 @@ use App\Models\Category;
               	@foreach($products as $product)
                 <tr class="gradeX">
                   <td class="center">{{ $product->id }}</td>
-                  <td class="center">{{ $product->category_id }}</td>
-                  <td class="center">{{ $product->category_name }}</td>
-                  <td class="center">{{ $product->product_name }}</td>
                   
+                  <td class="center">{{ $product->index_title }}</td>
+                  <td class="center">{{ $product->product_name }}</td>
                   <td class="center">{{ $product->price }}</td>
                   
                   <td class="center">
-                    {{-- <a href="#myModal{{ $product->id }}" data-toggle="modal" class="btn btn-success btn-mini">View</a>  --}}
-                    <a href="{{ url('/api/admin/edit-product/'.$product->slug) }}" class="btn btn-primary btn-mini">Edit</a> 
-                    {{-- <a href="{{ url('/api/admin/add-attributes/'.$product->id) }}" class="btn btn-success btn-mini">Add Attribute</a> --}}
-                    {{-- <a href="{{ url('/api/admin/add-images/'.$product->id) }}" class="btn btn-info btn-mini">Add</a> --}}
+                    
+                    <a href="{{ url('/admin/edit-product/'.$product->slug) }}" class="btn btn-primary btn-mini">Edit</a> 
                     <a id="delProduct" rel="{{ $product->id }}" rel1="delete-product" href="javascript:"  class="btn btn-danger btn-mini deleteRecord">Delete</a>
  
                         <div id="myModal{{ $product->id }}" class="modal hide">
@@ -70,20 +65,20 @@ use App\Models\Category;
                             
                             @php
                               
-                              $category=Category::where(['id'=>$product->category_id])->first();
-                              $category_name=$category->name;    
+                              $index=Index::where(['id'=>$product->index_Id])->first();
+                              $index_title=$index->title;    
                             @endphp
-                            <p>Category Name: {{ $category_name }}</p>
+                            <p>Index : {{ $index_title }}</p>
                             <p>Price: {{ $product->price }}</p>
                             <p>Description: {{ $product->description }}</p>
-                            @if (!empty($product->design))
+                            {{-- @if (!empty($product->design))
                               @foreach ($product->design as $key=> $val)
                               <p>SKU:{{$val->sku}}</p>
                               <p>Size:{{$val->size}}</p>
                               <p>Material:{{$val->materialType}}</p>
                               @endforeach    
                             @endif
-                            
+                             --}}
                           </div>
                         </div>
 

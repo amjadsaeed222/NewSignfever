@@ -4,7 +4,7 @@
 <div id="content">
   <div id="content-header">
     
-    <h1>Available Sizes</h1>
+    <h1>All Index</h1>
     @if(Session::has('flash_message_error'))
             <div class="alert alert-error alert-block">
                 <button type="button" class="close" data-dismiss="alert">×</button> 
@@ -24,7 +24,7 @@
       <div class="span12">
         <div class="widget-box">
           <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
-            <h5>All Sizes</h5>
+            <h5>Categories</h5>
           </div>
           @if(Session::has('flash_message_success'))
             <div class="alert alert-success alert-block">
@@ -36,26 +36,23 @@
             <table class="table table-bordered data-table">
               <thead>
                 <tr>
-                  <th>Size ID</th>
-                  <th>Size Title</th>
-                  <th>Size SPN</th>
-                  
+                  <th>Index ID</th>
+                  <th>Name</th>
+                  <th>Image</th>
                   <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
-              	@foreach($sizes as $size)
+              	@foreach($allIndexes as $index)
                 <tr class="gradeX">
-                  <td class="center">{{ $size->id }}</td>
-                  <td class="center">{{ $size->title }}</td>
-                  <td class="center">{{ $size->SPN }}</td>
+                  <td class="center">{{ $index->id }}</td>
+                  <td class="center">{{ $index->title }}</td>
                   
-                  
+                  <td class="center"><img src="{{ asset('/images/backend_images/product/large/'.$index->image) }}" style="float:right;width:25px;height:25px"></td>
                   <td class="center">
-                    <a href="{{ url('/admin/edit-size/'.$size->id) }}" class="btn btn-primary btn-mini">Edit</a> 
-                
-                    <a id="delSize" rel="{{ $size->id }}" rel1="delete-size" href="javascript:"  class="btn btn-danger btn-mini deleteRecord">Delete</a>
-                </tr>
+                    <a href="{{ url('/admin/edit-index/'.$index->slug) }}" class="btn btn-primary btn-mini">Edit</a> 
+                    <a id="delIndex" rel="{{ $index->id }}" rel1="delete-Index" href="javascript:"  class="btn btn-danger btn-mini deleteRecord">Delete</a>
+                  </tr>
                 @endforeach
               </tbody>
             </table>

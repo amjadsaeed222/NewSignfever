@@ -168,24 +168,20 @@ class IndexController extends Controller
         
     }
 
-
-
-
-
     public function allProducts(Request $request)
     {
         $products = Product::get();
         foreach($products as $key => $val)
         {
-			$category_name = Category::where(['id' => $val->category_id])->first();
-            $products[$key]->category_name = $category_name->name;
+			$index = Index::where(['id' => $val->index_Id])->first();
+            $products[$key]->index_name = $index->title;
             $attributes=ProductsAttribute::where(['product_id' => $val->id])->get();
             $products[$key]->desings = $attributes;
 
         }
         $products = json_decode($products);
         return $products;
-        //echo "<pre>";print_r($products);die;
+    
     }
     
     public function shoppingCart() 

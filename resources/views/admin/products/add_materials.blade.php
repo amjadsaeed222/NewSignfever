@@ -1,6 +1,8 @@
 @extends('layouts.adminLayout.admin_design') @section('content')
-<script>
-    CKEDITOR.replace( 'description' );
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.ckeditor').ckeditor();
+    });
 </script>
 <div id="content">
     <div class="container">
@@ -41,7 +43,7 @@
                         >
                         <div class="col-sm-9">
                             <textarea
-                                class="form-control"
+                                class=" ckeditor form-control"
                                 id="description"
                                 name="description"
                                 ></textarea>

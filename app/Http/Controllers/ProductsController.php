@@ -29,9 +29,9 @@ class ProductsController extends Controller
 			$product->index_Id = $data['product_index'];
 			$product->product_name = $data['product_name'];
             
-            if(!empty($data['product_description']))
+            if(!empty($data['description']))
             {
-				$product->description = $data['product_description'];
+				$product->description = $data['description'];
             }
             else
             {
@@ -57,7 +57,6 @@ class ProductsController extends Controller
             //Adding Sizes
             
             $addedproductId= $product->id;
-            
             
             foreach($data['product_sizes'] as $size)
             {
@@ -133,17 +132,7 @@ class ProductsController extends Controller
 
         if($request->isMethod('post'))
         {
-            /* $request->validate(
-                [
-                'category_id'=> 'required',
-                'product_name'=>'required | regex:/^[\pL\s\-]+$/u',
-                'description'=>'required',
-                'price'=>'required | numeric',
-                'image'=>'required | image',
-            ],
-            [
-                'category_id.required'=> 'Category field is required!'
-            ]); */
+            
             $data = $request->all();
 			//echo "<pre>"; print_r($data); die;
 
@@ -217,37 +206,13 @@ class ProductsController extends Controller
 		$productDetails = Product::where(['slug'=>$slug])->first();
 		// Get Product Details End //
         $id=$productDetails->id;
-		// Categories drop down start //
-		$categories = Category::where(['parent_id' => 0])->get();
-        $productSizes=ProductSize::where(['product_id'=> $productDetails->id])->get();
-		$categories_drop_down = "<option value='' disabled>Select</option>";
-        foreach($categories as $cat)
-        {
-            if($cat->id==$productDetails->category_id)
-            {
-				$selected = "selected";
-            }else
-            {
-				$selected = "";
-			}
-			$categories_drop_down .= "<option value='".$cat->id."' ".$selected.">".$cat->name."</option>";
-			$sub_categories = Category::where(['parent_id' => $cat->id])->get();
-            foreach($sub_categories as $sub_cat)
-            {
-                if($sub_cat->id==$productDetails->category_id)
-                {
-					$selected = "selected";
-                }else
-                {
-					$selected = "";
-				}
-				$categories_drop_down .= "<option value='".$sub_cat->id."' ".$selected.">&nbsp;&nbsp;--&nbsp;".$sub_cat->name."</option>";	
-			}	
-		}
-        // Categories drop down end //
-        
+		$productIndexes = Index::all();
+		$productMaterials = ProductMaterial::all();
+        $productSizes=ProductSize::all();
+        $productAttributes=ProductsAttribute::where('product_id',$id)->get();
+		
         //dd($productDetails);
-		return view('admin.products.edit_product')->with(compact('productDetails','categories_drop_down','id','productSizes'));
+		return view('admin.products.edit_product')->with(compact('productDetails','productIndexes','id','productSizes','productMaterials','productAttributes'));
 	} 
 
     public function deleteProductImage($id=null)
@@ -318,12 +283,10 @@ class ProductsController extends Controller
     public function viewProducts(Request $request)
     {
 		$products = Product::get();
-        foreach($products as $key => $val)
+        foreach($products as $product)
         {
-			$category_name = Category::where(['id' => $val->category_id])->first();
-            $products[$key]->category_name = $category_name->name;            
-            //$sizes=ProductSize::where(['product_id'=> $val->id])->get();
-            //$products[$key]->sizes=$sizes;
+			$index = Index::where(['id' => $product->index_Id])->first();
+            $product->index_title = $index->title;            
         }
          //echo "<pre>";print_r($products);die;
         return view('admin.products.view_products')->with(compact('products'));
@@ -734,7 +697,6 @@ class ProductsController extends Controller
             $MaterialDetails=new ProductMaterial;
             $MaterialDetails->title=$data['material_title'];
             $MaterialDetails->description=$data['description'];
-            
             $extension = $data['material_config_image']->getClientOriginalExtension();
             $fileName = rand(111,99999).'.'.$extension;
             $image_path = 'images/backend_images/product/large'.'/'.$fileName;
@@ -806,5 +768,53 @@ class ProductsController extends Controller
         }
         return view('admin.products.add_index');
         
+    }
+    public function editIndex(Request $request,$slug=null)
+    {
+        if($request->isMethod('post'))
+        {
+            $data=$request->all();
+            if($request->hasFile('index_image'))
+            {
+            	$image_tmp = $request->file('index_image');;
+                if ($image_tmp->isValid()) 
+                {
+                    // Upload Images after Resize
+                    $extension = $image_tmp->getClientOriginalExtension();
+                    $fileName = rand(111,99999).'.'.$extension;
+                    
+                    if(isset($data['current_image']))
+                        File::delete(public_path('images/backend_images/product/large/'. $data['current_image']));
+                    
+                    $large_image_path = 'images/backend_images/product/large'.'/'.$fileName;
+                    Image::make($image_tmp)->save($large_image_path);
+ 				}
+            }
+            else if(!empty($data['current_image']))
+            {
+            	$fileName = $data['current_image'];
+            }
+            else
+            {
+            	$fileName = '';
+            }
+            
+            $index=Index::where(['slug'=> $slug])->first();
+            $index->slug=null;
+            $index->update(['title'=>$data['index_title'],'image'=>$fileName,'description'=> $data['description']]);
+            return redirect()->action([ProductsController::class,'viewIndex']);
+        }
+        $index=Index::where('slug',$slug)->first();
+        return view('admin.products.edit_index')->with(compact('index'));
+    }
+    public function deleteIndex($id = null)
+    {
+        Index::where(['id'=>$id])->delete();
+        return redirect()->back()->with('flash_message_success', 'Index has been deleted successfully');
+    }
+    public function viewIndex()
+    {
+        $allIndexes=Index::all();
+        return view('admin.products.view_index')->with(compact('allIndexes'));
     }
 }
