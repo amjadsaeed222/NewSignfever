@@ -31,7 +31,6 @@
                             data-target="#exampleModal"
                         />
 
-                        <!-- MODAL -->
                         <!-- Modal -->
                         <div
                             class="modal fade"
@@ -636,9 +635,7 @@
     .qty-row {
         border-top: #cccccc 1px solid;
     }
-    .cursor-pointer:hover {
-        cursor: pointer;
-    }
+
     .mobile-only {
         display: none;
     }

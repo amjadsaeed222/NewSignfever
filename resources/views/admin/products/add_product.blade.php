@@ -101,29 +101,51 @@
             
                 <p class="lead">You may add multiple sizes for a product</p>
             
-                
-                
                 <!-- :name="'images_' + + '[]'" -->
 
                 
             
             <div class="single-section" id="size_container"v-for="divs,index in size_divs">
                 <h5>Product Size @{{ index + 1 }}</h5>
-                <input type="file" id="images" name="images" multiple="multiple" />
-                <!-- :name="'images_' + + '[]'" -->
-
-                <div class="col-sm-3 my-1">
-                    <label class="sr-only" for="size_title">Size Title</label>
-                    <div class="input-group">
-                        <select name="size_title[]" id="size_title" onchange="SetImageName()">
-                            <option disabled selected value> -- select an option -- </option>
-                            @foreach ($sizes as $size) 
-                                <option value="{{$size->id}}">{{$size->title}}</option>    
-                            @endforeach
+                
+                <div class="form-group">
+                    
+                    <label for="product_size">Product Size</label>
+                    <select
+                        class="form-control"
+                        name="product_sizes[]"
+                        id="product_size"
+                        class="d-block w-100"
+                        v-on:change="changeSize(event, index)"
+                    >
+                        <option
+                            v-for="size in allSizes"
+                            key="size.id"
+                            :value="size.id"
+                        >
+                            @{{ size.title }}
+                        </option>
+                    </select>
+                    <div id="material_container" class="single-section" v-for="divs,index in material_divs">
+                        <label for="product_material">Material Type @{{index+1}}</label>
+                        <select class="form-control" :name="'materials_' + size_inputs[index].size_id + '[]'" id="product_material">
+                        
+                            <option v-for="material in allMaterials"
+                            key="material.id"
+                            :value="material.id">
+                            @{{material.title}}</option>
                         </select>
                     </div>
+                    <a v-on:click="addMaterial()" class="btn btn-success"> Add Material </a>
+                <a v-on:click="removeMaterial()" v-if="material_divs != 1" class="btn btn-danger">Remove Material
+                </a>
+                    <input
+                        type="file"
+                        multiple
+                        :name="'image_' + size_inputs[index].size_id + '[]'"
+                        id=""
+                    />
                 </div>
-                
             </div>
 
             <div class="col-auto my-1">
@@ -143,7 +165,7 @@
                 <a v-on:click="addSize()" class="btn btn-success"> Add Size </a>
                 <a v-on:click="removeSize()" v-if="size_divs != 1" class="btn btn-danger">Remove Size
                 </a>
-
+                
                 <!-- </div> -->
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
@@ -152,13 +174,27 @@
 </div>
 
 <script>
+    var sizes = {!! $sizes !!}
+    console.log(sizes)
+    var materials = {!! $materials !!}
+    console.log(materials)
+
+
     new Vue({
         el: "#add-product-page",
         data: {
-            // sizes: [{}],
+            size_inputs: [],
             size_divs: 1,
             allSizes: [],
             allCats: [],
+            selectedSize:0,
+            material_inputs:[],
+            material_divs:1,
+            allMaterials:[],
+            selectedMaterial:0,
+        },
+        beforeCreate(){
+
         },
         mounted() {
             fetch("/all", {
@@ -170,31 +206,67 @@
                 .then((res) => res.json())
                 .then((newRes) => {
                     this.allCats = newRes;
-                    console.log(this.allCats);
+                    // console.log(this.allCats);
                 });
 
-            fetch("/all-sizes", {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            })
-                .then((res) => res.json())
-                .then((newRes) => {
-                    this.allSizes = newRes;
-                    console.log(this.allSizes);
-                });
+                this.allSizes = sizes
+                // console.log(this.allSizes)
+                this.selectedSize = this.allSizes[0].id
+
+                this.size_inputs.push(
+                    {
+                        size_id: this.selectedSize
+                    }
+                )
+                console.log(this.size_inputs)
+                //Materials
+                this.allMaterials = materials
+                // console.log(this.allSizes)
+                this.selectedMaterial = this.allMaterials[0].id
+
+                this.material_inputs.push(
+                    {
+                        material_id: this.selectedMaterial
+                    }
+                )
+                console.log(this.material_inputs)
+
+
         },
-        beforeCreate() {},
         methods: {
             addSize() {
                 this.size_divs = this.size_divs + 1;
-                console.log(this.size_divs);
+                // console.log(this.size_divs);
+                this.size_inputs.push(
+                    {
+                        size_id:this.selectedSize
+                    }
+                )
+            },
+            addMaterial() {
+                this.material_divs = this.material_divs + 1;
+                
+                // console.log(this.size_divs);
+                this.material_inputs.push(
+                    {
+                        size_material:this.selectedMaterial
+                    }
+                )
+            },
+            removeMaterial() {
+                if (this.material_divs == 1) return;
+                this.material_divs = this.material_divs - 1;
             },
             removeSize() {
                 if (this.size_divs == 1) return;
                 this.size_divs = this.size_divs - 1;
             },
+            changeSize(e,i){
+                // this.selectedSize = e.target.value
+                this.size_inputs[i].size_id = e.target.value
+                console.log(this.size_inputs[i])
+            }
+
         },
     });
 </script>
