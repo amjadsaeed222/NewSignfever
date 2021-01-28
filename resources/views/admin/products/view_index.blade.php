@@ -2,8 +2,8 @@
 @section('content')
 
 <div id="content">
-  <div id="content-header">
-    
+  
+  <div class="container">    
     <h1>All Index</h1>
     @if(Session::has('flash_message_error'))
             <div class="alert alert-error alert-block">
@@ -17,7 +17,7 @@
                     <strong>{!! session('flash_message_success') !!}</strong>
             </div>
         @endif
-  </div>
+  
   <div class="container-fluid">
     <hr>
     <div class="row-fluid">

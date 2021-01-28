@@ -39,7 +39,7 @@ Route::group(['middleware'=>'auth:api'],function(){
     Route::match(['get','post'],'/add-material',[ProductsController::class,'addmaterial']);
     Route::match(['get','post'],'/add-product',[ProductsController::class,'addProduct'])->middleware('web');
     
-    Route::match(['get','post'],'/edit-product/{slug}',[ProductsController::class,'editProduct'])->middleware('web');
+    Route::match(['get','post'],'/edit-product/{slug}',[ProductsController::class,'editProduct']);
     Route::get('/delete-product/{id}',[ProductsController::class,'deleteProduct']);
     Route::get('/view-products',[ProductsController::class,'viewProducts'])->name('viewproducts');
     Route::get('/delete-product-image/{id}',[ProductsController::class,'deleteProductImage']);

@@ -4,8 +4,8 @@
 use App\Models\Index;
 @endphp
 <div id="content">
-  <div id="content-header">
-    
+  
+  <div class="container">    
     <h1>Products</h1>
     @if(Session::has('flash_message_error'))
             <div class="alert alert-error alert-block">
@@ -19,7 +19,7 @@ use App\Models\Index;
                     <strong>{!! session('flash_message_success') !!}</strong>
             </div>
         @endif
-  </div>
+  
   <div class="container-fluid">
     <hr>
     <div class="row-fluid">

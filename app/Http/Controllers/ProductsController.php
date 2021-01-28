@@ -90,14 +90,6 @@ class ProductsController extends Controller
                 $imageDetails->save();
             }    
             
-                
-                
-                                   
-                    
-                
-
-        
-               
 			return redirect()->back()->with('flash_message_success', 'Product has been added successfully');
            
         }
@@ -136,7 +128,7 @@ class ProductsController extends Controller
             $data = $request->all();
 			//echo "<pre>"; print_r($data); die;
 
-            if(empty($data['status']))
+            if(empty($data['product_status']))
             {
                 $status='0';
             }else
@@ -148,52 +140,59 @@ class ProductsController extends Controller
             {
             	$data['description'] = '';
             }
-
-            $updateProducts=Product::where(['slug'=>$slug])->first();
-            $updateProducts->slug=null;
-            $updateProducts->update(['category_id'=> $data['product_category'],'partNo'=> $data['product_partNo'],'shape'=> $data['product_shape'],'status'=>$status,'product_name'=>$data['product_name'],
-				'description'=> $data['product_description'],'price'=>$data['product_price']]);
-            //Update Size Details.
-            if(!empty($data['size_title']))
+            
+            $updateProduct=Product::where(['slug'=>$slug])->first();
+            $updateProduct->slug=null;
+            $updateProduct->update(['index_Id'=> $data['product_index'],'partNo'=> $data['product_part_no'],'shape'=> $data['product_shape'],'status'=>$status,'product_name'=>$data['product_name'],
+				'description'=> $data['description'],'price'=>$data['product_price']]);
+            //Updating Attribute of the product
+            $product_id=$updateProduct->id;
+            
+            ProductsAttribute::where(['product_id'=>$product_id,'attribute_type'=>1])->delete();
+            ProductsAttribute::where(['product_id'=>$product_id,'attribute_type'=>2])->delete();
+            
+            foreach($data['product_sizes'] as $size)
             {
-                foreach($data['size_title'] as $key=> $val)
+                $attribute=new ProductsAttribute;
+                $attribute->product_id=$product_id;
+                $attribute->attribute_type=1;
+                $attribute->attribute_value=$size;
+                $attribute->save();
+                
+            }
+            foreach($data['product_materials'] as $material)
+            {
+                $attribute=new ProductsAttribute;
+                $attribute->product_id=$product_id;
+                $attribute->attribute_type=2;
+                $attribute->attribute_value=$material;
+                $attribute->save();    
+            }
+            //Update Image
+            if(!empty($data['product_images']))
+            {
+                ProductsImage::where(['product_id'=>$product_id])->delete();
+                $image_path='images/backend_images/product/large/';
+                if(!empty($data['current_images']))
                 {
-                    
-                    $existingsize=ProductSize::where('title',$data['size_title'][$key])->first();
-                    if(!empty($existingsize))
+                    foreach($data['current_images'] as $current_image)
                     {
-                        $sizeDetails=ProductSize::where(['id'=> $data['sizeId'][$key]])->first();
-                        $sizeDetails->Update(['title'=> $data['size_title'][$key],'SPN'=> $data['size_SPN'][$key]]);
+                        unlink($image_path.$current_image);
                     }
-                    else
-                    {
-                        $newSize=new ProductSize;
-                        $newSize->product_id=$data['product_id'][$key];
-                        $newSize->title=$data['size_title'][$key];
-                        $newSize->SPN=$data['size_SPN'][$key];
-                        $newSize->save();
-                    }
-                    
-                    
-                    //Update Images in size.
-                    
-                    //$insertedsizeId= $sizeDetails->id;
-                    if(!empty($data['images']))
-                    {
-                        $images=$data['images'];
-                        $img_len=count($images);
-                        for($i=0; $i<$img_len; $i++)
-                        {
-                            //$extension = $images[$i]->getClientOriginalExtension();
-                            //$fileName = rand(111,99999).'.'.$extension;
-                            //$image_path = 'images/backend_images/product/large'.'/'.$fileName;
-                            //Image::make($images[$i])->save($image_path);
-                            //$productImage = ProductsImage::where(['productSize_id'=> $images[$i]->id]);
-                            //$productImage->update(['image'=> $fileName]);
-                            //$imageDetails->image = $fileName;
-                            
-                        }
-                    }
+                }
+                
+                $images=$data['product_images'];
+                $img_len=count($images);
+                for($i=0; $i<$img_len; $i++)
+                {
+                    $productImage = new ProductsImage;
+                    $extension = $images[$i]->getClientOriginalExtension();
+                    $fileName = rand(111,99999).'.'.$extension;
+                    $image_path = 'images/backend_images/product/large'.'/'.$fileName;
+                    Image::make($images[$i])->save($image_path);
+                    $productImage->product_id=$product_id;
+                    $productImage->image= $fileName;
+                    $productImage->save();
                     
                 }
             }
@@ -210,9 +209,10 @@ class ProductsController extends Controller
 		$productMaterials = ProductMaterial::all();
         $productSizes=ProductSize::all();
         $productAttributes=ProductsAttribute::where('product_id',$id)->get();
+        $productImages=ProductsImage::where('product_Id',$id)->get();
 		
         //dd($productDetails);
-		return view('admin.products.edit_product')->with(compact('productDetails','productIndexes','id','productSizes','productMaterials','productAttributes'));
+		return view('admin.products.edit_product')->with(compact('productDetails','productIndexes','id','productSizes','productMaterials','productAttributes','productImages'));
 	} 
 
     public function deleteProductImage($id=null)

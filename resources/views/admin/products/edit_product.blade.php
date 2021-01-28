@@ -4,7 +4,7 @@
         $('.ckeditor').ckeditor();
     });
 </script>
-<div id="add-product-page">
+<div id="content">
     <div class="container">
         <div class="my-5" id="form">
             <h5 class="text-center">Edit Product</h5>
@@ -13,7 +13,7 @@
                 enctype="multipart/form-data"
                 class="form-horizontal"
                 method="post"
-                action="{{ url('/admin/add-product/'.$id) }}"
+                action="{{ url('/admin/edit-product/'.$productDetails->slug) }}"
                 name="add_product"
                 id="add_product"
                 class=""
@@ -49,11 +49,12 @@
                                 id="product_index"
                                 class="form-control"
                             >
-                                <option disabled selected>
-                                    Select An Index
-                                </option>
                                 @foreach ($productIndexes as $index)
-                                <option value="{{$index->id}}">{{$index->title}}</option>    
+                                <option value="{{$index->id}}"
+                                    @if ($index->id==$productDetails->index_Id)
+                                            selected
+                                        @endif
+                                    >{{$index->title}}</option>    
                                 @endforeach
                                 
                             </select>
@@ -133,6 +134,7 @@
                                     class="form-check-input"
                                     type="checkbox"
                                     id="gridCheck1"
+                                    
                                     <?php if($productDetails->status==1) echo "checked";?> 
                                     name="product_status"
                                 />
@@ -156,7 +158,15 @@
                                     class="custom-file-input"
                                     id="product_images"
                                 />
-                                
+                            @foreach ($productImages as $image)
+                                <input
+                                type="hidden"
+                                multiple
+                                name="current_images[]"
+                                id="current_images"
+                                value="{{$image->image}}"
+                                />
+                            @endforeach    
                                 <label
                                     class="custom-file-label"
                                     for="product_images"
@@ -197,7 +207,8 @@
                         <div class="form-group row">
                             <div class="col-sm-10"></div>
                         </div>
-                    </div>        
+                    </div>
+                                
                     @else
                     <div id="product_attribute_materials">
                         <div
