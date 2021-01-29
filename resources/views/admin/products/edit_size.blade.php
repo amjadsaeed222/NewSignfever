@@ -18,37 +18,44 @@
             </div>
         @endif
   
-  <div class="container-fluid"><hr>
-    <div class="row-fluid">
-      <div class="span12">
-        <div class="widget-box">
-          <div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
+        <div class="my-5" id="form">
             <h5>Edit Size</h5>
-          </div>
-          <div class="widget-content nopadding">
+          
             <form enctype="multipart/form-data" class="form-horizontal" method="post" action="{{ url('admin/edit-size/'. $size->id) }}" name="edit_size" id="edit_size" >{{ csrf_field() }}
-              
-              <div class="control-group">
-                <label class="control-label">Size Title</label>
-                <div class="controls">
-                  <input type="text" name="size_title" id="size_title" value="{{$size->title}}">
+              <div id="basic_info">
+                <div class="form-group row">
+                    <label for="size_title" class="col-sm-3 col-form-label"
+                        >Size Title</label
+                    >
+                    <div class="col-sm-9">
+                  <input type="text" class="form-control" name="size_title" id="size_title" value="{{$size->title}}">
+                
+                @error('size_title')
+                <div class="alert alert-danger">{{$message}}</div>
+                @enderror
+                    </div>
+              </div>
+              <div class="form-group row">
+                <label for="size_spn" class="col-sm-3 col-form-label"
+                    >Size SPN</label
+                >
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" name="size_SPN" id="size_SPN" value="{{$size->SPN}}">
+                  @error('size_SPN')
+                  <div class="alert alert-danger">{{$message}}</div>
+                  @enderror
                 </div>
               </div>
-              <div class="control-group">
-                <label class="control-label">Size SPN</label>
-                <div class="controls">
-                  <input type="text" name="size_SPN" id="size_SPN" value="{{$size->SPN}}">
+              <div class="form-group row">
+                <div class="col-sm-10">
+                    <button type="submit" class="btn btn-success">
+                        Update
+                    </button>
                 </div>
-              </div>
-              <div class="form-actions">
-                <input type="submit" value="Update" class="btn btn-success">
-              </div>
+            </div>
             </form>
 
-          </div>
-        </div>
-      </div>
-    </div>
+          
   </div>
 </div>
 

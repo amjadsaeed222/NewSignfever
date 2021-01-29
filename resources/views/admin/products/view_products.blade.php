@@ -20,14 +20,6 @@ use App\Models\Index;
             </div>
         @endif
   
-  <div class="container-fluid">
-    <hr>
-    <div class="row-fluid">
-      <div class="span12">
-        <div class="widget-box">
-          <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
-            <h5>Products</h5>
-          </div>
           <div class="widget-content nopadding">
             <table class="table table-bordered data-table">
               <thead>
@@ -47,46 +39,17 @@ use App\Models\Index;
                   <td class="center">{{ $product->index_title }}</td>
                   <td class="center">{{ $product->product_name }}</td>
                   <td class="center">{{ $product->price }}</td>
-                  
                   <td class="center">
                     
                     <a href="{{ url('/admin/edit-product/'.$product->slug) }}" class="btn btn-primary btn-mini">Edit</a> 
-                    <a id="delProduct" rel="{{ $product->id }}" rel1="delete-product" href="javascript:"  class="btn btn-danger btn-mini deleteRecord">Delete</a>
+                    <a id="delProduct" href="{{ url('/admin/delete-product/'.$product->id) }}"  class="btn btn-danger btn-mini deleteRecord">Delete</a>
  
-                        <div id="myModal{{ $product->id }}" class="modal hide">
-                          <div class="modal-header">
-                            <button data-dismiss="modal" class="close" type="button">×</button>
-                            <h3>{{ $product->product_name }} Full Details</h3>
-                          </div>
-                          
-                            <div class="modal-body">
-                            <p>Product ID: {{ $product->id }}</p>
-                            <img src="{{ asset('/images/backend_images/product/small/'.$product->image) }}" style="float:right;width:120px;">
-                            
-                            @php
-                              
-                              $index=Index::where(['id'=>$product->index_Id])->first();
-                              $index_title=$index->title;    
-                            @endphp
-                            <p>Index : {{ $index_title }}</p>
-                            <p>Price: {{ $product->price }}</p>
-                            <p>Description: {{ $product->description }}</p>
-                            {{-- @if (!empty($product->design))
-                              @foreach ($product->design as $key=> $val)
-                              <p>SKU:{{$val->sku}}</p>
-                              <p>Size:{{$val->size}}</p>
-                              <p>Material:{{$val->materialType}}</p>
-                              @endforeach    
-                            @endif
-                             --}}
-                          </div>
-                        </div>
-
+                        
                   </td>
                 </tr>
                 @endforeach
               </tbody>
-            </table>
+            </table>{{ $products->links() }}
           </div>
         </div>
       </div>

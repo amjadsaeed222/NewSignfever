@@ -7,6 +7,7 @@
 <div id="content">
     <div class="container">
         <h5 class="text-center">Add A New Product Index</h5>
+        
         <div class="my-5" id="form">
             <form
                 enctype="multipart/form-data"
@@ -29,8 +30,12 @@
                                 class="form-control"
                                 id="index_title"
                                 name="index_title"
+                                value="{{ old('index_title') }}"
                                 placeholder="Index Title"
                             />
+                            @error('index_title')
+                                <div class="alert alert-danger">{{$message}}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="form-group row">
@@ -47,6 +52,9 @@
                                 id="description"
                                 placeholder="Index Description"
                             ></textarea>
+                            @error('description')
+                                <div class="alert alert-danger">{{$message}}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="form-group row">
@@ -58,12 +66,16 @@
                                     name="index_image"
                                     class="custom-file-input"
                                     id="Index_image"
+                                    
                                 />
                                 <label
                                     class="custom-file-label"
                                     for="index_image"
                                     >Choose An Image</label
                                 >
+                                @error('index_image')
+                                <div class="alert alert-danger">{{$message}}</div>
+                                @enderror
                             </div>
                         </div>
                     </div>

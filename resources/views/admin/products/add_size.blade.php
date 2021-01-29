@@ -28,6 +28,9 @@
                                 name="size_title"
                                 placeholder="Size Title"
                             />
+                            @error('size_title')
+                            <div class="alert alert-danger">{{$message}}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="form-group row">
@@ -41,8 +44,11 @@
                                 id="size_spn"
                                 name="size_spn"
                                 placeholder="Size SPN"
-                            />
+                            />@error('size_spn')
+                            <div class="alert alert-danger">{{$message}}</div>
+                            @enderror
                         </div>
+                            
                     </div>
                 </div>
                 <div class="form-group row">

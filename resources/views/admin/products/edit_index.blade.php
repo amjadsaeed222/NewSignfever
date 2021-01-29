@@ -31,7 +31,9 @@
                                 name="index_title"
                                 value="{{$index->title}}"
                                 placeholder="Index Title"
-                            />
+                            />@error('index_title')
+                            <div class="alert alert-danger">{{$message}}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="form-group row">
@@ -47,6 +49,9 @@
                                 id="description"
                                 placeholder="Index Description"
                             >{{$index->description}}</textarea>
+                            @error('description')
+                            <div class="alert alert-danger">{{$message}}</div>
+                            @enderror  
                         </div>
                     </div>
                     <div class="form-group row">
@@ -59,6 +64,7 @@
                                     class="custom-file-input"
                                     id="Index_image"
                                 />
+                                
                                 <input
                                     type="hidden"
                                     name="current_image"

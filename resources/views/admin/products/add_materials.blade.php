@@ -33,6 +33,9 @@
                                 name="material_title"
                                 placeholder="Material Title"
                             />
+                            @error('material_title')
+                            <div class="alert alert-danger">{{$message}}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="form-group row">
@@ -47,6 +50,9 @@
                                 id="description"
                                 name="description"
                                 ></textarea>
+                                @error('description')
+                                <div class="alert alert-danger">{{$message}}</div>
+                                @enderror
                         </div>
                     </div>
                     <div class="form-group row">
@@ -64,7 +70,11 @@
                                     for="material_config_image"
                                     >Choose A Config Image For Material</label
                                 >
+                                @error('material_config_image')
+                                <div class="alert alert-danger">{{$message}}</div>
+                                @enderror
                             </div>
+                            
                         </div>
                     </div>
                 </div>

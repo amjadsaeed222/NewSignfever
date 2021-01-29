@@ -22,6 +22,15 @@ class ProductsController extends Controller
         if($request->isMethod('post'))
         {
             
+            $validate=$request->validate([
+                'product_name'=>'required',
+                'product_index'=>'required',
+                'description'=>'required',
+                'product_price'=>'required',
+                'product_shape'=>'required',
+                'product_part_no'=>'required',
+                'product_images'=>'required',
+            ]);
             $data = $request->all();
 			//echo "<pre>"; print_r($data); die;
             
@@ -124,7 +133,15 @@ class ProductsController extends Controller
 
         if($request->isMethod('post'))
         {
-            
+            $validate=$request->validate([
+                'product_name'=>'required',
+                'product_index'=>'required',
+                'description'=>'required',
+                'product_price'=>'required',
+                'product_shape'=>'required',
+                'product_part_no'=>'required',
+                
+            ]);
             $data = $request->all();
 			//echo "<pre>"; print_r($data); die;
 
@@ -282,7 +299,8 @@ class ProductsController extends Controller
 
     public function viewProducts(Request $request)
     {
-		$products = Product::get();
+        //$products = Product::get();
+        $products=DB::table('products')->paginate(10);
         foreach($products as $product)
         {
 			$index = Index::where(['id' => $product->index_Id])->first();
@@ -652,8 +670,11 @@ class ProductsController extends Controller
     {
         if($request->isMethod('post'))
         {
+            $validate=$request->validate([
+                'size_title'=>'required|unique:App\Models\ProductSize,title',
+                'size_spn'=>'required',
+            ]);
             $data=$request->all();
-            
             $sizeDetails=new ProductSize;
             $sizeDetails->title=$data['size_title'];
             $sizeDetails->SPN=$data['size_spn'];
@@ -665,7 +686,7 @@ class ProductsController extends Controller
     }
     public function ViewSize()
     {
-        $sizes=ProductSize::all();
+        $sizes=DB::table('product_sizes')->paginate(10);
         return view('admin.products.view_size')->with(compact('sizes'));
         
     }
@@ -673,11 +694,15 @@ class ProductsController extends Controller
     {
         if($request->isMethod('post'))
         {
+            $validate=$request->validate([
+                'size_title'=>'required',
+                'size_SPN'=>'required',    
+                ]);
             $data=$request->all();
             $sizeDetails=ProductSize::where(['id'=> $id])->first();
             $sizeDetails->update(['title'=>$data['size_title'],'SPN'=> $data['size_SPN']]);
             
-            return redirect('api/admin/view-size')->with('msg','Size updated successfully');
+            return redirect('admin/view-size')->with('msg','Size updated successfully');
         }
         $size=ProductSize::where(['id'=>$id])->first();
         return view('admin.products.edit_size')->with(compact('size'));
@@ -692,8 +717,12 @@ class ProductsController extends Controller
     {
         if($request->isMethod('post'))
         {
+            $validate=$request->validate([
+                'material_title'=>'required|unique:App\Models\ProductMaterial,title',
+                'description'=>'required',
+                'material_config_image'=>'required',
+            ]);
             $data=$request->all();
-            
             $MaterialDetails=new ProductMaterial;
             $MaterialDetails->title=$data['material_title'];
             $MaterialDetails->description=$data['description'];
@@ -712,7 +741,8 @@ class ProductsController extends Controller
     }
     public function ViewMaterial()
     {
-        $materials=ProductMaterial::all();
+        //$materials=ProductMaterial::all();
+        $materials=DB::table('product_materials')->paginate(10);
         return view('admin.products.view_material')->with(compact('materials'));
         
     }
@@ -721,6 +751,11 @@ class ProductsController extends Controller
     {
         if($request->isMethod('post'))
         {
+            $validate=$request->validate([
+                'material_title'=>'required',
+                'description'=>'required',
+                
+            ]);
             $data=$request->all();
             $MaterialDetails=ProductMaterial::where(['id'=> $id])->first();
             if(empty($data['image']))
@@ -735,9 +770,9 @@ class ProductsController extends Controller
                 Image::make($data['image'])->save($image_path);
             }
             
-            $MaterialDetails->update(['title'=>$data['material_title'],'SPN'=> $data['description'],'configImage'=>$fileName]);
+            $MaterialDetails->update(['title'=>$data['material_title'],'description'=> $data['description'],'configImage'=>$fileName]);
             
-            return redirect('api/admin/view-material')->with('msg','Material updated successfully');
+            return redirect('admin/view-material')->with('msg','Material updated successfully');
         }
         $material=ProductMaterial::where(['id'=>$id])->first();
         return view('admin.products.edit_material')->with(compact('material'));
@@ -753,6 +788,11 @@ class ProductsController extends Controller
 
         if($request->isMethod('post'))
         {
+            $validate=$request->validate([
+                'index_title'=>'required|unique:App\Models\Index,title',
+                'description'=>'required',
+                'index_image'=>'required',
+            ]);
             $data=$request->all();
             $indexDetails=new Index;
             $indexDetails->title=$data['index_title'];
@@ -773,6 +813,11 @@ class ProductsController extends Controller
     {
         if($request->isMethod('post'))
         {
+            $validate=$request->validate([
+                'index_title'=>'required',
+                'description'=>'required',
+                'index_image'=>'required',
+            ]);
             $data=$request->all();
             if($request->hasFile('index_image'))
             {
@@ -814,7 +859,9 @@ class ProductsController extends Controller
     }
     public function viewIndex()
     {
-        $allIndexes=Index::all();
+        //$allIndexes=Index::all();
+        $allIndexes=DB::table('indexes')->paginate(10);
         return view('admin.products.view_index')->with(compact('allIndexes'));
     }
+    
 }

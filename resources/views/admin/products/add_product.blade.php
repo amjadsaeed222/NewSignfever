@@ -34,6 +34,9 @@
                                 name="product_name"
                                 placeholder="Product Name"
                             />
+                            @error('product_name')
+                                <div class="alert alert-danger">{{$message}}</div>
+                                @enderror
                         </div>
                     </div>
                     <div class="form-group row">
@@ -56,6 +59,9 @@
                                 @endforeach
                                 
                             </select>
+                                @error('product_index')
+                                <div class="alert alert-danger">{{$message}}</div>
+                                @enderror
                         </div>
                     </div>
                     <div class="form-group row">
@@ -72,6 +78,9 @@
                                 name="description"
                                 placeholder="Product Description"
                             ></textarea>
+                                @error('description')
+                                <div class="alert alert-danger">{{$message}}</div>
+                                @enderror
                         </div>
                     </div>
                     <div class="form-group row">
@@ -88,6 +97,9 @@
                                 name="product_price"
                                 placeholder="Product Price"
                             />
+                                @error('product_price')
+                                <div class="alert alert-danger">{{$message}}</div>
+                                @enderror
                         </div>
                     </div>
                     <div class="form-group row">
@@ -104,6 +116,9 @@
                                 name="product_shape"
                                 placeholder="Product Shape"
                             />
+                                @error('product_shape')
+                                <div class="alert alert-danger">{{$message}}</div>
+                                @enderror
                         </div>
                     </div>
                     <div class="form-group row">
@@ -120,6 +135,9 @@
                                 name="product_part_no"
                                 placeholder="Product Part#"
                             />
+                                @error('product_part_no')
+                                <div class="alert alert-danger">{{$message}}</div>
+                                @enderror
                         </div>
                     </div>
                     <div class="form-group row">

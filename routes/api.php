@@ -36,6 +36,7 @@ Route::group(['middleware'=>'auth:api'],function(){
     Route::get('/view-categories',[CategoryController::class,'viewCategories'])->name('view-categories');
     
     // Admin Products Routes
+    
     Route::match(['get','post'],'/add-material',[ProductsController::class,'addmaterial']);
     Route::match(['get','post'],'/add-product',[ProductsController::class,'addProduct'])->middleware('web');
     
@@ -53,7 +54,7 @@ Route::group(['middleware'=>'auth:api'],function(){
     Route::get('/delete-attribute/{id}',[ProductsController::class,'deleteAttribute']);
     //Product Sizes Routes
     
-    Route::match(['get','post'],'/add-size',[ProductsController::class,'AddSize']);
+    Route::match(['get','post'],'/add-size',[ProductsController::class,'AddSize'])->middleware('web');
     Route::match(['get','post'],'/view-size',[ProductsController::class,'ViewSize']);
     Route::match(['get','post'],'/edit-size/{id}',[ProductsController::class,'EditSize']);
     Route::get('/delete-size/{id}',[ProductsController::class,'deleteSize']);
@@ -64,8 +65,8 @@ Route::group(['middleware'=>'auth:api'],function(){
     Route::match(['get','post'],'/view-material',[ProductsController::class,'ViewMaterial']);
     Route::match(['get','post'],'/edit-material/{id}',[ProductsController::class,'EditMaterial']);
     Route::get('/delete-material/{id}',[ProductsController::class,'deleteMaterial']);
-
-    Route::match(['get','post'],'/add-index',[ProductsController::class,'addIndex']);
+//Index Routes
+    Route::match(['get','post'],'/add-index',[ProductsController::class,'addIndex'])->middleware('web');
     Route::match(['get','post'],'/edit-index/{slug}',[ProductsController::class,'editIndex']);
     Route::match(['get','post'],'/delete-index/{id}',[ProductsController::class,'deleteIndex']);
     Route::match(['get','post'],'/view-index',[ProductsController::class,'viewIndex']);
