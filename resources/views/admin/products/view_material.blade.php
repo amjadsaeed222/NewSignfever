@@ -1,7 +1,7 @@
 @extends('layouts.adminLayout.admin_design')
 @section('content')
 
-<div id="content">
+<div id="content">  
   
   <div class="container">    
     <h1>Available Material</h1>

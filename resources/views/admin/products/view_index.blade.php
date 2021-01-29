@@ -19,22 +19,22 @@
         @endif
   
           <div class="widget-content nopadding">
-            <table class="table table-bordered data-table">
+            <table class="table table-hover text-left">
               <thead>
                 <tr>
+                  <th>Image</th>
                   <th>Index ID</th>
                   <th>Name</th>
-                  <th>Image</th>
                   <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
               	@foreach($allIndexes as $index)
-                <tr class="gradeX">
+                <tr class="">
+                  <td class="text-center"><img src="{{ asset('/images/backend_images/index/'.$index->image) }}" width="100px"></td>
                   <td class="center">{{ $index->id }}</td>
                   <td class="center">{{ $index->title }}</td>
-                  
-                  <td class="center"><img src="{{ asset('/images/backend_images/product/large/'.$index->image) }}" style="float:right;width:25px;height:25px"></td>
+                  <!-- style="float:right;width:25px;height:25px" -->
                   <td class="center">
                     <a href="{{ url('/admin/edit-index/'.$index->slug) }}" class="btn btn-primary btn-mini">Edit</a> 
                     <a id="delIndex"  href="{{ url('/admin/delete-index/'.$index->id) }}"  class="btn btn-danger btn-mini deleteRecord">Delete</a>

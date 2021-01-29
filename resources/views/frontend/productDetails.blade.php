@@ -10,7 +10,7 @@
                     <div class="col-3">
                         <!-- <div class="col-12"> -->
                         <img
-                            v-for="image in selectedSize.images"
+                            v-for="image in product.images"
                             :src="'/images/backend_images/product/large/' + image.image"
                             :alt="product.product_name"
                             style="width: 100%"
@@ -81,6 +81,25 @@
                     <div class="rating__border"></div>
                 </div>
                 <div class="col-12 my-4">
+                    <h4>Select A Design:</h4>
+                    <div class="col-12">
+                        <div class="slider">
+                            <div
+                                class="slide"
+                                v-for="product in product.index_products"
+                            >
+                                <img
+                                    src="/images/frontend_images/home/quick-turnaround-time-icon.svg"
+                                    alt="free-shipping-man"
+                                    width="100%"
+                                    class="d-block mx-auto"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 my-4">
                     <h4>
                         Select Size:
                         <span class="main-text">@{{ selectedSize.title }}</span>
@@ -112,7 +131,7 @@
                             </div>
                             <div
                                 class="materials_row"
-                                v-for="material in selectedSize.materials"
+                                v-for="material in product.materials"
                                 v-on:click="handleMaterial(material)"
                             >
                                 <p>@{{ material.title }}</p>
@@ -276,7 +295,7 @@
             <div class="row container no-gutters border px-2 py-2">
                 <!-- <div class="col-md-12"> -->
                 <img
-                    v-for="image in selectedSize.images"
+                    v-for="image in product.images"
                     :src="'/images/backend_images/product/large/' + image.image"
                     :alt="product.product_name"
                     style="width: 15%"
@@ -306,6 +325,27 @@
                         <!-- <span class="highlighted-text">1 day 7 hrs</span> Get your signs
                 on Wednesday. Free shipping for orders over $29.95. Orders over
                 $100 ship <b>UPS/Expendited 2nd Day</b> for free. Details: -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 my-4">
+                <h4>Select A Design:</h4>
+                <div class="col-12">
+                    <div class="slider">
+                        <div
+                            class="slide row"
+                            v-for="product in product.index_products"
+                        >
+                            <div class="col-12">
+                                <!-- :src="'/images/backend_images/product/large/' + designImage(product[].images[0].image) " -->
+                                <img
+                                    src="/images/frontend_images/home/quick-turnaround-time-icon.svg"
+                                    alt="free-shipping-man"
+                                    width="100%"
+                                    class="d-block mx-auto"
+                                />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -359,7 +399,7 @@
                     </div> -->
                     <div
                         class="row mobile-material-row no-gutters my-2 cursor-pointer"
-                        v-for="material in selectedSize.materials"
+                        v-for="material in product.materials"
                         v-on:click="handleMaterial(material)"
                     >
                         <img
@@ -464,97 +504,52 @@
     </div>
 </div>
 <script>
-        // var dbProduct = {!! $product !!}
+    // var dbProduct = {!! $product !!}
 
-      /*
-        dbProduct = {
-            product_name: "Pool Chemical",
-            shape: "Vertical",
-            partNo: "PART-34",
-            description:
-                "A custom danger sign indicates information about specific hazardous conditions that a standard sign cannot always relay. Add your choice of text to this template to create a unique safety sign. For immediate use of your customized design, download a free PDF and print on your inkjet or laser printer.",
-            sizes: [
-                {
-                    title: "2x6",
-                    SPN: "GA-235",
-                    materials: [
-                        {
-                            title: "Plastic",
-                            description: "",
-                            price: 50,
-                        },
-                        {
-                            title: "Alimunium",
-                            description: "",
-                            price: 80,
-                        },
-                        {
-                            title: "Plastic",
-                            description: "",
-                            price: 700,
-                        },
-                    ],
-                    images: [
-                        "https://images.mysafetysign.com/img/lg/S/Warning-Custom-ANSI-Danger-Sign-S-3035.gif",
-                    ],
-                },
-                {
-                    title: "5x4",
-                    SPN: "GA-3566",
-                },
-                {
-                    title: "5x4",
-                    SPN: "GA-3566",
-                },
-                {
-                    title: "5x4",
-                    SPN: "GA-3566",
-                },
-                {
-                    title: "5x4",
-                    SPN: "GA-3566",
-                },
-            ],
-        };
-    */
-        realDBProduct = {!! $product !!}
-        new Vue({
-            el: "#product-details",
-            data: {
-                product: realDBProduct,
-                selectedSize: {},
-                selectedMaterial: {},
-                selectedImage:{},
-                qty:1,
+
+    var dbProduct = {!! $product !!}
+    new Vue({
+        el: "#product-details",
+        data: {
+            product: dbProduct,
+            selectedSize: {},
+            selectedMaterial: {},
+            selectedImage:{},
+            qty:1,
+            designImage:null,
+        },
+        mounted() {
+            console.log(this.product)
+            this.selectedSize = this.product.sizes[0];
+            // this.selectedMaterial = this.selectedSize.materials[0];
+            this.selectedMaterail = this.product.materials[0];
+            // console.log(this.selectedMaterial)
+            // console.log(this.selectedSize.images[0].image);
+            // this.selectedImage = this.selectedSize.images[0];
+            this.selectedImage = this.product.images[0];
+
+        },
+        methods: {
+            handleSize(size) {
+                this.selectedSize = size;
+            // .lenght > 1 ? this.selectedMaterial = size.materials[0] : this.selectedMaterial = "None"
+
             },
-            mounted() {
-                // console.log(this.product.sizes[0].materials[0]);
-                this.selectedSize = this.product.sizes[0];
-
-                this.selectedMaterial = this.selectedSize.materials[0];
-                console.log(this.selectedMaterial)
-                // console.log(this.selectedSize.images[0].image);
-                this.selectedImage = this.selectedSize.images[0];
+            handleMaterial(material) {
+                this.selectedMaterial = material;
             },
-            methods: {
-                handleSize(size) {
-                    this.selectedSize = size;
-                    size.materials.lenght > 1 ? this.selectedMaterial = size.materials[0] : this.selectedMaterial = "None"
+            handleImage(image) {
+                this.selectedImage = image;
 
-                },
-                handleMaterial(material) {
-                    this.selectedMaterial = material;
-                },
-                handleImage(image) {
-                    this.selectedImage = image;
-
-                }
             },
-        });
+            handleDesignImage(image) {
+                this.designImage = image
+            }
+        },
+    });
 </script>
 
 <!-- Template GLOBALs -->
-
 <style>
     .rating {
         font-size: 1rem;
@@ -694,4 +689,19 @@
     }
 </style>
 
+<!-- Slider -->
+
+<style>
+    .slider {
+        width: 100%;
+        height: 200px;
+        display: flex;
+        overflow-x: auto;
+    }
+    .slide {
+        width: 250px;
+        flex-shrink: 0;
+        height: 100%;
+    }
+</style>
 @endsection

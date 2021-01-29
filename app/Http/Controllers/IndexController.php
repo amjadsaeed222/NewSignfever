@@ -7,6 +7,8 @@ use App\Models\ProductsAttribute;
 use App\Models\ProductsImage;
 use App\Models\ProductSize;
 use App\Models\ProductMaterial;
+use App\Models\Index;
+
 
 use Illuminate\Http\Request;
 
@@ -56,7 +58,7 @@ class IndexController extends Controller
         
         foreach($categories as $category) 
         {
-            $sub_categories = Category::where(['parent_id' => $category->id])->get();
+            $sub_categories = Index::where(['category_id' => $category->id])->get();
             // return $sub_categories;
             $category->sub_category=$sub_categories;
         }
@@ -79,7 +81,7 @@ class IndexController extends Controller
         //     echo "</ul>";
          
         }
-    // }
+
 
 
     public function showAllProducts($category)
@@ -124,6 +126,99 @@ class IndexController extends Controller
     }
 
 
+    public function showIndexProducts($slug)
+    {
+        $index=Index::where(['slug'=>$slug])->first();
+        $products= Product::where(['index_Id' => $index->id])->get();
+        // $product->category_name = $category_name->name;
+        foreach($products as $product) {
+            $images = ProductsImage::where(['product_id'=>$product->id])->get();
+            $size_ids=ProductsAttribute::where(['product_id'=>$product->id])->where(['attribute_type'=>1])->get();
+            $material_ids=ProductsAttribute::where(['product_id'=>$product->id])->where(['attribute_type'=>2])->get();
+             
+            $index_images;
+            $material_array;
+            $size_array;
+            
+            foreach($size_ids as $key=>$val) 
+            {
+                $size = ProductSize::where(['id'=>$val->attribute_value])->first();
+                $size_array[$key]=$size;
+            }
+    
+            foreach($material_ids as  $key=>$val) 
+            {
+                $material = ProductMaterial::where(['id' => $val->attribute_value])->first();
+                $material_array[$key]=$material;
+            }
+            
+            foreach($index as $key=>$val) 
+            {
+                $images = ProductsImage::where(['product_id'=>$product->id])->get();
+                $index_images[$key]=$images;
+                // $index_products->images=$index_images;
+            }
+            $product->sizes=$size_array;
+            $product->materials=$material_array;
+            $product->images=$images;
+            // $product->index_products =$index_products;
+            // $product->sizes = $sizes;
+    }
+    $category = $index;
+        // return $products;
+        return view('frontend.index', compact('category','products'));
+        
+        // $product=Product::where(['slug'=>$slug])->first();        
+        // $product->category_name = $category_name->name;
+        // $attributes=ProductsAttribute::where(['product_id' => $product->id])->get();
+        // $product->designs = $attributes;
+        // return view('frontend.productDetails', compact('product'));
+        
+    }
+    
+    public function showProduct($slug)
+    {
+        $product=Product::where(['slug'=>$slug])->first();        
+        $index = Index::where(['id' => $product->index_Id])->first();
+        $index_products = Product::where(['index_id' => $product->index_Id])->get();
+        $images = ProductsImage::where(['product_id'=>$product->id])->get();
+        $size_ids=ProductsAttribute::where(['product_id'=>$product->id])->where(['attribute_type'=>1])->get();
+        $material_ids=ProductsAttribute::where(['product_id'=>$product->id])->where(['attribute_type'=>2])->get();
+         
+        $index_images;
+        $material_array;
+        $size_array;
+        
+        foreach($size_ids as $key=>$val) 
+        {
+            $size = ProductSize::where(['id'=>$val->attribute_value])->first();
+            $size_array[$key]=$size;
+        }
+
+        foreach($material_ids as  $key=>$val) 
+        {
+            $material = ProductMaterial::where(['id' => $val->attribute_value])->first();
+            $material_array[$key]=$material;
+        }
+        
+        foreach($index_products as $key=>$val) 
+        {
+            $images = ProductsImage::where(['product_id'=>$product->id])->get();
+            $index_images[$key]=$images;
+            // $index_products->images=$index_images;
+        }
+        $product->index_title=$index->title;
+        $product->sizes=$size_array;
+        $product->materials=$material_array;
+        $product->images=$images;
+        $product->index_products =$index_products;
+        
+        // return $product;
+        return view('frontend.productDetails', compact('product'));
+        
+    }
+
+
     public function getSize($productId)
     {
         $size=ProductSize::where(['product_id'=>$productId])->get();
@@ -139,34 +234,7 @@ class IndexController extends Controller
     }
 
 
-    public function showProduct($slug)
-    {
-        $product=Product::where(['slug'=>$slug])->first();        
-        $category_name = Category::where(['id' => $product->category_id])->first();
-        $product->category_name = $category_name->name;
-        $sizes=ProductSize::where(['product_id'=>$product->id])->get();
-        foreach($sizes as $size)
-        {   
-            $images = ProductsImage::where(['productSize_id'=>$size->id])->get();
-            $materials=ProductMaterial::where(['sizeId'=>$size->id])->get();
-            $size->materials=$materials;
-            $size->images=$images;
-        }
-        $product->sizes = $sizes;
-
-        
-        
-        // $attributes=ProductsAttribute::where(['product_id' => $product->id])->get();
-        // foreach($attributes as $attribute)
-        // {
-        //     $images = ProductsImage::where(['productAttribute_id' => $attribute->id])->get();
-        //     $attribute->images = $images;
-        // }
-        // $product->designs = $attributes;
-        // return $product;
-        return view('frontend.productDetails', compact('product'));
-        
-    }
+    
 
     public function allProducts(Request $request)
     {

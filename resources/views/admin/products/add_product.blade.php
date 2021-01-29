@@ -4,9 +4,9 @@
         $('.ckeditor').ckeditor();
     });
 </script>
-<div id="add-product-page">
+<div id="add-product-page" >
     <div class="container">
-        <div class="my-5" id="form">
+        <div class="my-5" id="form content"  >
             <h5 class="text-center">Add A New Product</h5>
 
             <form
@@ -408,11 +408,6 @@
         background-color: white;
         margin: 20px 0px;
         width: 100%;
-    }
-    #form {
-        background-color: #cccccc;
-        padding: 25px;
-        border-radius: 5px;
     }
     .form-group {
         /* display: inline-block; */

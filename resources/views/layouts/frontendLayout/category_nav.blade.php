@@ -1,33 +1,4 @@
-<!-- <nav class="navbar navbar-expand ">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="">Features</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="">Pricing</a>
-      </li>
-    </ul>
-  </div>
-</nav> -->
-<!-- <div class="custom-nav" id="nav-el">
-      <div>
-      <ul class="">
-        <li class="">
-          <a class="" href="/">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li v-for="cat in categories" key="cat.slug">
-          <a class="" :href="'/category/' + cat.slug"  >@{{cat.name}}</a>
-        </li>
-      </ul>
-    </div>
-</div> -->
+
 <div id="nav-el" class="">
     <nav class="navbar navbar-expand-lg navbar-dark">
         <!-- <a class="navbar-brand" href="#">Navbar</a>-->
@@ -73,8 +44,8 @@
                         <a
                             class="dropdown-item"
                             v-for="subCat in category.sub_category"
-                            :href="'/category/' + category.slug"
-                            >@{{ subCat.name }}</a
+                            :href="'/index/' + subCat.slug"
+                            >@{{ subCat.title }}</a
                         >
                     </div>
                 </li>
