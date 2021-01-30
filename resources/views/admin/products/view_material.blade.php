@@ -34,7 +34,7 @@
                 <tr class="gradeX">
                   <td class="center">{{ $material->id }}</td>
                   <td class="center">{{ $material->title }}</td>
-                  <td class="center"><img src="{{ asset('/images/backend_images/product/large/'. $material->configImage ) }}" style="float:right;width:25px;height:25px"></td>
+                  <td class="center"><img src="{{ asset('/images/backend_images/product/large/'. $material->configImage ) }}" style="float:right;width:50px;height:50px"></td>
                   <td class="center">
                     <a href="{{ url('/admin/edit-material/'.$material->id) }}" class="btn btn-primary btn-mini">Edit</a> 
                 

@@ -792,10 +792,12 @@ class ProductsController extends Controller
                 'index_title'=>'required|unique:App\Models\Index,title',
                 'description'=>'required',
                 'index_image'=>'required',
+                'category_id'=>'required',
             ]);
             $data=$request->all();
             $indexDetails=new Index;
             $indexDetails->title=$data['index_title'];
+            $indexDetails->category_id=$data['category_id'];
             $indexDetails->description=$data['description'];
             $indexDetails->slug=SlugService::createslug(Index::class,'slug',$data['index_title']);
             $extension = $data['index_image']->getClientOriginalExtension();
@@ -806,7 +808,9 @@ class ProductsController extends Controller
             $indexDetails->save();
             return redirect()->back();
         }
-        return view('admin.products.add_index');
+        $categories=Category::all();
+        
+        return view('admin.products.add_index')->with(compact('categories'));
         
     }
     public function editIndex(Request $request,$slug=null)
@@ -816,7 +820,7 @@ class ProductsController extends Controller
             $validate=$request->validate([
                 'index_title'=>'required',
                 'description'=>'required',
-                'index_image'=>'required',
+                'category_id'=>'required',
             ]);
             $data=$request->all();
             if($request->hasFile('index_image'))
@@ -846,11 +850,12 @@ class ProductsController extends Controller
             
             $index=Index::where(['slug'=> $slug])->first();
             $index->slug=null;
-            $index->update(['title'=>$data['index_title'],'image'=>$fileName,'description'=> $data['description']]);
+            $index->update(['category_id'=> $data['category_id'],'title'=>$data['index_title'],'image'=>$fileName,'description'=> $data['description']]);
             return redirect()->action([ProductsController::class,'viewIndex']);
         }
         $index=Index::where('slug',$slug)->first();
-        return view('admin.products.edit_index')->with(compact('index'));
+        $categories=Category::all();
+        return view('admin.products.edit_index')->with(compact('index','categories'));
     }
     public function deleteIndex($id = null)
     {
@@ -861,6 +866,12 @@ class ProductsController extends Controller
     {
         //$allIndexes=Index::all();
         $allIndexes=DB::table('indexes')->paginate(10);
+        
+        foreach($allIndexes as $key=>$val)
+        {
+            $category=Category::where(['id'=> $val->category_id])->first();
+            $allIndexes[$key]->category_name=$category->name;
+        }
         return view('admin.products.view_index')->with(compact('allIndexes'));
     }
     

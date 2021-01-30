@@ -97,8 +97,8 @@ class IndexController extends Controller
 
     public function showCategoryProducts($slug)
     {
-        $category=Category::where(['slug'=>$slug])->first();
-        $products= Product::where(['category_id' => $category->id])->get();
+        $category=Index::where(['slug'=>$slug])->first();
+        $products= Product::where(['index_id' => $category->id])->get();
         // $product->category_name = $category_name->name;
         foreach($products as $product) {
 

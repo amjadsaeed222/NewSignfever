@@ -39,6 +39,27 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label for="index_title" class="col-sm-3 col-form-label"
+                            >Category</label
+                        >
+                        <div class="col-sm-9">
+                            <select
+                                
+                                class="form-control"
+                                id="category_id"
+                                name="category_id"
+                                value="{{ old('category_id') }}"
+                            >
+                            @foreach ($categories as $category)
+                            <option value="{{$category->id}}">{{$category->name}}</option>    
+                            @endforeach
+                            </select>
+                            @error('index_title')
+                                <div class="alert alert-danger">{{$message}}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label
                             for="index_description"
                             class="col-sm-3 col-form-label"

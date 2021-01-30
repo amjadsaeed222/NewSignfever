@@ -11,7 +11,7 @@ class Index extends Model
     public $table = 'indexes';
     use HasFactory;
     use sluggable;
-    protected $fillable=['title','slug','description','image'];
+    protected $fillable=['title','slug','description','image','category_id'];
     public function sluggable()
     {
         return [
