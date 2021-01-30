@@ -12,6 +12,46 @@ use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
+    
+    
+    public function addNewCategory(Request $request){
+        if($request->isMethod('post'))
+        {
+            
+            $data = $request->all();
+    		//echo "<pre>"; print_r($data); die;
+
+            if(empty($data['status'])){
+                $status='0';
+            }else{
+                $status='1';
+            }
+
+    		$category = new Category;
+    		$category->name = $data['category_title'];
+            $category->parent_id = 0;
+            $category->description = "test_dec";
+    		// $image = $data['image'];
+            //Storing Image
+            // $extension = $image->getClientOriginalExtension();
+            // $fileName = rand(111,99999).'.'.$extension;
+            // $image_path = 'images/backend_images/category'.'/'.$fileName;
+            // Image::make($image)->save($image_path);
+            
+            $category->image = "test_image";
+            
+    		//$category->url = $data['url'];
+            // $category->status = $status;
+            $category->slug=SlugService::createslug(Category::class,'slug',$data['category_title']);
+            $category->save();
+    		return redirect()->back()->with('flash_message_success', 'Category has been added successfully');
+    	}
+
+        // $levels = Category::where(['parent_id'=>0])->get();
+        
+        return view('admin.categories.add_category');
+    }
+    
     //
     public function addCategory(Request $request){
         if($request->isMethod('post'))
@@ -54,6 +94,7 @@ class CategoryController extends Controller
         
         return view('admin.categories.add_category')->with(compact('levels'));
     }
+
 
     public function editCategory(Request $request,$slug)
     {

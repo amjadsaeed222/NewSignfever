@@ -671,15 +671,16 @@ class ProductsController extends Controller
     {
         if($request->isMethod('post'))
         {
-            $validate=$request->validate([
-                'size_title'=>'required|unique:App\Models\ProductSize,title',
-                'size_spn'=>'required',
-            ]);
-            $data=$request->all();
-            $sizeDetails=new ProductSize;
+            // $validate=$request->validate([
+            //     'size_title'=>'required|unique:App\Models\ProductSize,title',
+            //     'size_spn'=>'required',
+            // ]);
+            $data=$request->json()->all();
+            $sizeDetails= new ProductSize;
             $sizeDetails->title=$data['size_title'];
             $sizeDetails->SPN=$data['size_spn'];
             $sizeDetails->save();
+            return $sizeDetails;
         }
         
 		return view('admin.products.add_size');
@@ -718,23 +719,24 @@ class ProductsController extends Controller
     {
         if($request->isMethod('post'))
         {
-            $validate=$request->validate([
-                'material_title'=>'required|unique:App\Models\ProductMaterial,title',
-                'description'=>'required',
-                'material_config_image'=>'required',
-            ]);
-            $data=$request->all();
+            // $validate=$request->validate([
+            //     'material_title'=>'required|unique:App\Models\ProductMaterial,title',
+            //     'description'=>'required',
+            //     'material_config_image'=>'required',
+            // ]);
+            $data=$request->json()->all();
             $MaterialDetails=new ProductMaterial;
             $MaterialDetails->title=$data['material_title'];
             $MaterialDetails->description=$data['description'];
-            $extension = $data['material_config_image']->getClientOriginalExtension();
-            $fileName = rand(111,99999).'.'.$extension;
-            $image_path = 'images/backend_images/product/large'.'/'.$fileName;
-            Image::make($data['material_config_image'])->save($image_path);
+
+            // $extension = $data['material_config_image']->getClientOriginalExtension();
+            // $fileName = rand(111,99999).'.'.$extension;
+            // $image_path = 'images/backend_images/product/large'.'/'.$fileName;
+            // Image::make($data['material_config_image'])->save($image_path);
             
-            $MaterialDetails->configImage = $fileName;
+            $MaterialDetails->configImage = "SampleImage";
             $MaterialDetails->save();            
-            
+            return $MaterialDetails;
         }
         
 		return view('admin.products.add_materials');
@@ -819,13 +821,6 @@ class ProductsController extends Controller
 
         if($request->isMethod('post'))
         {
-<<<<<<< HEAD
-            $validate=$request->validate([
-                'index_title'=>'required',
-                'description'=>'required',
-                'category_id'=>'required',
-            ]);
-=======
 
             // $validate=$request->validate([
             //     'index_title'=>'required',
@@ -834,7 +829,6 @@ class ProductsController extends Controller
             // ]);
         // dd('done');
 
->>>>>>> caa8976fc86ca45c8b9c4edba5d87a5f1d684d7d
             $data=$request->all();
             if($request->hasFile('index_image'))
             {
@@ -863,15 +857,9 @@ class ProductsController extends Controller
             
             $index=Index::where(['slug'=> $slug])->first();
             $index->slug=null;
-<<<<<<< HEAD
-            $index->update(['category_id'=> $data['category_id'],'title'=>$data['index_title'],'image'=>$fileName,'description'=> $data['description']]);
-=======
             $index->update(['title'=>$data['index_title'],'image'=>$fileName,'description'=> $data['description']]);
-            // $index->title = $data['index_title'];
-            // $index->description = $data['description'];
-            // $index.save();
+    
             
->>>>>>> caa8976fc86ca45c8b9c4edba5d87a5f1d684d7d
             return redirect()->action([ProductsController::class,'viewIndex']);
         }
         $index=Index::where('slug',$slug)->first();

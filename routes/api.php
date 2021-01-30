@@ -30,7 +30,10 @@ Route::get('/', function ()
 Route::group(['middleware'=>'auth:api'],function(){
     Route::get('/add-customer',[CustomerController::class,'addCustomer']);
     
+    
     Route::match(['get', 'post'], '/add-category',[CategoryController::class,'addCategory'])->middleware('web');
+    Route::match(['get', 'post'], '/add-new-category',[CategoryController::class,'addNewCategory'])->middleware('web');
+    
     Route::match(['get', 'post'], '/edit-category/{slug}',[CategoryController::class,'editCategory'])->middleware('web');
     Route::match(['get', 'post'], '/delete-category/{id}',[CategoryController::class,'deleteCategory']);
     Route::get('/view-categories',[CategoryController::class,'viewCategories'])->name('view-categories');

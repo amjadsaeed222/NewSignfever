@@ -36,12 +36,7 @@
                   <td class="center">{{ $index->id }}</td>
                   <td class="center">{{ $index->category_name }}</td>
                   <td class="center">{{ $index->title }}</td>
-<<<<<<< HEAD
-                  
-                  <td class="center"><img src="{{ asset('/images/backend_images/product/large/'.$index->image) }}" style="float:right;width:50px;height:50px"></td>
-=======
                   <!-- style="float:right;width:25px;height:25px" -->
->>>>>>> caa8976fc86ca45c8b9c4edba5d87a5f1d684d7d
                   <td class="center">
                     <a href="{{ url('/admin/edit-index/'.$index->slug) }}" class="btn btn-primary btn-mini">Edit</a> 
                     <a id="delIndex"  href="{{ url('/admin/delete-index/'.$index->id) }}"  class="btn btn-danger btn-mini deleteRecord">Delete</a>
