@@ -1,79 +1,51 @@
-@extends('layouts.adminLayout.admin_design')
-@section('content')
+@extends('layouts.adminLayout.admin_design') @section('content')
 
-<div id="content">
-  <div id="content-header">
-    <div id="breadcrumb"> <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#">Categories</a> <a href="#" class="current">Add Category</a> </div>
-    <h1>Categories</h1>
-    @if(Session::has('flash_message_error'))
-            <div class="alert alert-error alert-block">
-                <button type="button" class="close" data-dismiss="alert">×</button> 
-                    <strong>{!! session('flash_message_error') !!}</strong>
-            </div>
-        @endif   
-        @if(Session::has('flash_message_success'))
-            <div class="alert alert-success alert-block">
-                <button type="button" class="close" data-dismiss="alert">×</button> 
-                    <strong>{!! session('flash_message_success') !!}</strong>
-            </div>
-        @endif
-  </div>
-  <div class="container-fluid"><hr>
-    <div class="row-fluid">
-      <div class="span12">
-        <div class="widget-box">
-          <div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
-            <h5>Add Category</h5>
-          </div>
-          <div class="widget-content nopadding">
-            <form class="form-horizontal" method="post" action="{{ url('api/admin/add-category') }}" name="add_category" id="add_category" enctype="multipart/form-data">{{ csrf_field() }}
-              <div class="control-group">
-                <label class="control-label">Category Name</label>
-                <div class="controls">
-                  <input type="text" name="category_name" id="category_name">
-                  <span style="color: red">@error('category_name'){{$message}}@enderror</span>
+<div id="add-size">
+    <div class="container">
+        <div class="my-5" id="form">
+            <h5 class="text-center">Add A New Category</h5>
+
+            <form
+                enctype="multipart/form-data"
+                class="form-horizontal"
+                method="post"
+                action="{{ url('/admin/add-new-category') }}"
+                name="add_category"
+                id="add_category"
+                class=""
+            >
+                {{ csrf_field() }}
+                <div id="basic_info">
+                    <div class="form-group row">
+                        <label
+                            for="category_title"
+                            class="col-sm-3 col-form-label"
+                            >Catgory Title</label
+                        >
+                        <div class="col-sm-9">
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="category_title"
+                                name="category_title"
+                                placeholder="Category Title"
+                            />
+                            @error('category_title')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <div class="control-group">
-                <label class="control-label">Category Level</label>
-                <div class="controls">
-                  <select name="parent_id" id="parent_id" style="width:220px;">
-                    <option value="0">Main Category</option>
-                    @foreach($levels as $val)
-                    <option value="{{ $val->id }}">{{ $val->name }}</option>
-                    @endforeach
-                  </select>
-                  <span style="color: red">@error('parent_id'){{$message}}@enderror</span>
+                <div class="form-group row">
+                    <div class="col-sm-10">
+                        <button type="submit" class="btn btn-success">
+                            Add Category
+                        </button>
+                    </div>
                 </div>
-                <div class="control-group">
-                  <div class="controls">
-                  <input name="image" id="image" type="file" multiple="multiple">
-                </div>
-              </div>
-              </div>
-              <div class="control-group">
-                <label class="control-label">Description</label>
-                <div class="controls">
-                  <textarea name="description" id="description"></textarea>
-                  <span style="color: red">@error('description'){{$message}}@enderror</span>
-                </div>
-              </div>
-              
-              <div class="control-group">
-                <label class="control-label">Enable</label>
-                <div class="controls">
-                  <input type="checkbox" name="status" id="status" value="1">
-                </div>
-              </div>
-              <div class="form-actions">
-                <input type="submit" value="Add Category" class="btn btn-success">
-              </div>
             </form>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
 
 @endsection

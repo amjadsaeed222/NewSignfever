@@ -38,6 +38,8 @@
             integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
             crossorigin="anonymous"
         />
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
+
     </head>
     <body>
         <!-- @include('layouts.adminLayout.admin_header') -->
@@ -58,11 +60,7 @@
         body {
             background-color: #cccccc;
         }
-        #sidebar {
-            background-color: #1261a0;
-            color: white;
-        }
-
+       
         #form,
         #inner,
         #content {
@@ -72,6 +70,9 @@
             background-color: #f5f5f5;
             padding: 25px;
             border-radius: 5px;
+        }
+        .cursor-pointer:hover {
+            cursor:pointer;
         }
     </style>
 </html>
