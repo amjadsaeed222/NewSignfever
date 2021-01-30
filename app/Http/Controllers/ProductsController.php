@@ -13,6 +13,7 @@ use App\Models\ProductMaterial;
 use App\Models\Index;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Response;
+use File;
 
 class ProductsController extends Controller
 {
@@ -802,7 +803,7 @@ class ProductsController extends Controller
             $indexDetails->slug=SlugService::createslug(Index::class,'slug',$data['index_title']);
             $extension = $data['index_image']->getClientOriginalExtension();
             $fileName = rand(111,99999).'.'.$extension;
-            $image_path = 'images/backend_images/product/large'.'/'.$fileName;
+            $image_path = 'images/backend_images/index'.'/'.$fileName;
             Image::make($data['index_image'])->save($image_path);
             $indexDetails->image=$fileName;
             $indexDetails->save();
@@ -815,13 +816,25 @@ class ProductsController extends Controller
     }
     public function editIndex(Request $request,$slug=null)
     {
+
         if($request->isMethod('post'))
         {
+<<<<<<< HEAD
             $validate=$request->validate([
                 'index_title'=>'required',
                 'description'=>'required',
                 'category_id'=>'required',
             ]);
+=======
+
+            // $validate=$request->validate([
+            //     'index_title'=>'required',
+            //     'description'=>'required',
+            //     'index_image'=>'required',
+            // ]);
+        // dd('done');
+
+>>>>>>> caa8976fc86ca45c8b9c4edba5d87a5f1d684d7d
             $data=$request->all();
             if($request->hasFile('index_image'))
             {
@@ -833,9 +846,9 @@ class ProductsController extends Controller
                     $fileName = rand(111,99999).'.'.$extension;
                     
                     if(isset($data['current_image']))
-                        File::delete(public_path('images/backend_images/product/large/'. $data['current_image']));
+                        File::delete(public_path('images/backend_images/index/'. $data['current_image']));
                     
-                    $large_image_path = 'images/backend_images/product/large'.'/'.$fileName;
+                    $large_image_path = 'images/backend_images/index'.'/'.$fileName;
                     Image::make($image_tmp)->save($large_image_path);
  				}
             }
@@ -850,7 +863,15 @@ class ProductsController extends Controller
             
             $index=Index::where(['slug'=> $slug])->first();
             $index->slug=null;
+<<<<<<< HEAD
             $index->update(['category_id'=> $data['category_id'],'title'=>$data['index_title'],'image'=>$fileName,'description'=> $data['description']]);
+=======
+            $index->update(['title'=>$data['index_title'],'image'=>$fileName,'description'=> $data['description']]);
+            // $index->title = $data['index_title'];
+            // $index->description = $data['description'];
+            // $index.save();
+            
+>>>>>>> caa8976fc86ca45c8b9c4edba5d87a5f1d684d7d
             return redirect()->action([ProductsController::class,'viewIndex']);
         }
         $index=Index::where('slug',$slug)->first();
