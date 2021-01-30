@@ -60,6 +60,14 @@ class ProductsController extends Controller
             $product->partNo=$data['product_part_no'];
             $product->shape=$data['product_shape'];
             $product->status = $status;
+            if(empty($data['product_feature']))
+            {
+                $product->feature=false;
+            }
+            else
+            {
+                $product->feature=true;
+            }
             $product->slug=SlugService::createslug(Product::class,'slug',$data['product_name']);
             //echo "<pre>";print_r($product);die;
             $product->save();
@@ -158,11 +166,19 @@ class ProductsController extends Controller
             {
             	$data['description'] = '';
             }
+            if(empty($data['product_feature']))
+            {
+                $feature=false;
+            }
+            else
+            {
+                $feature=true;
+            }
             
             $updateProduct=Product::where(['slug'=>$slug])->first();
             $updateProduct->slug=null;
             $updateProduct->update(['index_Id'=> $data['product_index'],'partNo'=> $data['product_part_no'],'shape'=> $data['product_shape'],'status'=>$status,'product_name'=>$data['product_name'],
-				'description'=> $data['description'],'price'=>$data['product_price']]);
+				'description'=> $data['description'],'price'=>$data['product_price'],'feature'=> $feature]);
             //Updating Attribute of the product
             $product_id=$updateProduct->id;
             
@@ -822,13 +838,11 @@ class ProductsController extends Controller
         if($request->isMethod('post'))
         {
 
-            // $validate=$request->validate([
-            //     'index_title'=>'required',
-            //     'description'=>'required',
-            //     'index_image'=>'required',
-            // ]);
-        // dd('done');
-
+            /* $validate=$request->validate([
+                'index_title'=>'required',
+                'description'=>'required',
+                'category_id'=>'required',
+            ]); */
             $data=$request->all();
             if($request->hasFile('index_image'))
             {

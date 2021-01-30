@@ -18,7 +18,7 @@
             </div>
         @endif
   
-          <div class="widget-content nopadding">
+          
             <table class="table table-hover text-left">
               <thead>
                 <tr>
