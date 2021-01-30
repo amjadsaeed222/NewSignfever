@@ -160,6 +160,25 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <div class="col-sm-3">Featured</div>
+                        <div class="col-sm-9">
+                            <div class="form-check">
+                                <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    id="product_feature"
+                                    name="product_feature"
+                                />
+                                <label
+                                    class="form-check-label"
+                                    for="product_feature"
+                                >
+                                    Make featured Product
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <div class="col-sm-3">Choose Images</div>
                         <div class="col-sm-9">
                             <div class="custom-file">
