@@ -119,8 +119,10 @@
 </div> -->
 
 <div class="sidenav">
-    <h3 class="text-center">Sign Fever</h3>
-    <h5 class="text-center">Admin Panel</h5>
+    <div class="admin-headers">
+        <h3 class="text-center">Sign Fever</h3>
+        <h5 class="text-center">Admin Panel</h5>
+    </div>
     <div class="sidebar-links">
         <button class="products-dropdown dropdown-btn">
             Manage Products
@@ -170,6 +172,9 @@
 </style> -->
 
 <style>
+    .admin-headers {
+        color:white;
+    }
     .sidenav {
         height: 100%;
         width: 220px;

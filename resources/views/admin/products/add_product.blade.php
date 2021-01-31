@@ -75,7 +75,7 @@
                             <textarea
                                 class="ckeditor form-control"
                                 id="description"
-                                name="description"
+                                name="material_description"
                                 placeholder="Product Description"
                             ></textarea>
                             @error('description')
@@ -214,7 +214,7 @@
                                 <option disabled selected>Select A Size</option>
                                 <option
                                     v-for="singleSize in allSizes"
-                                    :value="size.id"
+                                    :value="singleSize.id"
                                 >
                                     @{{ singleSize.title }}
                                 </option>
@@ -265,87 +265,74 @@
                                             </div>
                                             <!-- SIZE MODAL -->
                                             <div class="modal-body">
-                                                <form
+                                                <!-- <form
                                                     enctype="multipart/form-data"
                                                     class="form-horizontal"
                                                     name="add_size"
                                                     id="add_size"
                                                     class=""
-                                                >
-                                                    {{ csrf_field() }}
-                                                    <div id="basic_info">
-                                                        <div
-                                                            class="form-group row"
+                                                > -->
+                                                {{ csrf_field() }}
+                                                <div id="basic_info">
+                                                    <div class="form-group row">
+                                                        <label
+                                                            for="size_title"
+                                                            class="col-sm-3 col-form-label"
+                                                            >Size Title</label
                                                         >
-                                                            <label
-                                                                for="size_title"
-                                                                class="col-sm-3 col-form-label"
-                                                                >Size
-                                                                Title</label
-                                                            >
+                                                        <div class="col-sm-9">
+                                                            <input
+                                                                type="text"
+                                                                class="form-control"
+                                                                id="size_title"
+                                                                name="size_title"
+                                                                placeholder="Size Title"
+                                                                v-model="newSizeTitle"
+                                                            />
+                                                            @error('size_title')
                                                             <div
-                                                                class="col-sm-9"
+                                                                class="alert alert-danger"
                                                             >
-                                                                <input
-                                                                    type="text"
-                                                                    class="form-control"
-                                                                    id="size_title"
-                                                                    name="size_title"
-                                                                    placeholder="Size Title"
-                                                                    v-model="newSizeTitle"
-                                                                />
-                                                                @error('size_title')
-                                                                <div
-                                                                    class="alert alert-danger"
-                                                                >
-                                                                    {{
-                                                                        $message
-                                                                    }}
-                                                                </div>
-                                                                @enderror
+                                                                {{ $message }}
                                                             </div>
-                                                        </div>
-                                                        <div
-                                                            class="form-group row"
-                                                        >
-                                                            <label
-                                                                for="size_spn"
-                                                                class="col-sm-3 col-form-label"
-                                                                >Size SPN</label
-                                                            >
-                                                            <div
-                                                                class="col-sm-9"
-                                                            >
-                                                                <input
-                                                                    type="text"
-                                                                    class="form-control"
-                                                                    id="size_spn"
-                                                                    name="size_spn"
-                                                                    placeholder="Size SPN"
-                                                                    v-model="newSizeSPN"
-                                                                />@error('size_spn')
-                                                                <div
-                                                                    class="alert alert-danger"
-                                                                >
-                                                                    {{
-                                                                        $message
-                                                                    }}
-                                                                </div>
-                                                                @enderror
-                                                            </div>
+                                                            @enderror
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
-                                                        <div class="col-sm-10">
-                                                            <a
-                                                                v-on:click="newSizeAJAX()"
-                                                                class="btn btn-success"
+                                                        <label
+                                                            for="size_spn"
+                                                            class="col-sm-3 col-form-label"
+                                                            >Size SPN</label
+                                                        >
+                                                        <div class="col-sm-9">
+                                                            <input
+                                                                type="text"
+                                                                class="form-control"
+                                                                id="size_spn"
+                                                                name="size_spn"
+                                                                placeholder="Size SPN"
+                                                                v-model="newSizeSPN"
+                                                            />@error('size_spn')
+                                                            <div
+                                                                class="alert alert-danger"
                                                             >
-                                                                Add Size
-                                                            </a>
+                                                                {{ $message }}
+                                                            </div>
+                                                            @enderror
                                                         </div>
                                                     </div>
-                                                </form>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="col-sm-10">
+                                                        <a
+                                                            v-on:click="newSizeAJAX()"
+                                                            class="btn btn-success"
+                                                        >
+                                                            Add Size
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <!-- </form> -->
                                             </div>
                                             <div class="modal-footer">
                                                 <button
@@ -444,76 +431,64 @@
                                             </div>
                                             <!-- SIZE MODAL -->
                                             <div class="modal-body">
-                                                <form
+                                                <!-- <form
                                                     enctype="multipart/form-data"
                                                     class="form-horizontal"
                                                     name="add_material"
                                                     id="add_material"
                                                     class=""
-                                                >
-                                                    {{ csrf_field() }}
-                                                    <div id="basic_info">
-                                                        <div
-                                                            class="form-group row"
+                                                > -->
+                                                {{ csrf_field() }}
+                                                <div id="basic_info">
+                                                    <div class="form-group row">
+                                                        <label
+                                                            for="material_title"
+                                                            class="col-sm-3 col-form-label"
+                                                            >Material
+                                                            Title</label
                                                         >
-                                                            <label
-                                                                for="material_title"
-                                                                class="col-sm-3 col-form-label"
-                                                                >Material
-                                                                Title</label
-                                                            >
+                                                        <div class="col-sm-9">
+                                                            <input
+                                                                type="text"
+                                                                class="form-control"
+                                                                id="material_title"
+                                                                name="material_title"
+                                                                v-model="material_title"
+                                                                placeholder="Material Title"
+                                                            />
+                                                            @error('material_title')
                                                             <div
-                                                                class="col-sm-9"
+                                                                class="alert alert-danger"
                                                             >
-                                                                <input
-                                                                    type="text"
-                                                                    class="form-control"
-                                                                    id="material_title"
-                                                                    name="material_title"
-                                                                    v-model="material_title"
-                                                                    placeholder="Material Title"
-                                                                />
-                                                                @error('material_title')
-                                                                <div
-                                                                    class="alert alert-danger"
-                                                                >
-                                                                    {{
-                                                                        $message
-                                                                    }}
-                                                                </div>
-                                                                @enderror
+                                                                {{ $message }}
                                                             </div>
+                                                            @enderror
                                                         </div>
-                                                        <div
-                                                            class="form-group row"
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label
+                                                            for="material_description"
+                                                            class="col-sm-3 col-form-label"
+                                                            >Material
+                                                            Description</label
                                                         >
-                                                            <label
-                                                                for="material_description"
-                                                                class="col-sm-3 col-form-label"
-                                                                >Material
-                                                                Description</label
-                                                            >
+                                                        <div class="col-sm-9">
+                                                            <textarea
+                                                                class="ckeditor form-control"
+                                                                id="description"
+                                                                name="description"
+                                                                v-model="material_description"
+                                                            ></textarea>
+                                                            @error('description')
                                                             <div
-                                                                class="col-sm-9"
+                                                                class="alert alert-danger"
                                                             >
-                                                                <textarea
-                                                                    class="ckeditor form-control"
-                                                                    id="description"
-                                                                    name="description"
-                                                                    v-model="material_description"
-                                                                ></textarea>
-                                                                @error('description')
-                                                                <div
-                                                                    class="alert alert-danger"
-                                                                >
-                                                                    {{
-                                                                        $message
-                                                                    }}
-                                                                </div>
-                                                                @enderror
+                                                                {{ $message }}
                                                             </div>
+                                                            @enderror
                                                         </div>
-                                                        <!-- <div
+                                                    </div>
+                                                    <!-- <div
                                                             class="form-group row"
                                                         >
                                                             <div
@@ -554,18 +529,18 @@
                                                                 </div>
                                                             </div>
                                                         </div> -->
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="col-sm-10">
+                                                        <a
+                                                            v-on:click="newMaterialAJAX()"
+                                                            class="btn btn-success"
+                                                        >
+                                                            Add Material
+                                                        </a>
                                                     </div>
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-10">
-                                                            <a
-                                                                v-on:click="newMaterialAJAX()"
-                                                                class="btn btn-success"
-                                                            >
-                                                                Add Material
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </form>
+                                                </div>
+                                                <!-- </form> -->
                                             </div>
                                             <div class="modal-footer">
                                                 <button
@@ -627,9 +602,11 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-10">
-                        <button type="submit" class="btn btn-success">
-                            Add Product
-                        </button>
+                        <input
+                            type="submit"
+                            value="Add Product"
+                            class="btn btn-success"
+                        />
                     </div>
                 </div>
             </form>
@@ -757,7 +734,7 @@
                       size_title:this.newSizeTitle,
                       size_spn: this.newSizeSPN
                   }
-                var addedSize = await fetch('/admin/add-size', {
+                var addedSize = await fetch('/admin/add-size-ajax', {
                   method: 'post',
                   headers: {
                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
@@ -781,7 +758,7 @@
                       material_title:this.material_title,
                       description: desc
                   }
-                var addedMaterial = await fetch('/admin/add-material', {
+                var addedMaterial = await fetch('/admin/add-material-ajax', {
                   method: 'post',
                   headers: {
                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),

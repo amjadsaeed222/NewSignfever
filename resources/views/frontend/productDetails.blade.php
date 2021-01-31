@@ -31,6 +31,27 @@
                             data-target="#exampleModal"
                         />
 
+                        <table class="table table-bordered my-2">
+                            <tbody>
+                                <tr>
+                                    <td>Part#</td>
+                                    <td>S-3057</td>
+                                </tr>
+                                <tr>
+                                    <td>SPN#</td>
+                                    <td>S-3057</td>
+                                </tr>
+                                <tr>
+                                    <td>Shape</td>
+                                    <td>S-3057</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="">
+                            <h4>Product Description</h4>
+                            <div class="" v-html="product.description"></div>
+                        </div>
                         <!-- Modal -->
                         <div
                             class="modal fade"
@@ -64,6 +85,8 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-12"></div>
                 </div>
             </div>
             <!-- Product Details -->
@@ -82,17 +105,20 @@
                 </div>
                 <div class="col-12 my-4">
                     <h4>Select A Design:</h4>
-                    <div class="col-12">
+                    <div class="col-12 mx-1">
                         <div class="slider">
                             <div
                                 class="slide"
                                 v-for="product in product.index_products"
                             >
+                                <!-- src="/images/frontend_images/home/quick-turnaround-time-icon.svg" -->
                                 <img
-                                    src="/images/frontend_images/home/quick-turnaround-time-icon.svg"
-                                    alt="free-shipping-man"
-                                    width="100%"
+                                    :src="'/images/backend_images/product/large/' + product.image.image"
+                                    alt="product-designs"
+                                    width="70%"
+                                    height=""
                                     class="d-block mx-auto"
+                                    v-on:click="handleDesign(product.slug)"
                                 />
                             </div>
                         </div>
@@ -331,7 +357,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 my-4">
+            <div class="col-12 my-2">
                 <h4>Select A Design:</h4>
                 <div class="col-12">
                     <div class="slider">
@@ -341,11 +367,14 @@
                         >
                             <div class="col-12">
                                 <!-- :src="'/images/backend_images/product/large/' + designImage(product[].images[0].image) " -->
+                                <!-- src="/images/frontend_images/home/quick-turnaround-time-icon.svg" -->
                                 <img
-                                    src="/images/frontend_images/home/quick-turnaround-time-icon.svg"
-                                    alt="free-shipping-man"
-                                    width="100%"
-                                    class="d-block mx-auto"
+                                    :src="'/images/backend_images/product/large/' + product.image.image"
+                                    alt="product-designs"
+                                    width="80%"
+                                    height=""
+                                    class="d-block mx-auto border"
+                                    v-on:click="handleDesign(product.slug)"
                                 />
                             </div>
                         </div>
@@ -554,6 +583,10 @@
                     // localStorage.setItem('cartProducts',)
                     window.location.href = "/shopping-cart"
                 }
+            },
+            handleDesign(slug){
+                window.location.href = `/product/${slug}`
+
             }
         },
     });

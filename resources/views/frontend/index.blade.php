@@ -61,8 +61,8 @@
             <div class="col-2 border" v-for="product in products">
                 <!-- <div class="col-12"> -->
                 <a :href="'/product/' + product.slug ">
-                <img
-                :src="'/images/backend_images/product/large/' + getProductImage(product)"
+                    <img
+                        :src="'/images/backend_images/product/large/' + getProductImage(product)"
                         :alt="product.slug"
                         class="d-block mx-auto w-100"
                     />
@@ -84,7 +84,7 @@
                     <div class="col-md-3">
                         <!-- <img src="https://via.placeholder.com/250" style="width:100%;"> -->
                         <img
-                            :src="'/images/backend_images/category/' + category.image"
+                            :src="'/images/backend_images/index/' + category.image"
                             :alt="category.name"
                             class="d-block mx-auto my-5"
                         />
@@ -147,7 +147,7 @@
                                         class="card-img-top"
                                         alt="Card image cap"
                                         :src="'/images/backend_images/product/large/' + getProductImage(product)"
-                                        />
+                                    />
                                     <!-- src="https://images.mysafetysign.com/img/dp/md/danger-signs-custom.jpg" -->
                                     <div class="card-body">
                                         <p class="card-text">
@@ -286,8 +286,7 @@
 </script>
 
 <style>
-    #category-page ul 
-    {
+    #category-page ul {
         list-style: disc;
         display: grid;
     }

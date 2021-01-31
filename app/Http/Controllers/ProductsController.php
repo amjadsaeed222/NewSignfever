@@ -23,25 +23,25 @@ class ProductsController extends Controller
         if($request->isMethod('post'))
         {
             
-            $validate=$request->validate([
-                'product_name'=>'required',
-                'product_index'=>'required',
-                'description'=>'required',
-                'product_price'=>'required',
-                'product_shape'=>'required',
-                'product_part_no'=>'required',
-                'product_images'=>'required',
-            ]);
+            // $validate=$request->validate([
+            //     'product_name'=>'required',
+            //     'product_index'=>'required',
+            //     'product_description'=>'required',
+            //     'product_price'=>'required',
+            //     'product_shape'=>'required',
+            //     'product_part_no'=>'required',
+            //     'product_images'=>'required',
+            // ]);
             $data = $request->all();
-			//echo "<pre>"; print_r($data); die;
+			// echo "<pre>"; print_r($data); die;
             
 			$product = new Product;
 			$product->index_Id = $data['product_index'];
 			$product->product_name = $data['product_name'];
             
-            if(!empty($data['description']))
+            if(!empty($data['product_description']))
             {
-				$product->description = $data['description'];
+				$product->description = $data['product_description'];
             }
             else
             {
@@ -60,14 +60,14 @@ class ProductsController extends Controller
             $product->partNo=$data['product_part_no'];
             $product->shape=$data['product_shape'];
             $product->status = $status;
-            if(empty($data['product_feature']))
-            {
-                $product->feature=false;
-            }
-            else
-            {
-                $product->feature=true;
-            }
+            // if(empty($data['product_feature']))
+            // {
+            //     $product->feature=false;
+            // }
+            // else
+            // {
+            //     $product->feature=true;
+            // }
             $product->slug=SlugService::createslug(Product::class,'slug',$data['product_name']);
             //echo "<pre>";print_r($product);die;
             $product->save();
@@ -142,15 +142,15 @@ class ProductsController extends Controller
 
         if($request->isMethod('post'))
         {
-            $validate=$request->validate([
-                'product_name'=>'required',
-                'product_index'=>'required',
-                'description'=>'required',
-                'product_price'=>'required',
-                'product_shape'=>'required',
-                'product_part_no'=>'required',
+        //     $validate=$request->validate([
+        //         'product_name'=>'required',
+        //         'product_index'=>'required',
+        //         'description'=>'required',
+        //         'product_price'=>'required',
+        //         'product_shape'=>'required',
+        //         'product_part_no'=>'required',
                 
-            ]);
+        //     ]);
             $data = $request->all();
 			//echo "<pre>"; print_r($data); die;
 
@@ -166,19 +166,21 @@ class ProductsController extends Controller
             {
             	$data['description'] = '';
             }
-            if(empty($data['product_feature']))
-            {
-                $feature=false;
-            }
-            else
-            {
-                $feature=true;
-            }
+            // if(empty($data['product_feature']))
+            // {
+            //     $feature=false;
+            // }
+            // else
+            // {
+            //     $feature=true;
+            // }
             
             $updateProduct=Product::where(['slug'=>$slug])->first();
             $updateProduct->slug=null;
             $updateProduct->update(['index_Id'=> $data['product_index'],'partNo'=> $data['product_part_no'],'shape'=> $data['product_shape'],'status'=>$status,'product_name'=>$data['product_name'],
-				'description'=> $data['description'],'price'=>$data['product_price'],'feature'=> $feature]);
+				'description'=> $data['description'],'price'=>$data['product_price']]);
+            // $updateProduct->update(['index_Id'=> $data['product_index'],'partNo'=> $data['product_part_no'],'shape'=> $data['product_shape'],'status'=>$status,'product_name'=>$data['product_name'],
+			// 	'description'=> $data['description'],'price'=>$data['product_price'],'feature'=> $feature]);
             //Updating Attribute of the product
             $product_id=$updateProduct->id;
             
@@ -231,8 +233,10 @@ class ProductsController extends Controller
                 }
             }
             
+			// return redirect()->route('viewproducts')->with('flash_message_success', 'Product has been edited successfully');
 			return redirect()->route('viewproducts')->with('flash_message_success', 'Product has been edited successfully');
-		}
+        
+        }
 
         // Get Product Details start //
         
@@ -247,7 +251,8 @@ class ProductsController extends Controller
 		
         //dd($productDetails);
 		return view('admin.products.edit_product')->with(compact('productDetails','productIndexes','id','productSizes','productMaterials','productAttributes','productImages'));
-	} 
+    } 
+    
 
     public function deleteProductImage($id=null)
     {
@@ -691,6 +696,26 @@ class ProductsController extends Controller
             //     'size_title'=>'required|unique:App\Models\ProductSize,title',
             //     'size_spn'=>'required',
             // ]);
+            $data=$request->all();
+            $sizeDetails= new ProductSize;
+            $sizeDetails->title=$data['size_title'];
+            $sizeDetails->SPN=$data['size_spn'];
+            $sizeDetails->save();
+            // return $sizeDetails;
+        }
+        
+		return view('admin.products.add_size');
+        
+    }
+
+    public function AddSizeAjax(Request $request)
+    {
+        if($request->isMethod('post'))
+        {
+            // $validate=$request->validate([
+            //     'size_title'=>'required|unique:App\Models\ProductSize,title',
+            //     'size_spn'=>'required',
+            // ]);
             $data=$request->json()->all();
             $sizeDetails= new ProductSize;
             $sizeDetails->title=$data['size_title'];
@@ -699,9 +724,11 @@ class ProductsController extends Controller
             return $sizeDetails;
         }
         
-		return view('admin.products.add_size');
+		return "Inavlid Request";
         
     }
+
+
     public function ViewSize()
     {
         $sizes=DB::table('product_sizes')->paginate(10);
@@ -740,6 +767,34 @@ class ProductsController extends Controller
             //     'description'=>'required',
             //     'material_config_image'=>'required',
             // ]);
+            $data=$request->all();
+            $MaterialDetails=new ProductMaterial;
+            $MaterialDetails->title=$data['material_title'];
+            $MaterialDetails->description=$data['description'];
+
+            $extension = $data['material_config_image']->getClientOriginalExtension();
+            $fileName = rand(111,99999).'.'.$extension;
+            $image_path = 'images/backend_images/product/large'.'/'.$fileName;
+            Image::make($data['material_config_image'])->save($image_path);
+            
+            $MaterialDetails->configImage = $fileName;
+            $MaterialDetails->save();            
+            // return $MaterialDetails;
+        }
+        
+		return view('admin.products.add_materials');
+        
+    }
+
+    public function AddMaterialAjax(Request $request)
+    {
+        if($request->isMethod('post'))
+        {
+            // $validate=$request->validate([
+            //     'material_title'=>'required|unique:App\Models\ProductMaterial,title',
+            //     'description'=>'required',
+            //     'material_config_image'=>'required',
+            // ]);
             $data=$request->json()->all();
             $MaterialDetails=new ProductMaterial;
             $MaterialDetails->title=$data['material_title'];
@@ -755,9 +810,14 @@ class ProductsController extends Controller
             return $MaterialDetails;
         }
         
-		return view('admin.products.add_materials');
+        // return view('admin.products.add_materials');
+        return "Invalid Request";
         
     }
+
+
+
+
     public function ViewMaterial()
     {
         //$materials=ProductMaterial::all();

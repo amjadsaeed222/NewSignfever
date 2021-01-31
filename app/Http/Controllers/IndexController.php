@@ -203,18 +203,22 @@ class IndexController extends Controller
         
         foreach($index_products as $key=>$val) 
         {
-            $images = ProductsImage::where(['product_id'=>$product->id])->get();
-            $index_images[$key]=$images;
-            // $index_products->images=$index_images;
+            $image = ProductsImage::where(['product_id'=>$val->id])->first();
+            // foreach($images as $image)
+            // {
+            //     $index_images[$key]=$image->image;
+            // }
+            $index_products[$key]->image=$image;
         }
+        // $index_products['image']=$index_images;
         $product->index_title=$index->title;
         $product->sizes=$size_array;
         $product->materials=$material_array;
         $product->images=$images;
         $product->index_products =$index_products;
         
-        // return $product;
-        return view('frontend.productDetails', compact('product'));
+        // return $index_products;
+        return view('frontend.productDetails', compact('product','index_products'));
         
     }
 

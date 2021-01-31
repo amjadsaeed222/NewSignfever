@@ -358,6 +358,7 @@
                 </a>
             </div>
         </div>
+
         <!-- ICONS (MOBILE ONLY) -->
 
         <div class="row no-gutters col-12" id="icons">
@@ -416,7 +417,7 @@
     </div> -->
         <div class="row mx-2">
             <div class="col-md-2 col-6 col-xs-6 product text-center">
-                <a href="/index/danger-signs">
+                <a href="/index/custom-danger-signs">
                     <img
                         src="/images/frontend_images/home/danger-header-signs.jpg"
                         class="sign-img"
@@ -426,7 +427,7 @@
                 </a>
             </div>
             <div class="col-md-2 col-6 col-xs-6 product text-center">
-                <a href="/index/danger-sign">
+                <a href="/index/custom-warning-sign">
                     <img
                         src="/images/frontend/home/custom_templates/warning-header-signs.jpg"
                         class="sign-img"
@@ -452,27 +453,21 @@
 
 <script>
 
-    $(".carousel").swipe({
-            swipe: function (event, direction, distance, duration, fingerCount, fingerData) {
-                if (direction == 'left') $(this).carousel('next');
-                if (direction == 'right') $(this).carousel('prev');
-            },
-            allowPageScroll: "vertical"
-        });
-        var products = {!! $products !!};
-        new Vue({
 
-            el:'#home-page',
-            data:{
-                allProducts:{}
-            },
-            mounted(){
-                this.allProducts = products;
-                console.log(this.allProducts)
+    var products = {!! $products !!};
+    new Vue({
 
-            }
+        el:'#home-page',
+        data:{
+            allProducts:{}
+        },
+        mounted(){
+            this.allProducts = products;
+            console.log(this.allProducts)
 
-        })
+        }
+
+    })
 </script>
 
 <!-- Desktop Styling -->

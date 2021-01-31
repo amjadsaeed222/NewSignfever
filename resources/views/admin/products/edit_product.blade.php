@@ -5,7 +5,7 @@
     });
 </script>
 <div id="content">
-    <div class="container">
+    <div class="container" id="edit-product-page">
         <div class="my-5" id="form">
             <h5 class="text-center">Edit Product</h5>
 
@@ -318,7 +318,7 @@
 
 
     new Vue({
-        el: "#add-product-page",
+        el: "#edit-product-page",
         data: {
             size_inputs: [],
             size_divs: 1,
