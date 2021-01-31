@@ -868,7 +868,7 @@ class ProductsController extends Controller
             
             $index=Index::where(['slug'=> $slug])->first();
             $index->slug=null;
-            $index->update(['title'=>$data['index_title'],'image'=>$fileName,'description'=> $data['description']]);
+            $index->update(['category_id'=>$data['category_id'],'title'=>$data['index_title'],'image'=>$fileName,'description'=> $data['description']]);
             // $index->title = $data['index_title'];
             // $index->description = $data['description'];
             // $index.save();
