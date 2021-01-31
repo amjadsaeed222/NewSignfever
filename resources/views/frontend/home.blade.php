@@ -7,7 +7,7 @@
         <!-- Category Row -->
         <div class="row my-2 mx-4">
             <div class="col-2 .col-md-offset-2 mx-2 home__category">
-                <a href="/category/social-distancing"
+                <a href="/index/social-distancing"
                     ><h5 class="category__heading">
                         <b> > </b> Social Distancing Signs
                     </h5>
@@ -20,7 +20,7 @@
             </div>
 
             <div class="col-2 .col-md-offset-2 mx-2 home__category">
-                <a href="/category/social-distancing"
+                <a href="/index/social-distancing"
                     ><h5 class="category__heading">
                         <b> > </b> Mask Required Signs
                     </h5>
@@ -33,7 +33,7 @@
             </div>
 
             <div class="col-2 .col-md-offset-2 mx-2 home__category">
-                <a href="/category/social-distancing-floor-signs"
+                <a href="/index/social-distancing-floor-signs"
                     ><h5 class="category__heading">
                         <b> > </b> Floor Signs and Tapes
                     </h5>
@@ -45,7 +45,7 @@
                 /></a>
             </div>
             <div class="col-2 .col-md-offset-2 mx-2 home__category">
-                <a href="/category/social-distancing"
+                <a href="/index/social-distancing"
                     ><h5 class="category__heading">
                         <b> > </b> Coronavirus Symptoms Signs
                     </h5>
@@ -174,7 +174,7 @@
                 </p>
                 <div class="row cards_row">
                     <div class="col-3 custom_card">
-                        <a href="/category/custom-danger-signs">
+                        <a href="/index/custom-danger-signs">
                             <div class="custom_header">
                                 <h5 class="">Danger</h5>
                             </div>
@@ -186,7 +186,7 @@
                         </a>
                     </div>
                     <div class="col-3 custom_card">
-                        <a href="/category/custom-warning-signs">
+                        <a href="/index/custom-warning-signs">
                             <div class="custom_header">
                                 <h5 class="">Warning</h5>
                             </div>
@@ -198,7 +198,7 @@
                         </a>
                     </div>
                     <div class="col-3 custom_card">
-                        <a href="/category/custom-caution-signs">
+                        <a href="/index/custom-caution-signs">
                             <div class="custom_header">
                                 <h5 class="">Caution</h5>
                             </div>
@@ -224,7 +224,7 @@
                 </p>
             </div>
             <div class="col-2 mx-3 mx-2 custom_card">
-                <a href="/category/custom-danger-signs">
+                <a href="/index/custom-danger-signs">
                     <div class="custom_header">
                         <h5 class="">Danger</h5>
                     </div>
@@ -236,7 +236,7 @@
                 </a>
             </div>
             <div class="col-2 mx-3 custom_card">
-                <a href="/category/custom-caution-signs">
+                <a href="/index/custom-caution-signs">
                     <div class="custom_header">
                         <h5 class="">Caution</h5>
                     </div>
@@ -248,7 +248,7 @@
                 </a>
             </div>
             <div class="col-2 mx-3 custom_card">
-                <a href="/category/custom-warning-signs">
+                <a href="/index/custom-warning-signs">
                     <div class="custom_header">
                         <h5 class="">Warning</h5>
                     </div>
@@ -260,7 +260,7 @@
                 </a>
             </div>
             <div class="col-2 mx-3 custom_card">
-                <a href="/category/custom-notice-signs">
+                <a href="/index/custom-notice-signs">
                     <div class="custom_header">
                         <h5 class="">Notice</h5>
                     </div>
@@ -416,7 +416,7 @@
     </div> -->
         <div class="row mx-2">
             <div class="col-md-2 col-6 col-xs-6 product text-center">
-                <a href="/category/danger-signs">
+                <a href="/index/danger-signs">
                     <img
                         src="/images/frontend_images/home/danger-header-signs.jpg"
                         class="sign-img"
@@ -426,7 +426,7 @@
                 </a>
             </div>
             <div class="col-md-2 col-6 col-xs-6 product text-center">
-                <a href="/category/danger-sign">
+                <a href="/index/danger-sign">
                     <img
                         src="/images/frontend/home/custom_templates/warning-header-signs.jpg"
                         class="sign-img"
@@ -437,7 +437,7 @@
             </div>
 
             <div class="col-md-2 col-6 col-xs-6 product text-center">
-                <a href="/category/custom-caution-signs">
+                <a href="/index/custom-caution-signs">
                     <img
                         src="/images/frontend/home/custom_templates/caution-header-signs.jpg"
                         class="sign-img"

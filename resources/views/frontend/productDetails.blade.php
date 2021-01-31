@@ -227,8 +227,11 @@
                             </div>
                             <div class="col-sm-auto">
                                 <div class="col-12">
-                                    <button class="btn btn-success">
-                                        Personalize
+                                    <button
+                                        v-on:click="addToCart()"
+                                        class="btn btn-success"
+                                    >
+                                        Add To Cart
                                     </button>
                                 </div>
                             </div>
@@ -517,6 +520,7 @@
             selectedImage:{},
             qty:1,
             designImage:null,
+            cartProduct:{}
         },
         mounted() {
             console.log(this.product)
@@ -544,6 +548,12 @@
             },
             handleDesignImage(image) {
                 this.designImage = image
+            },
+            addToCart() {
+                cartProduct:{
+                    // localStorage.setItem('cartProducts',)
+                    window.location.href = "/shopping-cart"
+                }
             }
         },
     });
