@@ -110,6 +110,7 @@
                             <div
                                 class="slide"
                                 v-for="product in product.index_products"
+                                style="border: 1px solid rgb(146, 146, 146)"
                             >
                                 <!-- src="/images/frontend_images/home/quick-turnaround-time-icon.svg" -->
                                 <img
@@ -608,6 +609,7 @@
         list-style: disc;
         margin-left: 2px;
         padding-inline-start: 10px;
+        display: unset;
     }
 </style>
 
@@ -753,8 +755,8 @@
         width: 250px;
         flex-shrink: 0;
         height: 100%;
-        border: 1px solid rgb(146, 146, 146);
     }
+
     .slide:hover {
         border: 2px solid red;
     }
