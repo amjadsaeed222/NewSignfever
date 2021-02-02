@@ -35,15 +35,15 @@
                             <tbody>
                                 <tr>
                                     <td>Part#</td>
-                                    <td>S-3057</td>
+                                    <td>@{{ product.partNo }}</td>
                                 </tr>
                                 <tr>
                                     <td>SPN#</td>
-                                    <td>S-3057</td>
+                                    <td>@{{ selectedSize.SPN }}</td>
                                 </tr>
                                 <tr>
                                     <td>Shape</td>
-                                    <td>S-3057</td>
+                                    <td>@{{ product.shape }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -95,7 +95,11 @@
             <!-- Product Details -->
             <div class="col-9">
                 <div class="col-12 bb-1">
-                    <h3 class="main-text">@{{ product.product_name }}</h3>
+                    <h3 class="main-text">
+                        {!! $product->index_title !!}: @{{
+                            product.product_name
+                        }}
+                    </h3>
                 </div>
                 <div class="col-12 rating no-gutters">
                     <span class="fa fa-star checked"></span>
@@ -151,8 +155,8 @@
                         Select Material:
                         <!-- <span class="main-text">Quantity/Price</span> -->
                     </h4>
-                    <div class="col-12">
-                        <div class="col-3">
+                    <div class="col-12 row">
+                        <div class="col-6">
                             <div class="materials_row">
                                 <p>
                                     For Size: <b>@{{ selectedSize.title }}</b>
@@ -167,6 +171,13 @@
                                 <p>@{{ material.title }}</p>
                                 <p>$@{{ product.price }}</p>
                             </div>
+                        </div>
+                        <div
+                            class="col-6 border material-description"
+                            v-if="materialDescription"
+                        >
+                            <p style="font-weight: 700">Material Description</p>
+                            <div v-html="materialDescription"></div>
                         </div>
                     </div>
                 </div>
@@ -306,7 +317,9 @@
 
     <div class="mobile-only">
         <div class="row no-gutters">
-            <h4>{{ product.product_name }}</h4>
+            <h4>
+                {!! $product->index_title !!}: {!!$product->product_name !!}
+            </h4>
             <img
                 :src="'/images/backend_images/product/large/' + selectedImage.image"
                 :alt="product.slug"
@@ -376,7 +389,7 @@
             <div class="col-12 my-4">
                 <h4>
                     Select Size:
-                    <span class="main-text">@{{ selectedSize.title }}</span>
+                    <span class="main-text"> {{ selectedSize.title }} </span>
                 </h4>
                 <div class="col-12">
                     <div class="row">
@@ -535,6 +548,7 @@
 
 
     var dbProduct = {!! $product !!}
+    console.log(dbProduct)
     new Vue({
         el: "#product-details",
         data: {
@@ -544,17 +558,23 @@
             selectedImage:{},
             qty:1,
             designImage:null,
-            cartProduct:{}
+            cartProduct:{},
+            materialDescription:''
+        },
+        computed: {
+            index_title() {
+                return this.product.index_title;
+            }
         },
         mounted() {
-            console.log(this.product)
             this.selectedSize = this.product.sizes[0];
             // this.selectedMaterial = this.selectedSize.materials[0];
-            this.selectedMaterail = this.product.materials[0];
+            this.selectedmaterial = this.product.materials[0];
             // console.log(this.selectedMaterial)
             // console.log(this.selectedSize.images[0].image);
             // this.selectedImage = this.selectedSize.images[0];
             this.selectedImage = this.product.images[0];
+            console.log(this.selectedSize)
 
         },
         methods: {
@@ -565,6 +585,8 @@
             },
             handleMaterial(material) {
                 this.selectedMaterial = material;
+                this.materialDescription = material.description;
+                console.log()
             },
             handleImage(image) {
                 this.selectedImage = image;
@@ -596,6 +618,9 @@
         border-bottom: 1px solid #cccccc;
         margin: 2px 5px;
     }
+    .material-description {
+        padding: 20px;
+    }
     .product-description ul {
         list-style: disc;
         margin-left: 2px;
@@ -609,12 +634,20 @@
     .materials_row {
         display: flex;
         height: 30px;
-        width: 450px;
+        width: 350px;
         padding: 0 10px;
         background-color: #ededed;
         /* align-items: center; */
         justify-content: space-between;
     }
+
+    .materials_row ul {
+        list-style: disc;
+        margin-left: 2px;
+        padding-inline-start: 10px;
+        display: unset !important;
+    }
+
     .materials_row:first-child {
         background-color: #cccccc;
     }
@@ -638,6 +671,7 @@
     .order-info {
         border: 1px solid #cccccc;
         padding: 10px 10px;
+        width: 890px;
     }
 
     .custom_card {
@@ -664,7 +698,7 @@
     }
     .cards_row {
         display: flex;
-        margin: 0px 5px;
+        margin: 2px 5px;
         /* justify-content: ; */
     }
 </style>

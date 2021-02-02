@@ -27,7 +27,7 @@
                             >Product Name</label
                         >
                         <div class="col-sm-9">
-                            <input required required
+                            <input required
                                 type="text"
                                 class="form-control"
                                 id="product_name"
@@ -151,7 +151,7 @@
                         <div class="col-sm-3">Status</div>
                         <div class="col-sm-9">
                             <div class="form-check">
-                                <input required
+                                <input 
                                     class="form-check-input"
                                     type="checkbox"
                                     id="gridCheck1"
@@ -170,7 +170,7 @@
                         <div class="col-sm-3">Featured</div>
                         <div class="col-sm-9">
                             <div class="form-check">
-                                <input required
+                                <input 
                                     class="form-check-input"
                                     type="checkbox"
                                     id="product_feature"
@@ -289,7 +289,7 @@
                                                             >Size Title</label
                                                         >
                                                         <div class="col-sm-9">
-                                                            <input required
+                                                            <input 
                                                                 type="text"
                                                                 class="form-control"
                                                                 id="size_title"
@@ -313,7 +313,7 @@
                                                             >Size SPN</label
                                                         >
                                                         <div class="col-sm-9">
-                                                            <input required
+                                                            <input 
                                                                 type="text"
                                                                 class="form-control"
                                                                 id="size_spn"
@@ -450,7 +450,7 @@
                                                             Title</label
                                                         >
                                                         <div class="col-sm-9">
-                                                            <input required
+                                                            <input 
                                                                 type="text"
                                                                 class="form-control"
                                                                 id="material_title"
