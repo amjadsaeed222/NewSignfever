@@ -37,7 +37,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="index_title" class="col-sm-3 col-form-label"
+                        <label for="category_id" class="col-sm-3 col-form-label"
                             >Category</label
                         >
                         <div class="col-sm-9">
@@ -83,7 +83,7 @@
                         <div class="col-sm-3">Image</div>
                         <div class="col-sm-9">
                             <div class="custom-file">
-                                <input required
+                                <input 
                                     type="file"
                                     name="index_image"
                                     class="custom-file-input"

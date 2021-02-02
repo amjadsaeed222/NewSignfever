@@ -109,8 +109,10 @@
                                     Select A Shape
                                 </option>
                                 <option value="Vertical">Vertical</option>
-                                <option value="Horizontal">Horizontal</option>
+                                <option selected value="Horizontal">Horizontal</option>
                                 <option value="Octagon">Octagon</option>
+
+                                
                             </select>
                         </div>
                     </div>
@@ -135,7 +137,7 @@
                         <div class="col-sm-3">Status</div>
                         <div class="col-sm-9">
                             <div class="form-check">
-                                <input required
+                                <input 
                                     class="form-check-input"
                                     type="checkbox"
                                     id="gridCheck1"
@@ -156,7 +158,7 @@
                         <div class="col-sm-3">Featured</div>
                         <div class="col-sm-9">
                             <div class="form-check">
-                                <input required
+                                <input 
                                     class="form-check-input"
                                     type="checkbox"
                                     id="product_feature"
@@ -176,7 +178,7 @@
                         <div class="col-sm-3">Choose Images</div>
                         <div class="col-sm-9">
                             <div class="custom-file">
-                                <input required
+                                <input 
                                     type="file"
                                     multiple
                                     name="product_images[]"
@@ -283,7 +285,7 @@
                                                             >Size Title</label
                                                         >
                                                         <div class="col-sm-9">
-                                                            <input required
+                                                            <input 
                                                                 type="text"
                                                                 class="form-control"
                                                                 id="size_title"
@@ -307,7 +309,7 @@
                                                             >Size SPN</label
                                                         >
                                                         <div class="col-sm-9">
-                                                            <input required
+                                                            <input 
                                                                 type="text"
                                                                 class="form-control"
                                                                 id="size_spn"
@@ -442,7 +444,7 @@
                                                             Title</label
                                                         >
                                                         <div class="col-sm-9">
-                                                            <input required
+                                                            <input 
                                                                 type="text"
                                                                 class="form-control"
                                                                 id="material_title"
@@ -594,7 +596,7 @@
                     <div class="col-sm-10">
                     <input
                             type="submit"
-                            value="Add Product"
+                            value="Update Product Info"
                             class="btn btn-success"
                         />
                     </div>

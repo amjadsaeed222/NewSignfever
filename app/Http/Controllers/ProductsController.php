@@ -108,13 +108,14 @@ class ProductsController extends Controller
                 $imageDetails->save();
             }    
             
-			return redirect()->back()->with('flash_message_success', 'Product has been added successfully');
+			// return redirect()->back()->with('flash_message_success', 'Product has been added successfully');
+            return redirect()->route('viewproducts')->with('flash_message_success', 'Product has been added successfully');
            
         }
         $sizes=ProductSize::all();
         $materials=ProductMaterial::all();
         $indexes=Index::all();
-		return view('admin.products.add_product')->with(compact('sizes','materials','indexes'));
+        return view('admin.products.add_product')->with(compact('sizes','materials','indexes'));
     }  
     
     /* public function addmaterial(Request $request)
@@ -701,6 +702,8 @@ class ProductsController extends Controller
             $sizeDetails->title=$data['size_title'];
             $sizeDetails->SPN=$data['size_spn'];
             $sizeDetails->save();
+            return redirect()->action([ProductsController::class,'ViewSize'])->with('flash_message_success', 'Size has been added successfully');
+
             // return $sizeDetails;
         }
         
@@ -747,7 +750,9 @@ class ProductsController extends Controller
             $sizeDetails=ProductSize::where(['id'=> $id])->first();
             $sizeDetails->update(['title'=>$data['size_title'],'SPN'=> $data['size_SPN']]);
             
-            return redirect('admin/view-size')->with('msg','Size updated successfully');
+            // return redirect('admin/view-size')->with('msg','Size updated successfully');
+            return redirect()->action([ProductsController::class,'ViewSize'])->with('flash_message_success', 'Size has been updated successfully');
+
         }
         $size=ProductSize::where(['id'=>$id])->first();
         return view('admin.products.edit_size')->with(compact('size'));
@@ -780,6 +785,8 @@ class ProductsController extends Controller
             $MaterialDetails->configImage = $fileName;
             $MaterialDetails->save();            
             // return $MaterialDetails;
+            return redirect()->action([ProductsController::class,'ViewMaterial'])->with('flash_message_success', 'Material has been added successfully');
+
         }
         
 		return view('admin.products.add_materials');
@@ -851,7 +858,9 @@ class ProductsController extends Controller
             
             $MaterialDetails->update(['title'=>$data['material_title'],'description'=> $data['description'],'configImage'=>$fileName]);
             
-            return redirect('admin/view-material')->with('msg','Material updated successfully');
+            // return redirect('admin/view-material')->with('msg','Material updated successfully');
+            return redirect()->action([ProductsController::class,'ViewMaterial'])->with('flash_message_success', 'Material has been edited successfully');
+
         }
         $material=ProductMaterial::where(['id'=>$id])->first();
         return view('admin.products.edit_material')->with(compact('material'));
@@ -928,13 +937,14 @@ class ProductsController extends Controller
             {
             	$fileName = '';
             }
+
             
             $index=Index::where(['slug'=> $slug])->first();
             $index->slug=null;
-            $index->update(['title'=>$data['index_title'],'image'=>$fileName,'description'=> $data['description']]);
-    
+            $index->update(['title'=>$data['index_title'],'image'=>$fileName,'description'=> $data['description'],'category_id'=>$data['category_id']]);   
+            // return redirect();
+            return redirect()->action([ProductsController::class,'viewIndex'])->with('flash_message_success', 'Index has been edited successfully');
             
-            return redirect()->action([ProductsController::class,'viewIndex']);
         }
         $index=Index::where('slug',$slug)->first();
         $categories=Category::all();
