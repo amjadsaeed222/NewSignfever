@@ -522,9 +522,9 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <button class="btn btn-success w-100">
+                                    <a href="/shopping-cart" class="btn btn-success w-100">
                                         Add To Cart
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                         </div>

@@ -138,31 +138,31 @@
             <div v-if="products.length > 0" class="my-2 mx-3">
                 <h4 class="text-left">@{{ category.name }} - Best Sellers</h4>
                 <div class="row">
-                    <div v-for="product in products" class="col-5">
-                        <div class="col-12">
-                            <a :href="'/product/' + product.slug">
-                                <div class="card" style="width: 100%">
-                                    <img
-                                        stlye="width:100%"
-                                        class="card-img-top"
-                                        alt="Card image cap"
-                                        :src="'/images/backend_images/product/large/' + getProductImage(product)"
-                                    />
-                                    <!-- src="https://images.mysafetysign.com/img/dp/md/danger-signs-custom.jpg" -->
-                                    <div class="card-body">
-                                        <p class="card-text">
-                                            @{{ product.product_name }}
-                                        </p>
-                                    </div>
+                    <div v-for="product in products" class="col-6">
+                        <!-- <div class="col-12"> -->
+                        <a :href="'/product/' + product.slug">
+                            <div class="card" style="width: 100%">
+                                <img
+                                    stlye="width:100%"
+                                    class="card-img-top"
+                                    alt="Card image cap"
+                                    :src="'/images/backend_images/product/large/' + getProductImage(product)"
+                                />
+                                <!-- src="https://images.mysafetysign.com/img/dp/md/danger-signs-custom.jpg" -->
+                                <div class="card-body w-100">
+                                    <p class="card-text w-100">
+                                        @{{ product.product_name }}
+                                    </p>
                                 </div>
-                            </a>
-                        </div>
+                            </div>
+                        </a>
+                        <!-- </div> -->
                     </div>
                 </div>
             </div>
             <div v-else>
                 <h5 class="text-center">
-                    No Products on Sale Currently for @{{ category.name }}
+                    No Products on Sale Currently for @{{ category.title }}
                 </h5>
                 <h6 class="text-center">Vist Later :)</h6>
             </div>
@@ -321,6 +321,7 @@
     }
 
     #free-shipping {
+        max-height: 120px;
         font-size: 0.9rem;
         border: #b6d498 2px solid;
         padding: 5px;
