@@ -117,7 +117,7 @@
                                     alt="product-designs"
                                     width="70%"
                                     height=""
-                                    class="d-block mx-auto"
+                                    class="d-block mx-auto cursor-pointer"
                                     v-on:click="handleDesign(product.slug)"
                                 />
                             </div>
@@ -318,7 +318,7 @@
             <img
                 :src="'/images/backend_images/product/large/' + selectedImage.image"
                 :alt="product.slug"
-                style="width: 75%"
+                style="width: 250px; height: 100%"
                 class="mx-auto d-block p-2"
             />
             <div class="row container no-gutters border px-2 py-2">
@@ -327,7 +327,7 @@
                     v-for="image in product.images"
                     :src="'/images/backend_images/product/large/' + image.image"
                     :alt="product.product_name"
-                    style="width: 15%"
+                    style="width: 50px; height: 50px"
                     class="d-block my-2 mx-auto border cursor-pointer"
                     v-on:click="handleImage(image)"
                 />
@@ -373,7 +373,7 @@
                                     alt="product-designs"
                                     width="80%"
                                     height=""
-                                    class="d-block mx-auto border"
+                                    class="d-block mx-auto"
                                     v-on:click="handleDesign(product.slug)"
                                 />
                             </div>
@@ -522,7 +522,10 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <a href="/shopping-cart" class="btn btn-success w-100">
+                                    <a
+                                        href="/shopping-cart"
+                                        class="btn btn-success w-100"
+                                    >
                                         Add To Cart
                                     </a>
                                 </div>
@@ -601,6 +604,11 @@
         border-bottom: 1px solid #cccccc;
         margin: 2px 5px;
     }
+    ul {
+        list-style: disc;
+        margin-left: 2px;
+        padding-inline-start: 10px;
+    }
 </style>
 
 <!-- Desktop -->
@@ -608,7 +616,7 @@
     .materials_row {
         display: flex;
         height: 30px;
-        width: 250px;
+        width: 450px;
         padding: 0 10px;
         background-color: #ededed;
         /* align-items: center; */
@@ -745,6 +753,10 @@
         width: 250px;
         flex-shrink: 0;
         height: 100%;
+        border: 1px solid rgb(146, 146, 146);
+    }
+    .slide:hover {
+        border: 2px solid red;
     }
 </style>
 @endsection

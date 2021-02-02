@@ -3,7 +3,7 @@
 <div id="home-page">
     <!-- Desktop Version -->
 
-    <div class="desktop-only container-fluid">
+    <div class="desktop-only ">
         <!-- Category Row -->
         <div class="row my-2 mx-4">
             <div class="col-2 .col-md-offset-2 mx-2 home__category">
@@ -568,6 +568,7 @@
         padding: 25px 5px;
         border: 1px solid #d3d3d3;
         border-radius: 5px;
+        height:245px;
         /* -webkit-box-shadow: 0px 5px 5px 0px rgba(50, 50, 50, 0.36);
         -moz-box-shadow: 0px 5px 5px 0px rgba(50, 50, 50, 0.36);
         box-shadow: 0px 5px 5px 0px rgba(50, 50, 50, 0.36); */

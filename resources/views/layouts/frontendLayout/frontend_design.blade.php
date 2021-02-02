@@ -66,7 +66,11 @@
                 }
             }
         </style>
-        @include('layouts.frontendLayout.frontend_header') @yield('content')
+        @include('layouts.frontendLayout.frontend_header') 
+        <div class="container">
+            @yield('content')
+
+        </div>
     </body>
     @include('layouts.frontendLayout.frontend_footer')
 </html>

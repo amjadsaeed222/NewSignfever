@@ -349,12 +349,6 @@
                                                 >
                                                     Close
                                                 </button>
-                                                <button
-                                                    type="button"
-                                                    class="btn btn-primary"
-                                                >
-                                                    Save changes
-                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -557,12 +551,6 @@
                                                 >
                                                     Close
                                                 </button>
-                                                <button
-                                                    type="button"
-                                                    class="btn btn-primary"
-                                                >
-                                                    Save changes
-                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -623,9 +611,7 @@
 
 <script>
     var sizes = {!! $sizes !!}
-    console.log(sizes)
     var materials = {!! $materials !!}
-    console.log(materials)
 
 
     new Vue({
@@ -648,10 +634,9 @@
             material_title:'',
             material_description:''
         },
-        beforeCreate(){
-
-        },
         mounted() {
+
+
             fetch("/all", {
                 method: "GET",
                 headers: {
@@ -661,7 +646,6 @@
                 .then((res) => res.json())
                 .then((newRes) => {
                     this.allCats = newRes;
-                    // console.log(this.allCats);
                 });
 
                 this.allSizes = sizes
@@ -672,7 +656,6 @@
                         size_id: this.selectedSize
                     }
                 )
-                console.log(this.size_inputs)
                 //Materials
                 this.allMaterials = materials
                 this.selectedMaterial = this.allMaterials[0].id
@@ -682,14 +665,12 @@
                         material_id: this.selectedMaterial
                     }
                 )
-                console.log(this.material_inputs)
 
 
         },
         methods: {
             addSize() {
                 this.size_divs = this.size_divs + 1;
-                // console.log(this.size_divs);
                 // this.size_inputs.push(
                 //     {
                 //         size_id:this.selectedSize
@@ -699,7 +680,6 @@
             addMaterial() {
                 this.material_divs = this.material_divs + 1;
 
-                // console.log(this.size_divs);
                 this.material_inputs.push(
                     {
                         size_material:this.selectedMaterial
@@ -716,7 +696,6 @@
             },
             addMaterial() {
                 this.material_divs = this.material_divs + 1;
-                // console.log(this.size_divs);
                 // this.size_inputs.push(
                 //     {
                 //         size_id:this.selectedSize
@@ -730,17 +709,14 @@
             changeSize(e,i){
                 // this.selectedSize = e.target.value
                 this.size_inputs[i].size_id = e.target.value
-                console.log(this.size_inputs[i])
             },
             async newSizeAJAX() {
-                console.log(this.newSizeSPN)
-                console.log(this.newSizeTitle)
-                console.log(this.allSizes)
 
                   var postData = {
                       size_title:this.newSizeTitle,
                       size_spn: this.newSizeSPN
                   }
+
                 var addedSize = await fetch('/admin/add-size-ajax', {
                   method: 'post',
                   headers: {
@@ -748,19 +724,41 @@
                   'Content-Type': 'application/json'
                   },
                   body:JSON.stringify(postData),
-                  }).then(function(response) {
+                  }).then((response) => {
+
+                      this.newSizeTitle = ''
+
+                      this.newSizeSPN = ''
+
+
                   return response.json();
-                  }).then(function(data) {
+                  }).then((data) => {
+
                     $("#sizeModal .close").click()
-                  return data;
-                  }).catch(() => "Error")
-                  if(addedSize != "Error") this.allSizes.push(addedSize);
+
+                    return data;
+                  }).catch(() => {
+
+                    Swal.fire(
+                    'Error Occured!',
+                    'Please try again!',
+                    'error'
+                    )
+                      return "Error"
+                  })
+                  if(addedSize != "Error") {
+                      this.allSizes.push(addedSize);
+                      Swal.fire(
+                    'Added!',
+                    "Size has been added successfully, don't forget to select it!",
+                    'success'
+                    )
+                  }
+
+
             },
             async newMaterialAJAX() {
-                console.log(this.material_title)
-                console.log(this.allMaterials)
                 var desc = CKEDITOR.instances.description.getData()
-                console.log(desc)
                   var postData = {
                       material_title:this.material_title,
                       description: desc
@@ -775,12 +773,31 @@
                   }).then(function(response) {
                   return response.json();
                   }).then(function(data) {
-                    $("#materialModal .close").click()
 
+                    this.material_title=''
+            this.material_description=''
+                    $("#materialModal .close").click()
                   return data;
-                  }).catch(() => "Error")
-                  if(addedMaterial != "Error") this.allMaterials.push(addedMaterial);
-            }
+                  }).catch(() => {
+
+                    Swal.fire(
+                    'Error Occured!',
+                    'Please try again!',
+                    'error'
+                    )
+                      return "Error"})
+                  if(addedMaterial != "Error")
+                  {
+                      this.allMaterials.push(addedMaterial);
+                      Swal.fire(
+                    'Added!',
+                    "Material has been added successfully, don't forget to select it!",
+                    'success'
+                    )
+                  }
+
+            },
+
 
         },
     });
