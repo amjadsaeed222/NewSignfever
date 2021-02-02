@@ -50,7 +50,10 @@
 
                         <div class="">
                             <h4>Product Description</h4>
-                            <div class="" v-html="product.description"></div>
+                            <div
+                                class="product-description"
+                                v-html="product.description"
+                            ></div>
                         </div>
                         <!-- Modal -->
                         <div
@@ -605,7 +608,7 @@
         border-bottom: 1px solid #cccccc;
         margin: 2px 5px;
     }
-    ul {
+    .product-description ul {
         list-style: disc;
         margin-left: 2px;
         padding-inline-start: 10px;
