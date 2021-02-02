@@ -55,7 +55,7 @@
                 </div>
             </div>
             <div class="col-12">
-                <h4>Social Distancing</h4>
+                <h4>@{{ category.title }} - Featured</h4>
             </div>
             <!-- <div class="products" > -->
             <div class="col-2 border" v-for="product in products">
@@ -79,7 +79,7 @@
     <div class="mobile-only">
         <div class="my-5 text-center">
             <div class="mx-2 text-center">
-                <h3 class="text-left">@{{ category.name }}</h3>
+                <h3 class="text-left">@{{ category.title }}</h3>
                 <div class="row category-main no-gutters">
                     <div class="col-md-3">
                         <!-- <img src="https://via.placeholder.com/250" style="width:100%;"> -->
@@ -136,7 +136,7 @@
                 </div>
             </div>
             <div v-if="products.length > 0" class="my-2 mx-3">
-                <h4 class="text-left">@{{ category.name }} - Best Sellers</h4>
+                <h4 class="text-left">@{{ category.title }} - Featured</h4>
                 <div class="row">
                     <div v-for="product in products" class="col-6">
                         <!-- <div class="col-12"> -->
