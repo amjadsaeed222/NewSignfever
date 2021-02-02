@@ -69,8 +69,8 @@
                         <div class="col-sm-9">
                             <textarea
                                 class="ckeditor form-control"
-                                id="description"
-                                name="description"
+                                id="product_description"
+                                name="product_description"
                                 placeholder="Product Description"
                             >{{$productDetails->description}}</textarea>
                         </div>
@@ -99,14 +99,19 @@
                             >Product Shape</label
                         >
                         <div class="col-sm-9">
-                            <input
-                                type="text"
-                                class="form-control"
-                                id="product_shape"
+                        <select
                                 name="product_shape"
-                                value="{{$productDetails->shape}}"
-                                placeholder="Product Shape"
-                            />
+                                id="product_shape"
+                                class="form-control"
+                                required
+                            >
+                                <option disabled selected value="None">
+                                    Select A Shape
+                                </option>
+                                <option value="Vertical">Vertical</option>
+                                <option value="Horizontal">Horizontal</option>
+                                <option value="Octagon">Octagon</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group row">

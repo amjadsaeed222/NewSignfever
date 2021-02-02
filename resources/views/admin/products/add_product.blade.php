@@ -74,8 +74,8 @@
                         <div class="col-sm-9">
                             <textarea
                                 class="ckeditor form-control"
-                                id="description"
-                                name="material_description"
+                                id="product_description"
+                                name="product_description"
                                 placeholder="Product Description"
                             ></textarea>
                             @error('description')
@@ -96,6 +96,7 @@
                                 id="product_price"
                                 name="product_price"
                                 placeholder="Product Price"
+                                step="0.01"
                             />
                             @error('product_price')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -109,13 +110,19 @@
                             >Product Shape</label
                         >
                         <div class="col-sm-9">
-                            <input
-                                type="text"
-                                class="form-control"
-                                id="product_shape"
+                            <select
                                 name="product_shape"
-                                placeholder="Product Shape"
-                            />
+                                id="product_shape"
+                                class="form-control"
+                                required
+                            >
+                                <option disabled selected>
+                                    Select A Shape
+                                </option>
+                                <option value="Vertical">Vertical</option>
+                                <option value="Horizontal">Horizontal</option>
+                                <option value="Octagon">Octagon</option>
+                            </select>
                             @error('product_shape')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror

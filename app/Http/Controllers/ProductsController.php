@@ -43,10 +43,10 @@ class ProductsController extends Controller
             {
 				$product->description = $data['product_description'];
             }
-            else
-            {
-				$product->description = '';	
-			}
+            // else
+            // {
+			// 	$product->description = '';	
+			// }
             
             if(empty($data['product_status']))
             {
@@ -162,10 +162,10 @@ class ProductsController extends Controller
                 $status='1';
             }
 
-            if(empty($data['description']))
-            {
-            	$data['description'] = '';
-            }
+            // if(empty($data['description']))
+            // {
+            // 	$data['description'] = '';
+            // }
             // if(empty($data['product_feature']))
             // {
             //     $feature=false;
@@ -178,7 +178,7 @@ class ProductsController extends Controller
             $updateProduct=Product::where(['slug'=>$slug])->first();
             $updateProduct->slug=null;
             $updateProduct->update(['index_Id'=> $data['product_index'],'partNo'=> $data['product_part_no'],'shape'=> $data['product_shape'],'status'=>$status,'product_name'=>$data['product_name'],
-				'description'=> $data['description'],'price'=>$data['product_price']]);
+				'description'=> $data['product_description'],'price'=>$data['product_price']]);
             // $updateProduct->update(['index_Id'=> $data['product_index'],'partNo'=> $data['product_part_no'],'shape'=> $data['product_shape'],'status'=>$status,'product_name'=>$data['product_name'],
 			// 	'description'=> $data['description'],'price'=>$data['product_price'],'feature'=> $feature]);
             //Updating Attribute of the product
