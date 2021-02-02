@@ -276,7 +276,7 @@
             <div class="col-12">
                 <div class="row cards_row">
                     <div class="col-2 mx-1 custom_card">
-                        <a href="/category/danger">
+                        <a href="/index/custom-danger-signs">
                             <div class="custom_header">
                                 <h5 class="">Danger</h5>
                             </div>
@@ -288,24 +288,12 @@
                         </a>
                     </div>
                     <div class="col-2 mx-1 custom_card">
-                        <a href="/category/social-distancing">
+                        <a href="/index/social-distancing">
                             <div class="custom_header">
                                 <h5 class="">Social Distances</h5>
                             </div>
                             <img
                                 src="/images/frontend/home/custom_templates/social_distancing.jpg"
-                                alt=""
-                                class="d-block mx-auto"
-                            />
-                        </a>
-                    </div>
-                    <div class="col-2 mx-1 custom_card">
-                        <a href="/category/osha-signs">
-                            <div class="custom_header">
-                                <h5 class="">OSHA Signs</h5>
-                            </div>
-                            <img
-                                src="/images/frontend/home/custom_templates/osha-signs.jpg"
                                 alt=""
                                 class="d-block mx-auto"
                             />
@@ -676,7 +664,7 @@
     }
     .cards_row {
         display: flex;
-        margin: 2px 5px;
+        margin: 0px 5px;
         /* justify-content: ; */
     }
 </style>

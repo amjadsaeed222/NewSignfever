@@ -119,9 +119,10 @@
 </div> -->
 
 <div class="sidenav">
-    <div class="admin-headers">
+    <div class="admin-headers ">
         <h3 class="text-center">Sign Fever</h3>
         <h5 class="text-center">Admin Panel</h5>
+        <a href="/" class="text-center">Visit Site</a>
     </div>
     <div class="sidebar-links">
         <button class="products-dropdown dropdown-btn">
@@ -155,7 +156,7 @@
             <a href="/admin/add-category">Add Category</a>
         </div>
         <a
-            title=""
+            class="logout-btn btn btn-danger"
             href="{{ url('/logout') }}"
             onclick="event.preventDefault();
         document.getElementById('logout-form').submit();"
@@ -189,6 +190,9 @@
 </style> -->
 
 <style>
+    .sidenav{
+      
+    }
     .admin-headers {
         color: white;
     }
@@ -228,6 +232,9 @@
     .sidenav a:hover {
         color: white;
     }
+    .logout-btn a:hover{
+        color:black;
+    }
     .dropdown-btn:hover {
         background-color: #1d50c7;
     }
@@ -244,12 +251,16 @@
         background-color: #1d50c7;
         color: white;
     }
+    .dropdown-container {
+       
+    }
 
     /* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
     .dropdown-container {
         display: none;
         background-color: #f1f1f1;
         padding-left: 8px;
+        
     }
 
     /* Optional: Style the caret down icon */
@@ -269,8 +280,13 @@
             var dropdownContent = this.nextElementSibling;
             if (dropdownContent.style.display === "block") {
                 dropdownContent.style.display = "none";
+           
+       
+                
             } else {
                 dropdownContent.style.display = "block";
+   
+  
             }
         });
     }

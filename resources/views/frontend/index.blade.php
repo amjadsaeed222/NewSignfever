@@ -294,6 +294,7 @@
     .shipping_card {
         border: 1px #e3e3e3 solid;
         border-radius: 5px;
+        width:250px;
     }
     .shipping_card ul {
         list-style: disc;

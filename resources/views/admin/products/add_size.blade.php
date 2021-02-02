@@ -21,7 +21,7 @@
                             >Size Title</label
                         >
                         <div class="col-sm-9">
-                            <input
+                            <input required
                                 type="text"
                                 class="form-control"
                                 id="size_title"
@@ -38,7 +38,7 @@
                             >Size SPN</label
                         >
                         <div class="col-sm-9">
-                            <input
+                            <input required
                                 type="text"
                                 class="form-control"
                                 id="size_spn"

@@ -24,7 +24,7 @@
                             >Index Title</label
                         >
                         <div class="col-sm-9">
-                            <input
+                            <input required
                                 type="text"
                                 class="form-control"
                                 id="index_title"
@@ -83,14 +83,14 @@
                         <div class="col-sm-3">Image</div>
                         <div class="col-sm-9">
                             <div class="custom-file">
-                                <input
+                                <input required
                                     type="file"
                                     name="index_image"
                                     class="custom-file-input"
                                     id="Index_image"
                                 />
                                 
-                                <input
+                                <input required
                                     type="hidden"
                                     name="current_image"
                                     class="custom-file-input"

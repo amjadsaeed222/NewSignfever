@@ -30,7 +30,7 @@
                         >Material Title</label
                     >
                     <div class="col-sm-9">
-                  <input type="text" class="form-control" name="material_title" id="material_title" value="{{$material->title}}">
+                  <input required type="text" class="form-control" name="material_title" id="material_title" value="{{$material->title}}">
               
                 @error('material_title')
                 <div class="alert alert-danger">{{$message}}</div>
@@ -52,8 +52,8 @@
                 <div class="col-sm-3">Config Image</div>
                 <div class="col-sm-9">
                   <div class="custom-file">
-                  <input type="file" name="image" class="custom-file-input" id="image">
-                  <input type="hidden" name="current_image" id="current_image" value="{{$material->configImage}}">
+                  <input required type="file" name="image" class="custom-file-input" id="image">
+                  <input required type="hidden" name="current_image" id="current_image" value="{{$material->configImage}}">
                 
                   <label
                   class="custom-file-label"

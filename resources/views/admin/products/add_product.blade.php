@@ -27,7 +27,7 @@
                             >Product Name</label
                         >
                         <div class="col-sm-9">
-                            <input
+                            <input required required
                                 type="text"
                                 class="form-control"
                                 id="product_name"
@@ -90,7 +90,7 @@
                             >Product Price</label
                         >
                         <div class="col-sm-9">
-                            <input
+                            <input required
                                 type="number"
                                 class="form-control"
                                 id="product_price"
@@ -135,7 +135,7 @@
                             >Product Part#</label
                         >
                         <div class="col-sm-9">
-                            <input
+                            <input required
                                 type="text"
                                 class="form-control"
                                 id="product_part_no"
@@ -151,7 +151,7 @@
                         <div class="col-sm-3">Status</div>
                         <div class="col-sm-9">
                             <div class="form-check">
-                                <input
+                                <input required
                                     class="form-check-input"
                                     type="checkbox"
                                     id="gridCheck1"
@@ -170,7 +170,7 @@
                         <div class="col-sm-3">Featured</div>
                         <div class="col-sm-9">
                             <div class="form-check">
-                                <input
+                                <input required
                                     class="form-check-input"
                                     type="checkbox"
                                     id="product_feature"
@@ -189,7 +189,7 @@
                         <div class="col-sm-3">Choose Images</div>
                         <div class="col-sm-9">
                             <div class="custom-file">
-                                <input
+                                <input required
                                     type="file"
                                     multiple
                                     name="product_images[]"
@@ -222,6 +222,7 @@
                                 <option
                                     v-for="singleSize in allSizes"
                                     :value="singleSize.id"
+                                    
                                 >
                                     @{{ singleSize.title }}
                                 </option>
@@ -288,7 +289,7 @@
                                                             >Size Title</label
                                                         >
                                                         <div class="col-sm-9">
-                                                            <input
+                                                            <input required
                                                                 type="text"
                                                                 class="form-control"
                                                                 id="size_title"
@@ -312,7 +313,7 @@
                                                             >Size SPN</label
                                                         >
                                                         <div class="col-sm-9">
-                                                            <input
+                                                            <input required
                                                                 type="text"
                                                                 class="form-control"
                                                                 id="size_spn"
@@ -449,7 +450,7 @@
                                                             Title</label
                                                         >
                                                         <div class="col-sm-9">
-                                                            <input
+                                                            <input required
                                                                 type="text"
                                                                 class="form-control"
                                                                 id="material_title"
@@ -503,7 +504,7 @@
                                                                 <div
                                                                     class="custom-file"
                                                                 >
-                                                                    <input
+                                                                    <input required
                                                                         type="file"
                                                                         name="material_config_image"
                                                                         class="custom-file-input"
