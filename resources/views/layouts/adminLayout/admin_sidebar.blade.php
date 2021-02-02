@@ -154,8 +154,25 @@
         <div class="dropdown-container">
             <a href="/admin/add-category">Add Category</a>
         </div>
+        <a
+            title=""
+            href="{{ url('/logout') }}"
+            onclick="event.preventDefault();
+        document.getElementById('logout-form').submit();"
+            ><i class="icon icon-share-alt"></i>
+            <span class="text">Logout</span></a
+        >
+        <form
+            id="logout-form"
+            action="{{ route('logout') }}"
+            method="POST"
+            class="d-none"
+        >
+            @csrf
+        </form>
     </div>
 </div>
+
 <!-- <style>
     h5 {
         color: black;
@@ -173,7 +190,7 @@
 
 <style>
     .admin-headers {
-        color:white;
+        color: white;
     }
     .sidenav {
         height: 100%;
@@ -209,7 +226,7 @@
 
     /* On mouse-over */
     .sidenav a:hover {
-        color: #0083c1;
+        color: white;
     }
     .dropdown-btn:hover {
         background-color: #1d50c7;
