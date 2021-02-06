@@ -1,19 +1,21 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Image;
-use App\Models\Category;
-use App\Models\Product;
-use App\Models\ProductsAttribute;
-use App\Models\ProductsImage;
-use App\Models\ProductSize;
-use App\Models\ProductMaterial;
-use App\Models\Index;
-use Cviebrock\EloquentSluggable\Services\SlugService;
-use Response;
 use File;
+use Response;
+use App\Models\Index;
+use App\Models\Product;
+use App\Models\Category;
+use App\Models\ProductSize;
+use Illuminate\Http\Request;
+use App\Models\ProductsImage;
+use App\Models\ProductMaterial;
+use App\Models\ProductsAttribute;
+use Illuminate\Support\Facades\DB;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Session;
+use Cviebrock\EloquentSluggable\Services\SlugService;
+use App\Cart;
 
 class ProductsController extends Controller
 {
@@ -122,7 +124,6 @@ class ProductsController extends Controller
     {
         if($request->isMethod('post'))
         {
-
         $data=$request->all();
         $material=new ProductMaterial;
         $material->title=$data['material_title'];
@@ -539,7 +540,7 @@ class ProductsController extends Controller
         Session::forget('CouponCode');
 
         $data = $request->all();
-        /*echo "<pre>"; print_r($data); die;*/
+        echo "<pre>"; print_r(json_decode(json_encode($data))); die;
         if(empty($data['user_email']))
         {
             $data['user_email'] = '';    
@@ -966,6 +967,28 @@ class ProductsController extends Controller
             $allIndexes[$key]->category_name=$category->name;
         }
         return view('admin.products.view_index')->with(compact('allIndexes'));
+    }
+    public function getAddToCart(Request $request, $id, $sizeId, $materialId) 
+    {
+        $product = Product::find($id);
+        $size=ProductSize::find($sizeId);
+        $material=ProductMaterial::find($materialId);
+        
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->add($product, $product->id,$size->title,$material->title);
+
+        $request->session()->put('cart', $cart);
+        return redirect()->route('product.index');
+    }
+
+    public function getCart() {
+        if (!Session::has('cart')) {
+            return view('shop.shopping-cart');
+        }
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
+        return view('shop.shopping-cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
     }
     
 }

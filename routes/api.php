@@ -8,6 +8,8 @@ use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\CustomerController;
+//this line is added by the developer.
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -21,16 +23,10 @@ use App\Http\Controllers\CustomerController;
 require __DIR__.'/auth.php';
 Auth::routes();
 
-Route::get('/', function ()
-{
-    return view('admin.dashboard');
-    
-})->middleware('auth:api')->name('dashboard');
 
 Route::group(['middleware'=>'auth:api'],function(){
+    
     Route::get('/add-customer',[CustomerController::class,'addCustomer']);
-    
-    
     Route::match(['get', 'post'], '/add-category',[CategoryController::class,'addCategory'])->middleware('web');
     Route::match(['get', 'post'], '/add-new-category',[CategoryController::class,'addNewCategory'])->middleware('web');
     
@@ -75,6 +71,25 @@ Route::group(['middleware'=>'auth:api'],function(){
     Route::match(['get','post'],'/edit-index/{slug}',[ProductsController::class,'editIndex']);
     Route::match(['get','post'],'/delete-index/{id}',[ProductsController::class,'deleteIndex']);
     Route::match(['get','post'],'/view-index',[ProductsController::class,'viewIndex']);
+// Cart Page
+Route::match(['get', 'post'],'/cart','ProductsController@cart');
+
+// Add to Cart Route
+Route::get('/add-to-cart/{id}/{sizeId}/{materialId}', [
+    'uses' => 'ProductController@getAddToCart',
+    'as' => 'product.addToCart'
+]);
+
+Route::get('/shopping-cart', [
+    'uses' => 'ProductController@getCart',
+    'as' => 'product.shoppingCart'
+]);
+
+// Delete Product from Cart Route
+Route::get('/cart/delete-product/{id}','ProductsController@deleteCartProduct');
+
+// Update Product Quantity from Cart
+Route::get('/cart/update-quantity/{id}/{quantity}','ProductsController@updateCartQuantity');    
 });
 
 

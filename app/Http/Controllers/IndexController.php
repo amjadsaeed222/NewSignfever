@@ -1,16 +1,17 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Category;
-use App\Models\Product;
-use App\Models\ProductsAttribute;
-use App\Models\ProductsImage;
-use App\Models\ProductSize;
-use App\Models\ProductMaterial;
 use App\Models\Index;
-
-
+use App\Models\Product;
+use App\Models\Category;
+use App\Models\ProductSize;
 use Illuminate\Http\Request;
+use App\Models\ProductsImage;
+use App\Models\ProductMaterial;
+
+
+use App\Models\ProductsAttribute;
+use Illuminate\Support\Facades\Session;
 
 class IndexController extends Controller
 {
@@ -18,6 +19,12 @@ class IndexController extends Controller
     public function home()
     {
         $products=Product::all();
+        foreach ($products as $key=>$val)
+        {
+            $index=Index::where(['id'=>$val->index_Id])->first();
+            $products[$key]->index=$index->slug;
+        }
+        
 
         return view('frontend.home', compact('products'));
     }
@@ -129,6 +136,7 @@ class IndexController extends Controller
     public function showIndexProducts($slug)
     {
         $index=Index::where(['slug'=>$slug])->first();
+        //echo "<pre>";print_r($index);die;
         $products= Product::where(['index_Id' => $index->id])->get();
         // $product->category_name = $category_name->name;
         foreach($products as $product) {
@@ -166,6 +174,7 @@ class IndexController extends Controller
     }
     $category = $index;
         // return $products;
+        //echo "<pre>";print_r(json_decode(json_encode($category)));die;
         return view('frontend.index', compact('category','products'));
         
         // $product=Product::where(['slug'=>$slug])->first();        
@@ -259,6 +268,55 @@ class IndexController extends Controller
     public function shoppingCart() 
     {
         return view('frontend.shoppingCart');
+    }
+    public function addToCart(Request $request)
+    {
+
+       $data = $request->all();
+        /*echo "<pre>"; print_r($data); die;*/
+        if(empty($data['user_email'])){
+            $data['user_email'] = '';    
+        }
+
+        $session_id = Session::get('session_id');
+        if(!isset($session_id))
+        {
+            $session_id = str_random(40);
+            if($request->session('product_id')==$data['product_id'])
+            {
+
+            }
+            else
+            {
+                Session::put('session_id',$session_id);
+                Session::put('product_id',$data['product_id']);
+                Session::put('product_name',$data['product_name']);
+                Session::put('product_price',$data['product_price']);
+                Session::put('product_size',$data['product_size']);
+                Session::put('product_material',$data['product_material']);
+                Session::put('product_image',$data['product_image']);
+                Session::put('product_quantity',$data['product_quantity']);
+            }
+            
+        }
+
+        $countProducts = DB::table('cart')->where(['product_id' => $data['product_id'],'product_color' => $data['product_color'],'size' => $data['size'],'session_id' => $session_id])->count();
+        if($countProducts>0){
+            return redirect()->back()->with('flash_message_error','Product already exist in Cart!');
+        }
+
+        $sizeIDArr = explode('-',$data['size']);
+        $product_size = $sizeIDArr[1];
+
+        $getSKU = ProductsAttribute::select('sku')->where(['product_id' => $data['product_id'], 'size' => $product_size])->first();
+                
+        DB::table('cart')
+        ->insert(['product_id' => $data['product_id'],'product_name' => $data['product_name'],
+            'product_code' => $getSKU['sku'],'product_color' => $data['product_color'],
+            'price' => $data['price'],'size' => $product_size,'quantity' => $data['quantity'],'user_email' => $data['user_email'],'session_id' => $session_id]);
+
+        return redirect('cart')->with('flash_message_success','Product has been added in Cart!');
+
     }
 
     

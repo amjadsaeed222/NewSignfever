@@ -18,6 +18,9 @@ class CategoryController extends Controller
         if($request->isMethod('post'))
         {
             
+            $validate=$request->validate([
+                'category_title'=>'required|unique:App\Models\Category,name',
+            ]);
             $data = $request->all();
     		//echo "<pre>"; print_r($data); die;
 

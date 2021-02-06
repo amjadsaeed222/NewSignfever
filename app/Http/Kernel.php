@@ -24,6 +24,7 @@ class Kernel extends HttpKernel
         //\App\Http\Middleware\Authenticate::class,
         // I added below class manually...
         \Illuminate\Session\Middleware\StartSession::class,
+        
     ];
 
     /**

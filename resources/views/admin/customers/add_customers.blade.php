@@ -64,14 +64,7 @@
                   <span style="color: red">@error('phone'){{$message}}@enderror</span>
                 </div>
               </div>
-              {{-- <div class="control-group">
-              <label for="country">Country:</label>
-                <select id="country" name="country" class="form-control">
-                    @foreach(App\Http\Utilities\Country::all() as $country)
-                    <option value="{{ $country }}" {{ $flyers->country == $country ? "selected" : "" }}>{{ $country }}</option>
-                    @endforeach
-                </select>
-            </div> --}}
+              
               <div class="control-group">
                 <label class="control-label">Streed Address</label>
                 <div class="controls">
