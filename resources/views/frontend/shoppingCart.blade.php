@@ -246,7 +246,13 @@
     </div>
 </div>
 
-<script></script>
+<script>
+
+    // var dbProduct = 
+
+
+    console.log({!! $products !!})
+</script>
 
 <!-- Desktop -->
 <style>

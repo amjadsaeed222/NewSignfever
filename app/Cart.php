@@ -34,17 +34,31 @@ class Cart
         $this->totalQty++;
         $this->totalPrice += $item->price;
     }
+
+
+    // NOT USING THIS 
 	public function getCart()
 	{
 		if(!session::has('cart'))
 		{
-			return view('shopping-cart',['products'=>null]);
+			// return view('shopping-cart',['products'=>null]);
+            // $products = null;
+        // return view('shopping-cart', compact('products'));
+            return "hello";
 		}
 		else
 		{
 			$oldCart=Session::get('cart');
 			$cart=new Cart($oldCart);
-			return view('shopping-cart',['products'=>$cart->items,'totalPrice'=>$cart->totalPrice]);	
+            $products = $cart->items;
+            return "hello";
+
+            return $products;
+            // return view('shopping-cart',['products'=>$cart->items,'totalPrice'=>$cart->totalPrice]);
+			// return view('shopping-cart',compact('products'));
+        return view('shopping-cart', compact('products'));
+
+
 		}
 	}
 }

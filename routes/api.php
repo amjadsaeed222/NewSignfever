@@ -71,18 +71,19 @@ Route::group(['middleware'=>'auth:api'],function(){
     Route::match(['get','post'],'/edit-index/{slug}',[ProductsController::class,'editIndex']);
     Route::match(['get','post'],'/delete-index/{id}',[ProductsController::class,'deleteIndex']);
     Route::match(['get','post'],'/view-index',[ProductsController::class,'viewIndex']);
+
+
 // Cart Page
 Route::match(['get', 'post'],'/cart','ProductsController@cart');
 
 // Add to Cart Route
 Route::get('/add-to-cart/{id}/{sizeId}/{materialId}', [
-    'uses' => 'ProductController@getAddToCart',
-    'as' => 'product.addToCart'
+    ProductsController::class,'getAddToCart',
+    'as' => 'product.index'
 ]);
 
 Route::get('/shopping-cart', [
-    'uses' => 'ProductController@getCart',
-    'as' => 'product.shoppingCart'
+    ProductsController::class,'getCart',
 ]);
 
 // Delete Product from Cart Route

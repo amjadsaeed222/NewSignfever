@@ -181,10 +181,10 @@
                         </div>
                     </div>
                 </div>
-            <form method="POST" action="{{url('add-cart')}}" enctype="multipart/form-data">
-                @csrf
-            <input type="hidden" name="product_id" value=" product.id" />
-            <input type="hidden" name="product_name" value="product.product_name" />
+            <!-- <form method="POST" action="/admin/add-to-cart/product.id/selectedSize.id/selectedMaterial.id" enctype="multipart/form-data"> -->
+                <!-- @csrf -->
+            <input type="hidden" name="product_id" :value=" product.id" />
+            <input type="hidden" name="product_name" :value="product.product_name" />
             
             
                 <div class="col-12 my-4 no-gutters">
@@ -289,7 +289,7 @@
                     </div>
                 </div>
             </div>
-        </form>
+        <!-- </form> -->
             <div class="col-12">
                 <h4>Related Departments</h4>
             </div>
@@ -608,6 +608,7 @@
                 cartProduct:{
                     // localStorage.setItem('cartProducts',)
                     window.location.href = "/shopping-cart"
+                    window.location.href = `/admin/add-to-cart/${this.product.id}/${this.selectedSize.id}/${this.selectedMaterial.id} `
                 }
             },
             handleDesign(slug){
