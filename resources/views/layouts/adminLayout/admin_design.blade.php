@@ -23,6 +23,7 @@
 
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.touchswipe/1.6.4/jquery.touchSwipe.min.js"></script>
         <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.14.0/dist/sweetalert2.all.min.js"></script>
         <script src="{{
                 asset('js/backend_js/matrix.form_validation.js')
             }} "></script>

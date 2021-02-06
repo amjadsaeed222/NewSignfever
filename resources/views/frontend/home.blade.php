@@ -3,7 +3,7 @@
 <div id="home-page">
     <!-- Desktop Version -->
 
-    <div class="desktop-only container-fluid">
+    <div class="desktop-only ">
         <!-- Category Row -->
         <div class="row my-2 mx-4">
             <div class="col-2 .col-md-offset-2 mx-2 home__category">
@@ -358,6 +358,7 @@
                 </a>
             </div>
         </div>
+
         <!-- ICONS (MOBILE ONLY) -->
 
         <div class="row no-gutters col-12" id="icons">
@@ -365,13 +366,104 @@
                 <i
                     class="icon rounded-circle fa fa-phone phone-icon"
                     aria-hidden="true"
+                    data-toggle="modal"
+                    data-target="#callUsModal"
                 ></i>
                 <p class="icon-text">Call us</p>
+                <div
+                    class="modal fade"
+                    id="callUsModal"
+                    tabindex="-1"
+                    role="dialog"
+                    aria-labelledby="exampleModalLabel"
+                    aria-hidden="true"
+                >
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">
+                                    Get in touch with us
+                                </h5>
+                                <button
+                                    type="button"
+                                    class="close"
+                                    data-dismiss="modal"
+                                    aria-label="Close"
+                                >
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Call Now on: 0900-123-456-78
+                            </div>
+                            <div class="modal-footer">
+                                <button
+                                    type="button"
+                                    class="btn btn-secondary"
+                                    data-dismiss="modal"
+                                >
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="">
-                <i class="icon rounded-circle fas fa-video"></i>
+                <i
+                    class="icon rounded-circle fas fa-video"
+                    data-toggle="modal"
+                    data-target="#watchVideoModal"
+                ></i>
                 <p class="icon-text">Watch Video</p>
+
+                <div
+                    class="modal fade"
+                    id="watchVideoModal"
+                    tabindex="-1"
+                    role="dialog"
+                    aria-labelledby="exampleModalLabel"
+                    aria-hidden="true"
+                >
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">
+                                    Watch Video
+                                </h5>
+                                <button
+                                    type="button"
+                                    class="close"
+                                    data-dismiss="modal"
+                                    aria-label="Close"
+                                >
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="d-block w-100 text-center">
+                                    <iframe
+                                        height="100%"
+                                        src="https://www.youtube.com/embed/rEsH2MDPx4g"
+                                        frameborder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen
+                                    ></iframe>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button
+                                    type="button"
+                                    class="btn btn-secondary"
+                                    data-dismiss="modal"
+                                >
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="">
                 <i class="icon rounded-circle fas fa-edit"></i>
@@ -416,7 +508,7 @@
     </div> -->
         <div class="row mx-2">
             <div class="col-md-2 col-6 col-xs-6 product text-center">
-                <a href="/index/danger-signs">
+                <a href="/index/custom-danger-signs">
                     <img
                         src="/images/frontend_images/home/danger-header-signs.jpg"
                         class="sign-img"
@@ -426,7 +518,7 @@
                 </a>
             </div>
             <div class="col-md-2 col-6 col-xs-6 product text-center">
-                <a href="/index/danger-sign">
+                <a href="/index/custom-warning-sign">
                     <img
                         src="/images/frontend/home/custom_templates/warning-header-signs.jpg"
                         class="sign-img"
@@ -452,27 +544,21 @@
 
 <script>
 
-    $(".carousel").swipe({
-            swipe: function (event, direction, distance, duration, fingerCount, fingerData) {
-                if (direction == 'left') $(this).carousel('next');
-                if (direction == 'right') $(this).carousel('prev');
-            },
-            allowPageScroll: "vertical"
-        });
-        var products = {!! $products !!};
-        new Vue({
 
-            el:'#home-page',
-            data:{
-                allProducts:{}
-            },
-            mounted(){
-                this.allProducts = products;
-                console.log(this.allProducts)
+    var products = {!! $products !!};
+    new Vue({
 
-            }
+        el:'#home-page',
+        data:{
+            allProducts:{}
+        },
+        mounted(){
+            this.allProducts = products;
+            console.log(this.allProducts)
 
-        })
+        }
+
+    })
 </script>
 
 <!-- Desktop Styling -->
@@ -482,6 +568,7 @@
         padding: 25px 5px;
         border: 1px solid #d3d3d3;
         border-radius: 5px;
+        height:245px;
         /* -webkit-box-shadow: 0px 5px 5px 0px rgba(50, 50, 50, 0.36);
         -moz-box-shadow: 0px 5px 5px 0px rgba(50, 50, 50, 0.36);
         box-shadow: 0px 5px 5px 0px rgba(50, 50, 50, 0.36); */

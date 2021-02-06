@@ -26,7 +26,7 @@
                             >Material Title</label
                         >
                         <div class="col-sm-9">
-                            <input
+                            <input required
                                 type="text"
                                 class="form-control"
                                 id="material_title"
@@ -59,7 +59,7 @@
                         <div class="col-sm-3">Config Image</div>
                         <div class="col-sm-9">
                             <div class="custom-file">
-                                <input
+                                <input required
                                     type="file"
                                     name="material_config_image"
                                     class="custom-file-input"

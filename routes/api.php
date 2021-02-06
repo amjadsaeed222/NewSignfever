@@ -58,6 +58,7 @@ Route::group(['middleware'=>'auth:api'],function(){
     //Product Sizes Routes
     
     Route::match(['get','post'],'/add-size',[ProductsController::class,'AddSize'])->middleware('web');
+    Route::match(['get','post'],'/add-size-ajax',[ProductsController::class,'AddSizeAjax'])->middleware('web');
     Route::match(['get','post'],'/view-size',[ProductsController::class,'ViewSize']);
     Route::match(['get','post'],'/edit-size/{id}',[ProductsController::class,'EditSize']);
     Route::get('/delete-size/{id}',[ProductsController::class,'deleteSize']);
@@ -65,6 +66,7 @@ Route::group(['middleware'=>'auth:api'],function(){
     
     //Product Material Routes
     Route::match(['get','post'],'/add-material',[ProductsController::class,'AddMaterial']);
+    Route::match(['get','post'],'/add-material-ajax',[ProductsController::class,'AddMaterialAjax']);
     Route::match(['get','post'],'/view-material',[ProductsController::class,'ViewMaterial']);
     Route::match(['get','post'],'/edit-material/{id}',[ProductsController::class,'EditMaterial']);
     Route::get('/delete-material/{id}',[ProductsController::class,'deleteMaterial']);

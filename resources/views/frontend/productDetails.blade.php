@@ -31,6 +31,30 @@
                             data-target="#exampleModal"
                         />
 
+                        <table class="table table-bordered my-2">
+                            <tbody>
+                                <tr>
+                                    <td>Part#</td>
+                                    <td>@{{ product.partNo }}</td>
+                                </tr>
+                                <tr>
+                                    <td>SPN#</td>
+                                    <td>@{{ selectedSize.SPN }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Shape</td>
+                                    <td>@{{ product.shape }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="">
+                            <h4>Product Description</h4>
+                            <div
+                                class="product-description"
+                                v-html="product.description"
+                            ></div>
+                        </div>
                         <!-- Modal -->
                         <div
                             class="modal fade"
@@ -64,12 +88,18 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-12"></div>
                 </div>
             </div>
             <!-- Product Details -->
             <div class="col-9">
                 <div class="col-12 bb-1">
-                    <h3 class="main-text">@{{ product.product_name }}</h3>
+                    <h3 class="main-text">
+                        {!! $product->index_title !!}: @{{
+                            product.product_name
+                        }}
+                    </h3>
                 </div>
                 <div class="col-12 rating no-gutters">
                     <span class="fa fa-star checked"></span>
@@ -82,17 +112,21 @@
                 </div>
                 <div class="col-12 my-4">
                     <h4>Select A Design:</h4>
-                    <div class="col-12">
+                    <div class="col-12 mx-1">
                         <div class="slider">
                             <div
                                 class="slide"
                                 v-for="product in product.index_products"
+                                style="border: 1px solid rgb(146, 146, 146)"
                             >
+                                <!-- src="/images/frontend_images/home/quick-turnaround-time-icon.svg" -->
                                 <img
-                                    src="/images/frontend_images/home/quick-turnaround-time-icon.svg"
-                                    alt="free-shipping-man"
-                                    width="100%"
-                                    class="d-block mx-auto"
+                                    :src="'/images/backend_images/product/large/' + product.image.image"
+                                    alt="product-designs"
+                                    width="70%"
+                                    height=""
+                                    class="d-block mx-auto cursor-pointer"
+                                    v-on:click="handleDesign(product.slug)"
                                 />
                             </div>
                         </div>
@@ -121,8 +155,8 @@
                         Select Material:
                         <!-- <span class="main-text">Quantity/Price</span> -->
                     </h4>
-                    <div class="col-12">
-                        <div class="col-3">
+                    <div class="col-12 row">
+                        <div class="col-6">
                             <div class="materials_row">
                                 <p>
                                     For Size: <b>@{{ selectedSize.title }}</b>
@@ -137,6 +171,13 @@
                                 <p>@{{ material.title }}</p>
                                 <p>$@{{ product.price }}</p>
                             </div>
+                        </div>
+                        <div
+                            class="col-6 border material-description"
+                            v-if="materialDescription"
+                        >
+                            <p style="font-weight: 700">Material Description</p>
+                            <div v-html="materialDescription"></div>
                         </div>
                     </div>
                 </div>
@@ -246,7 +287,7 @@
             <div class="col-12">
                 <div class="row cards_row">
                     <div class="col-2 mx-1 custom_card">
-                        <a href="/category/danger">
+                        <a href="/index/custom-danger-signs">
                             <div class="custom_header">
                                 <h5 class="">Danger</h5>
                             </div>
@@ -258,24 +299,12 @@
                         </a>
                     </div>
                     <div class="col-2 mx-1 custom_card">
-                        <a href="/category/social-distancing">
+                        <a href="/index/social-distancing">
                             <div class="custom_header">
                                 <h5 class="">Social Distances</h5>
                             </div>
                             <img
                                 src="/images/frontend/home/custom_templates/social_distancing.jpg"
-                                alt=""
-                                class="d-block mx-auto"
-                            />
-                        </a>
-                    </div>
-                    <div class="col-2 mx-1 custom_card">
-                        <a href="/category/osha-signs">
-                            <div class="custom_header">
-                                <h5 class="">OSHA Signs</h5>
-                            </div>
-                            <img
-                                src="/images/frontend/home/custom_templates/osha-signs.jpg"
                                 alt=""
                                 class="d-block mx-auto"
                             />
@@ -288,11 +317,13 @@
 
     <div class="mobile-only">
         <div class="row no-gutters">
-            <h4>{{ product.product_name }}</h4>
+            <h4>
+                {!! $product->index_title !!}: {!!$product->product_name !!}
+            </h4>
             <img
                 :src="'/images/backend_images/product/large/' + selectedImage.image"
                 :alt="product.slug"
-                style="width: 75%"
+                style="width: 250px; height: 100%"
                 class="mx-auto d-block p-2"
             />
             <div class="row container no-gutters border px-2 py-2">
@@ -301,7 +332,7 @@
                     v-for="image in product.images"
                     :src="'/images/backend_images/product/large/' + image.image"
                     :alt="product.product_name"
-                    style="width: 15%"
+                    style="width: 50px; height: 50px"
                     class="d-block my-2 mx-auto border cursor-pointer"
                     v-on:click="handleImage(image)"
                 />
@@ -331,7 +362,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 my-4">
+            <div class="col-12 my-2">
                 <h4>Select A Design:</h4>
                 <div class="col-12">
                     <div class="slider">
@@ -341,11 +372,14 @@
                         >
                             <div class="col-12">
                                 <!-- :src="'/images/backend_images/product/large/' + designImage(product[].images[0].image) " -->
+                                <!-- src="/images/frontend_images/home/quick-turnaround-time-icon.svg" -->
                                 <img
-                                    src="/images/frontend_images/home/quick-turnaround-time-icon.svg"
-                                    alt="free-shipping-man"
-                                    width="100%"
+                                    :src="'/images/backend_images/product/large/' + product.image.image"
+                                    alt="product-designs"
+                                    width="80%"
+                                    height=""
                                     class="d-block mx-auto"
+                                    v-on:click="handleDesign(product.slug)"
                                 />
                             </div>
                         </div>
@@ -355,7 +389,7 @@
             <div class="col-12 my-4">
                 <h4>
                     Select Size:
-                    <span class="main-text">@{{ selectedSize.title }}</span>
+                    <span class="main-text"> {{ selectedSize.title }} </span>
                 </h4>
                 <div class="col-12">
                     <div class="row">
@@ -493,9 +527,12 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <button class="btn btn-success w-100">
+                                    <a
+                                        href="/shopping-cart"
+                                        class="btn btn-success w-100"
+                                    >
                                         Add To Cart
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -511,6 +548,7 @@
 
 
     var dbProduct = {!! $product !!}
+    console.log(dbProduct)
     new Vue({
         el: "#product-details",
         data: {
@@ -520,17 +558,23 @@
             selectedImage:{},
             qty:1,
             designImage:null,
-            cartProduct:{}
+            cartProduct:{},
+            materialDescription:''
+        },
+        computed: {
+            index_title() {
+                return this.product.index_title;
+            }
         },
         mounted() {
-            console.log(this.product)
             this.selectedSize = this.product.sizes[0];
             // this.selectedMaterial = this.selectedSize.materials[0];
-            this.selectedMaterail = this.product.materials[0];
+            this.selectedmaterial = this.product.materials[0];
             // console.log(this.selectedMaterial)
             // console.log(this.selectedSize.images[0].image);
             // this.selectedImage = this.selectedSize.images[0];
             this.selectedImage = this.product.images[0];
+            console.log(this.selectedSize)
 
         },
         methods: {
@@ -541,6 +585,8 @@
             },
             handleMaterial(material) {
                 this.selectedMaterial = material;
+                this.materialDescription = material.description;
+                console.log()
             },
             handleImage(image) {
                 this.selectedImage = image;
@@ -554,6 +600,10 @@
                     // localStorage.setItem('cartProducts',)
                     window.location.href = "/shopping-cart"
                 }
+            },
+            handleDesign(slug){
+                window.location.href = `/product/${slug}`
+
             }
         },
     });
@@ -568,6 +618,15 @@
         border-bottom: 1px solid #cccccc;
         margin: 2px 5px;
     }
+    .material-description {
+        padding: 20px;
+    }
+    .product-description ul {
+        list-style: disc;
+        margin-left: 2px;
+        padding-inline-start: 10px;
+        display: unset;
+    }
 </style>
 
 <!-- Desktop -->
@@ -575,12 +634,20 @@
     .materials_row {
         display: flex;
         height: 30px;
-        width: 250px;
+        width: 350px;
         padding: 0 10px;
         background-color: #ededed;
         /* align-items: center; */
         justify-content: space-between;
     }
+
+    .materials_row ul {
+        list-style: disc;
+        margin-left: 2px;
+        padding-inline-start: 10px;
+        display: unset !important;
+    }
+
     .materials_row:first-child {
         background-color: #cccccc;
     }
@@ -604,6 +671,7 @@
     .order-info {
         border: 1px solid #cccccc;
         padding: 10px 10px;
+        width: 890px;
     }
 
     .custom_card {
@@ -712,6 +780,10 @@
         width: 250px;
         flex-shrink: 0;
         height: 100%;
+    }
+
+    .slide:hover {
+        border: 2px solid red;
     }
 </style>
 @endsection

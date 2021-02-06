@@ -55,14 +55,14 @@
                 </div>
             </div>
             <div class="col-12">
-                <h4>Social Distancing</h4>
+                <h4>@{{ category.title }} - Featured</h4>
             </div>
             <!-- <div class="products" > -->
             <div class="col-2 border" v-for="product in products">
                 <!-- <div class="col-12"> -->
                 <a :href="'/product/' + product.slug ">
-                <img
-                :src="'/images/backend_images/product/large/' + getProductImage(product)"
+                    <img
+                        :src="'/images/backend_images/product/large/' + getProductImage(product)"
                         :alt="product.slug"
                         class="d-block mx-auto w-100"
                     />
@@ -79,12 +79,12 @@
     <div class="mobile-only">
         <div class="my-5 text-center">
             <div class="mx-2 text-center">
-                <h3 class="text-left">@{{ category.name }}</h3>
+                <h3 class="text-left">@{{ category.title }}</h3>
                 <div class="row category-main no-gutters">
                     <div class="col-md-3">
                         <!-- <img src="https://via.placeholder.com/250" style="width:100%;"> -->
                         <img
-                            :src="'/images/backend_images/category/' + category.image"
+                            :src="'/images/backend_images/index/' + category.image"
                             :alt="category.name"
                             class="d-block mx-auto my-5"
                         />
@@ -136,33 +136,33 @@
                 </div>
             </div>
             <div v-if="products.length > 0" class="my-2 mx-3">
-                <h4 class="text-left">@{{ category.name }} - Best Sellers</h4>
+                <h4 class="text-left">@{{ category.title }} - Featured</h4>
                 <div class="row">
-                    <div v-for="product in products" class="col-5">
-                        <div class="col-12">
-                            <a :href="'/product/' + product.slug">
-                                <div class="card" style="width: 100%">
-                                    <img
-                                        stlye="width:100%"
-                                        class="card-img-top"
-                                        alt="Card image cap"
-                                        :src="'/images/backend_images/product/large/' + getProductImage(product)"
-                                        />
-                                    <!-- src="https://images.mysafetysign.com/img/dp/md/danger-signs-custom.jpg" -->
-                                    <div class="card-body">
-                                        <p class="card-text">
-                                            @{{ product.product_name }}
-                                        </p>
-                                    </div>
+                    <div v-for="product in products" class="col-6">
+                        <!-- <div class="col-12"> -->
+                        <a :href="'/product/' + product.slug">
+                            <div class="card" style="width: 100%">
+                                <img
+                                    stlye="width:100%"
+                                    class="card-img-top"
+                                    alt="Card image cap"
+                                    :src="'/images/backend_images/product/large/' + getProductImage(product)"
+                                />
+                                <!-- src="https://images.mysafetysign.com/img/dp/md/danger-signs-custom.jpg" -->
+                                <div class="card-body w-100">
+                                    <p class="card-text w-100">
+                                        @{{ product.product_name }}
+                                    </p>
                                 </div>
-                            </a>
-                        </div>
+                            </div>
+                        </a>
+                        <!-- </div> -->
                     </div>
                 </div>
             </div>
             <div v-else>
                 <h5 class="text-center">
-                    No Products on Sale Currently for @{{ category.name }}
+                    No Products on Sale Currently for @{{ category.title }}
                 </h5>
                 <h6 class="text-center">Vist Later :)</h6>
             </div>
@@ -286,8 +286,7 @@
 </script>
 
 <style>
-    #category-page ul 
-    {
+    #category-page ul {
         list-style: disc;
         display: grid;
     }
@@ -295,6 +294,7 @@
     .shipping_card {
         border: 1px #e3e3e3 solid;
         border-radius: 5px;
+        width:250px;
     }
     .shipping_card ul {
         list-style: disc;
@@ -322,6 +322,7 @@
     }
 
     #free-shipping {
+        max-height: 120px;
         font-size: 0.9rem;
         border: #b6d498 2px solid;
         padding: 5px;
