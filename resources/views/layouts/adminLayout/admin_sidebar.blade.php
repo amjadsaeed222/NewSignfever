@@ -152,6 +152,25 @@
         <div class="dropdown-container">
             <a href="/admin/add-category">Add Category</a>
         </div>
+        <a
+        title=""
+        href=""
+        onclick="event.preventDefault();
+    document.getElementById('logout-form').submit();"
+        ><i class="icon icon-share-alt"></i>
+        <span class="text">Logout</span></a
+    >
+    <form
+        id="logout-form"
+        action="{{ url('/admin/logout') }}"
+        method="POST"
+        class="d-none"
+    >
+        <input type="hidden" name="_token" value="{{ Session::token() }}" />        
+                
+        </form>
+
+         
     </div>
 </div>
 <!-- <style>

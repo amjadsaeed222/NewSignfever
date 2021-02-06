@@ -172,11 +172,15 @@
                     Our Affordable custom products feature 3M inks and films.
                     The overlaminate protects signs for over 10 years.
                 </p>
+                {{-- @foreach ($products as $product)
+                    
+                @endforeach --}}
                 <div class="row cards_row">
+                    @foreach ($products as $product)
                     <div class="col-3 custom_card">
-                        <a href="/index/custom-danger-signs">
+                        <a href="/index/{{$product->index}}">
                             <div class="custom_header">
-                                <h5 class="">Danger</h5>
+                                <h5 class="">{{ $product->index}}</h5>
                             </div>
                             <img
                                 src="/images/frontend/home/custom_templates/danger-120.jpg"
@@ -184,7 +188,9 @@
                                 class="d-block mx-auto"
                             />
                         </a>
-                    </div>
+                    </div>    
+                    @endforeach
+                    
                     <div class="col-3 custom_card">
                         <a href="/index/custom-warning-signs">
                             <div class="custom_header">

@@ -1,19 +1,20 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Image;
-use App\Models\Category;
-use App\Models\Product;
-use App\Models\ProductsAttribute;
-use App\Models\ProductsImage;
-use App\Models\ProductSize;
-use App\Models\ProductMaterial;
-use App\Models\Index;
-use Cviebrock\EloquentSluggable\Services\SlugService;
-use Response;
 use File;
+use Image;
+use Response;
+use App\Models\Index;
+use App\Models\Product;
+use App\Models\Category;
+use App\Models\ProductSize;
+use Illuminate\Http\Request;
+use App\Models\ProductsImage;
+use App\Models\ProductMaterial;
+use App\Models\ProductsAttribute;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class ProductsController extends Controller
 {
@@ -23,6 +24,7 @@ class ProductsController extends Controller
         if($request->isMethod('post'))
         {
             
+            
             $validate=$request->validate([
                 'product_name'=>'required',
                 'product_index'=>'required',
@@ -31,6 +33,8 @@ class ProductsController extends Controller
                 'product_shape'=>'required',
                 'product_part_no'=>'required',
                 'product_images'=>'required',
+                'product_sizes'=>'required',
+                'product_materials'=>'required',
             ]);
             $data = $request->all();
 			//echo "<pre>"; print_r($data); die;
@@ -121,7 +125,6 @@ class ProductsController extends Controller
     {
         if($request->isMethod('post'))
         {
-
         $data=$request->all();
         $material=new ProductMaterial;
         $material->title=$data['material_title'];
@@ -533,7 +536,7 @@ class ProductsController extends Controller
         Session::forget('CouponCode');
 
         $data = $request->all();
-        /*echo "<pre>"; print_r($data); die;*/
+        echo "<pre>"; print_r(json_decode(json_encode($data))); die;
         if(empty($data['user_email']))
         {
             $data['user_email'] = '';    
@@ -871,15 +874,8 @@ class ProductsController extends Controller
             
             $index=Index::where(['slug'=> $slug])->first();
             $index->slug=null;
-<<<<<<< HEAD
-            $index->update(['category_id'=>$data['category_id'],'title'=>$data['index_title'],'image'=>$fileName,'description'=> $data['description']]);
-            // $index->title = $data['index_title'];
-            // $index->description = $data['description'];
-            // $index.save();
-=======
             $index->update(['title'=>$data['index_title'],'image'=>$fileName,'description'=> $data['description']]);
     
->>>>>>> 65b704d953a800bf4a99f0a4445068141440fc52
             
             return redirect()->action([ProductsController::class,'viewIndex']);
         }

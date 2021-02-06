@@ -140,7 +140,12 @@
                         </div>
                     </div>
                 </div>
-
+            <form method="POST" action="{{url('add-cart')}}" enctype="multipart/form-data">
+                @csrf
+            <input type="hidden" name="product_id" value=" product.id" />
+            <input type="hidden" name="product_name" value="product.product_name" />
+            
+            
                 <div class="col-12 my-4 no-gutters">
                     <h4>Order Quantity</h4>
                     <div class="col-12 no-gutters">
@@ -184,6 +189,7 @@
                                             </button>
                                             <input
                                                 type="number"
+                                                name="product_quantity"
                                                 :value="qty"
                                                 required
                                                 minlength="1"
@@ -216,6 +222,7 @@
                                     <p>
                                         <b>$@{{ product.price * qty }}</b>
                                     </p>
+                                    <input type="hidden" name="product_price" value="@{{ product.price * qty }}" />
                                 </div>
                                 <div class="col-12">
                                     <p>
@@ -230,6 +237,7 @@
                                     <button
                                         v-on:click="addToCart()"
                                         class="btn btn-success"
+                                        type="submit"
                                     >
                                         Add To Cart
                                     </button>
@@ -240,6 +248,7 @@
                     </div>
                 </div>
             </div>
+        </form>
             <div class="col-12">
                 <h4>Related Departments</h4>
             </div>
@@ -493,7 +502,7 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <button class="btn btn-success w-100">
+                                    <button class="btn btn-success w-100" type="submit">
                                         Add To Cart
                                     </button>
                                 </div>

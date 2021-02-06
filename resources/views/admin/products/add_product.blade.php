@@ -1,4 +1,5 @@
-@extends('layouts.adminLayout.admin_design') @section('content')
+@extends('layouts.adminLayout.admin_design')
+ @section('content')
 <script type="text/javascript">
     $(document).ready(function () {
         $(".ckeditor").ckeditor();
@@ -19,6 +20,7 @@
                 class=""
             >
                 {{ csrf_field() }}
+                
                 <div id="basic_info">
                     <div class="form-group row">
                         <label
@@ -193,10 +195,13 @@
                                     class="custom-file-label"
                                     for="product_images"
                                     >Choose Multiple Images</label
-                                >
+                                >@error('product_images')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                             </div>
                         </div>
                     </div>
+                    
                 </div>
                 <div id="product_attribute_sizes">
                     <div class="form-group row" v-for="size,index in size_divs">
@@ -214,17 +219,14 @@
                                 <option disabled selected>Select A Size</option>
                                 <option
                                     v-for="singleSize in allSizes"
-                                    :value="size.id"
+                                    :value="singleSize.id"
                                 >
                                     @{{ singleSize.title }}
                                 </option>
 
-                                <!-- @foreach ($sizes as $size)
-                                <option value="{{$size->id}}">
-                                    {{$size->title}}
-                                </option>
-                                @endforeach -->
-                            </select>
+                            </select>@error('product_sizes')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                             <div class="">
                                 <small>
                                     <a
@@ -294,15 +296,7 @@
                                                                     placeholder="Size Title"
                                                                     v-model="newSizeTitle"
                                                                 />
-                                                                @error('size_title')
-                                                                <div
-                                                                    class="alert alert-danger"
-                                                                >
-                                                                    {{
-                                                                        $message
-                                                                    }}
-                                                                </div>
-                                                                @enderror
+                                                                
                                                             </div>
                                                         </div>
                                                         <div
@@ -323,15 +317,7 @@
                                                                     name="size_spn"
                                                                     placeholder="Size SPN"
                                                                     v-model="newSizeSPN"
-                                                                />@error('size_spn')
-                                                                <div
-                                                                    class="alert alert-danger"
-                                                                >
-                                                                    {{
-                                                                        $message
-                                                                    }}
-                                                                </div>
-                                                                @enderror
+                                                                />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -362,7 +348,7 @@
                                                     Save changes
                                                 </button>
                                             </div>
-                                        </div>
+                                        {{-- </div> --}}
                                     </div>
                                 </div>
                             </div>
@@ -391,18 +377,16 @@
                                 <option disabled selected>
                                     Select A Material
                                 </option>
-                                <!-- @foreach ($materials as $material)
-                                <option value="{{$material->id}}">
-                                    {{$material->title}}
-                                </option>
-                                @endforeach -->
+                                
                                 <option
                                     v-for="singleMaterial in allMaterials"
                                     :value="singleMaterial.id"
                                 >
                                     @{{ singleMaterial.title }}
                                 </option>
-                            </select>
+                            </select>@error('product_materials')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                             <div class="">
                                 <small
                                     ><a
@@ -473,15 +457,7 @@
                                                                     v-model="material_title"
                                                                     placeholder="Material Title"
                                                                 />
-                                                                @error('material_title')
-                                                                <div
-                                                                    class="alert alert-danger"
-                                                                >
-                                                                    {{
-                                                                        $message
-                                                                    }}
-                                                                </div>
-                                                                @enderror
+                                                                
                                                             </div>
                                                         </div>
                                                         <div
@@ -502,58 +478,10 @@
                                                                     name="description"
                                                                     v-model="material_description"
                                                                 ></textarea>
-                                                                @error('description')
-                                                                <div
-                                                                    class="alert alert-danger"
-                                                                >
-                                                                    {{
-                                                                        $message
-                                                                    }}
-                                                                </div>
-                                                                @enderror
+                                                                
                                                             </div>
                                                         </div>
-                                                        <!-- <div
-                                                            class="form-group row"
-                                                        >
-                                                            <div
-                                                                class="col-sm-3"
-                                                            >
-                                                                Config Image
-                                                            </div>
-                                                            <div
-                                                                class="col-sm-9"
-                                                            >
-                                                                <div
-                                                                    class="custom-file"
-                                                                >
-                                                                    <input
-                                                                        type="file"
-                                                                        name="material_config_image"
-                                                                        class="custom-file-input"
-                                                                        id="material_config_image"
-                                                                    />
-                                                                    <label
-                                                                        class="custom-file-label"
-                                                                        for="material_config_image"
-                                                                        >Choose
-                                                                        A Config
-                                                                        Image
-                                                                        For
-                                                                        Material</label
-                                                                    >
-                                                                    @error('material_config_image')
-                                                                    <div
-                                                                        class="alert alert-danger"
-                                                                    >
-                                                                        {{
-                                                                            $message
-                                                                        }}
-                                                                    </div>
-                                                                    @enderror
-                                                                </div>
-                                                            </div>
-                                                        </div> -->
+
                                                     </div>
                                                     <div class="form-group row">
                                                         <div class="col-sm-10">
@@ -642,15 +570,12 @@
     console.log(sizes)
     var materials = {!! $materials !!}
     console.log(materials)
-
-
     new Vue({
         el: "#add-product-page",
         data: {
             size_inputs: [],
             size_divs: 1,
             material_divs: 1,
-
             allSizes: [],
             allCats: [],
             selectedSize:0,
@@ -660,12 +585,10 @@
             selectedMaterial:0,
             newSizeSPN:'',
             newSizeTitle:'',
-
             material_title:'',
             material_description:''
         },
         beforeCreate(){
-
         },
         mounted() {
             fetch("/all", {
@@ -679,10 +602,8 @@
                     this.allCats = newRes;
                     // console.log(this.allCats);
                 });
-
                 this.allSizes = sizes
                 this.selectedSize = this.allSizes[0].id
-
                 this.size_inputs.push(
                     {
                         size_id: this.selectedSize
@@ -692,15 +613,12 @@
                 //Materials
                 this.allMaterials = materials
                 this.selectedMaterial = this.allMaterials[0].id
-
                 this.material_inputs.push(
                     {
                         material_id: this.selectedMaterial
                     }
                 )
                 console.log(this.material_inputs)
-
-
         },
         methods: {
             addSize() {
@@ -714,7 +632,6 @@
             },
             addMaterial() {
                 this.material_divs = this.material_divs + 1;
-
                 // console.log(this.size_divs);
                 this.material_inputs.push(
                     {
@@ -752,7 +669,6 @@
                 console.log(this.newSizeSPN)
                 console.log(this.newSizeTitle)
                 console.log(this.allSizes)
-
                   var postData = {
                       size_title:this.newSizeTitle,
                       size_spn: this.newSizeSPN
@@ -792,21 +708,17 @@
                   return response.json();
                   }).then(function(data) {
                     $("#materialModal .close").click()
-
                   return data;
                   }).catch(() => "Error")
                   if(addedMaterial != "Error") this.allMaterials.push(addedMaterial);
             }
-
         },
     });
 </script>
 <script>
     FilePond.parse(document.body);
-
     function SetImageName() {
         var sizeId = document.getElementById("size_title").value;
-
         var imageId = document.getElementById("images");
         imageId.name = "image_".concat(sizeId).concat("[]");
         //alert(sizeId);
@@ -822,5 +734,5 @@
         /* display: inline-block; */
     }
 </style>
-<script></script>
+
 @endsection
