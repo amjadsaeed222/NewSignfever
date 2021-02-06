@@ -227,7 +227,6 @@ class IndexController extends Controller
         $product->index_products =$index_products;
         
         // return $index_products;
-        
         return view('frontend.productDetails', compact('product','index_products'));
         
     }
