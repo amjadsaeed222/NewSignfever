@@ -236,12 +236,23 @@
             </div>
         </div>
     </div>
+    <div class="mobile-only">
+        <div class="container text-center my-5">
+            <!-- <div class="row"> -->
+            <h4>Mobile View In Progress</h4>
+            <p class="lead">Only Desktop view available at the moment. :)</p>
+            <!-- </div> -->
+        </div>
+    </div>
 </div>
 
 <script></script>
 
 <!-- Desktop -->
 <style>
+    .mobile-only {
+        height: 100vh;
+    }
     p,
     b {
         font-size: 0.8rem;

@@ -119,8 +119,11 @@
 </div> -->
 
 <div class="sidenav">
-    <h3 class="text-center">Sign Fever</h3>
-    <h5 class="text-center">Admin Panel</h5>
+    <div class="admin-headers ">
+        <h3 class="text-center">Sign Fever</h3>
+        <h5 class="text-center">Admin Panel</h5>
+        <a href="/" class="text-center">Visit Site</a>
+    </div>
     <div class="sidebar-links">
         <button class="products-dropdown dropdown-btn">
             Manage Products
@@ -153,26 +156,24 @@
             <a href="/admin/add-category">Add Category</a>
         </div>
         <a
-        title=""
-        href=""
-        onclick="event.preventDefault();
-    document.getElementById('logout-form').submit();"
-        ><i class="icon icon-share-alt"></i>
-        <span class="text">Logout</span></a
-    >
-    <form
-        id="logout-form"
-        action="{{ url('/admin/logout') }}"
-        method="POST"
-        class="d-none"
-    >
-        <input type="hidden" name="_token" value="{{ Session::token() }}" />        
-                
+            class="logout-btn btn btn-danger"
+            href="{{ url('/logout') }}"
+            onclick="event.preventDefault();
+        document.getElementById('logout-form').submit();"
+            ><i class="icon icon-share-alt"></i>
+            <span class="text">Logout</span></a
+        >
+        <form
+            id="logout-form"
+            action="{{ route('logout') }}"
+            method="POST"
+            class="d-none"
+        >
+            @csrf
         </form>
-
-         
     </div>
 </div>
+
 <!-- <style>
     h5 {
         color: black;
@@ -189,6 +190,12 @@
 </style> -->
 
 <style>
+    .sidenav{
+      
+    }
+    .admin-headers {
+        color: white;
+    }
     .sidenav {
         height: 100%;
         width: 220px;
@@ -223,7 +230,10 @@
 
     /* On mouse-over */
     .sidenav a:hover {
-        color: #0083c1;
+        color: white;
+    }
+    .logout-btn a:hover{
+        color:black;
     }
     .dropdown-btn:hover {
         background-color: #1d50c7;
@@ -241,12 +251,16 @@
         background-color: #1d50c7;
         color: white;
     }
+    .dropdown-container {
+       
+    }
 
     /* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
     .dropdown-container {
         display: none;
         background-color: #f1f1f1;
         padding-left: 8px;
+        
     }
 
     /* Optional: Style the caret down icon */
@@ -266,8 +280,13 @@
             var dropdownContent = this.nextElementSibling;
             if (dropdownContent.style.display === "block") {
                 dropdownContent.style.display = "none";
+           
+       
+                
             } else {
                 dropdownContent.style.display = "block";
+   
+  
             }
         });
     }

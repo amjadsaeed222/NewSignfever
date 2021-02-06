@@ -28,7 +28,7 @@
                         >Size Title</label
                     >
                     <div class="col-sm-9">
-                  <input type="text" class="form-control" name="size_title" id="size_title" value="{{$size->title}}">
+                  <input required type="text" class="form-control" name="size_title" id="size_title" value="{{$size->title}}">
                 
                 @error('size_title')
                 <div class="alert alert-danger">{{$message}}</div>
@@ -40,7 +40,7 @@
                     >Size SPN</label
                 >
                 <div class="col-sm-9">
-                  <input type="text" class="form-control" name="size_SPN" id="size_SPN" value="{{$size->SPN}}">
+                  <input required type="text" class="form-control" name="size_SPN" id="size_SPN" value="{{$size->SPN}}">
                   @error('size_SPN')
                   <div class="alert alert-danger">{{$message}}</div>
                   @enderror

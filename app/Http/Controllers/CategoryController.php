@@ -48,7 +48,8 @@ class CategoryController extends Controller
             $category->slug=SlugService::createslug(Category::class,'slug',$data['category_title']);
             $category->save();
     		return redirect()->back()->with('flash_message_success', 'Category has been added successfully');
-    	}
+        
+        }
 
         // $levels = Category::where(['parent_id'=>0])->get();
         

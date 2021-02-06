@@ -174,6 +174,7 @@ class IndexController extends Controller
     }
     $category = $index;
         // return $products;
+        //echo "<pre>";print_r(json_decode(json_encode($category)));die;
         return view('frontend.index', compact('category','products'));
         
         // $product=Product::where(['slug'=>$slug])->first();        
@@ -211,29 +212,23 @@ class IndexController extends Controller
         
         foreach($index_products as $key=>$val) 
         {
-            $images = ProductsImage::where(['product_id'=>$val->id])->get();
-            foreach($images as $item=>$value)
-            {
-                $index_images[$item]=$value->image;
-            }
-            $index_products[$key]->image=$index_images;
+            $image = ProductsImage::where(['product_id'=>$val->id])->first();
+            // foreach($images as $image)
+            // {
+            //     $index_images[$key]=$image->image;
+            // }
+            $index_products[$key]->image=$image;
         }
-        
-       // return $index_products;
-        // foreach($index_images as $key=>$val)
-        // {
-        //     $index_products[$key]->image=$val->image;
-        // }
-        //$index_products->images=$index_images;
-        
+        // $index_products['image']=$index_images;
         $product->index_title=$index->title;
         $product->sizes=$size_array;
         $product->materials=$material_array;
         $product->images=$images;
         $product->index_products =$index_products;
         
-        // return $product;
-        return view('frontend.productDetails', compact('product'));
+        // return $index_products;
+        
+        return view('frontend.productDetails', compact('product','index_products'));
         
     }
 
