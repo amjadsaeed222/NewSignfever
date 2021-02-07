@@ -30,6 +30,26 @@ Route::get('index/{slug}',[IndexController::class,'showIndexProducts']);
 Route::post('/find/{searchString}',[ProductsController::class,'search']);
 
 
+
+// Cart Routes
+
+// Add to Cart Route
+Route::get('/add-to-cart/{id}/{sizeId}/{materialId}/{imageId}', [
+    ProductsController::class,'getAddToCart'
+]);
+
+Route::get('/shopping-cart', [
+    ProductsController::class,'getCart',
+])->name('shopping_cart');
+
+// Delete Product from Cart Route
+Route::get('/cart/delete-product/{id}', [ProductsController::class, 'deleteCartProduct']);
+
+// Update Product Quantity from Cart
+Route::get('/cart/update-quantity/{id}/{quantity}','ProductsController@updateCartQuantity');    
+
+
+
 //require __DIR__.'/auth.php';
 //Auth::routes(['register'=>false]);
 

@@ -52,6 +52,9 @@
             .mobile-only {
                 display: none;
             }
+            .body-content {
+                height: 100vh;
+            }
             @media only screen and (max-width: 768px) {
                 #categories_row {
                     display: none;
@@ -67,10 +70,14 @@
             }
         </style>
         @include('layouts.frontendLayout.frontend_header') 
-        <div class="container">
+        <div class="container" id="body-content">
             @yield('content')
 
         </div>
     </body>
-    @include('layouts.frontendLayout.frontend_footer')
+
+
+    <footer>
+        @include('layouts.frontendLayout.frontend_footer')
+    </footer>
 </html>

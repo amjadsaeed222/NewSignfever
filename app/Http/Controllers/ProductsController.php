@@ -601,10 +601,13 @@ class ProductsController extends Controller
     }
 
     public function deleteCartProduct($id=null){
-        Session::forget('CouponAmount');
-        Session::forget('CouponCode');
-        DB::table('cart')->where('id',$id)->delete();
-        return redirect('cart')->with('flash_message_success','Product has been deleted in Cart!');
+        $oldCart=session::get('cart');
+        $cart=new Cart($oldCart);
+        if(array_key_exists($id,$cart->items))
+        {
+            session::forget($id);
+        }
+        return redirect('shopping-cart')->with('flash_message_success','Product has been deleted in Cart!');
     }
 
     public function applyCoupon(Request $request){
@@ -968,7 +971,7 @@ class ProductsController extends Controller
         }
         return view('admin.products.view_index')->with(compact('allIndexes'));
     }
-    public function getAddToCart(Request $request, $id, $sizeId, $materialId,$imageId) 
+    public function getAddToCart(Request $request, $id, $sizeId, $materialId, $imageId) 
     {
         $product = Product::find($id);
         $size=ProductSize::find($sizeId);
@@ -978,26 +981,23 @@ class ProductsController extends Controller
         $cart = new Cart($oldCart);
         $cart->add($product, $product->id,$size->title,$material->title,$image->image);
         $request->session()->put('cart', $cart);
-        $products=session::get('cart');
-        $products=json_decode(json_encode($products));
-        dd($products);
-        //return redirect()->route('product.index');
+        $session_cart=session::get('cart');
+        // $session_cart=json_encode($session_cart);
+        // dd($session_cart);
+        return redirect()->route('shopping_cart');
     }
 
     public function getCart() {
-        if (!Session::has('cart')) {
-            // return view('shop.shopping-cart');
-
-            $products = null;
-        return view('frontend.shoppingCart', compact('products'));
+        if (!Session::has('cart')) {        
+        return view('frontend.emptyCart');
 
 
         }
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
         $products = $cart->items;
-        dd($products);
-        // $products = json_decode($products);
+        $products = json_encode($products);
+        // dd($products);
 
         // return view('shop.shopping-cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
         return view('frontend.shoppingCart',compact('products'));

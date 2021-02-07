@@ -76,6 +76,12 @@ Route::group(['middleware'=>'auth:api'],function(){
 // Cart Page
 Route::match(['get', 'post'],'/cart','ProductsController@cart');
 
+
+// Frontend Routes
+// NOT USING THERE, USING THE ONES PRESENT ON web.php
+
+
+
 // Add to Cart Route
 Route::get('/add-to-cart/{id}/{sizeId}/{materialId}/{imageId}', [
     ProductsController::class,'getAddToCart'
@@ -86,14 +92,11 @@ Route::get('/shopping-cart', [
 ]);
 
 // Delete Product from Cart Route
-Route::get('/cart/delete-product/{id}','ProductsController@deleteCartProduct');
+Route::get('/cart/delete-product/{id}', [ProductsController::class, 'deleteCartProduct']);
 
 // Update Product Quantity from Cart
 Route::get('/cart/update-quantity/{id}/{quantity}','ProductsController@updateCartQuantity');    
 });
-
-
-// Frontend Routes
 
 Route::get('categories',[IndexController::class,'showCategories']);
 Route::get('/products/{id}',[IndexController::class,'showAllProducts']);

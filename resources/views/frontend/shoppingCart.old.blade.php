@@ -21,14 +21,12 @@
                         </thead>
                         <tbody class="text-left">
                             <!-- Loop of Products on this <tr > -->
-                            <tr v-for="product in cartProducts">
+                            <tr>
                                 <td>
-                                    <!-- src="https://www.mysafetysign.com/img/sm/S/all-ppe-required-notice-sign-s-9775.png" -->
                                     <img
-                                        :src="'/images/backend_images/product/large/' + product.image"
+                                        src="https://www.mysafetysign.com/img/sm/S/all-ppe-required-notice-sign-s-9775.png"
                                         alt=""
                                         class="mx-auto d-block cursor-pointer"
-                                        width="100px"
                                         data-toggle="modal"
                                         data-target="#exampleModal"
                                     />
@@ -69,12 +67,8 @@
                                 <td class="no-gutters">
                                     <div class="col-12">
                                         <a href="#"
-                                            >@{{
-                                                product.item.product_name
-                                            }}
-                                            @{{ product.material }} (@{{
-                                                product.size
-                                            }})</a
+                                            >Maintain Distance (Spanish) Floor
+                                            Making Tape (2.25" x 54")</a
                                         >
                                     </div>
                                     <div class="col-12 row no-gutters">
@@ -82,13 +76,16 @@
                                             <b>Size:</b>
                                         </div>
                                         <div class="col-6">
-                                            <p>@{{ product.size }} (H x W)</p>
+                                            <p>2.25" x 684" (H x W)</p>
                                         </div>
                                         <div class="col-6">
                                             <p><b>Material:</b></p>
                                         </div>
                                         <div class="col-6">
-                                            <p>@{{ product.material }}</p>
+                                            <p>
+                                                Floor Marking Tape 2.25" x 54"
+                                                Roll
+                                            </p>
                                         </div>
                                         <div class="col-6">
                                             <p><b>Part#</b></p>
@@ -123,9 +120,7 @@
                                 <td>
                                     <div class="col-12 no-gutters">
                                         <div class="col-12">
-                                            <p>
-                                                $@{{ product.item.price }}/Roll
-                                            </p>
+                                            <p>$37.05/Roll</p>
                                         </div>
                                         <div class="col-12">
                                             <p>Package: 1 Roll</p>
@@ -152,7 +147,7 @@
                                 </td>
                                 <td>
                                     <div class="col-12 no-gutters">
-                                        <p>@{{ product.price }}</p>
+                                        <p>$37.05</p>
                                     </div>
                                 </td>
                             </tr>
@@ -160,10 +155,7 @@
                                 <td></td>
                                 <td>
                                     <div class="col-12 text-left">
-                                        <p>
-                                            @{{ cartProducts.length }} item(s)
-                                            in your cart.
-                                        </p>
+                                        <p>1 item(s) in your cart.</p>
                                     </div>
                                 </td>
                                 <td></td>
@@ -175,7 +167,7 @@
                                             font-weight: 600;
                                         "
                                     >
-                                        Total : $@{{ totalPrice }}
+                                        Total : $37.05
                                     </p>
                                 </td>
                             </tr>
@@ -199,9 +191,7 @@
             <div class="col-3">
                 <div class="col-12 border rounded py-2 my-2 text-center">
                     <p class="my-2 font-weight-bold">
-                        Subtotal (@{{ cartProducts.length }} item) : $@{{
-                            totalPrice
-                        }}
+                        Subtotal (1 item) : $37.05
                     </p>
                     <button
                         class="btn btn-success d-block w-100"
@@ -257,34 +247,11 @@
 </div>
 
 <script>
-    var dbProduct, result;
 
-    dbProduct = {!! $products; !!};
-         dbProduct = {!! $products; !!};
-         result = Object.values(dbProduct)
+    // var dbProduct = 
 
-
-    console.log(dbProduct)
-    // var result = Object.keys(dbProduct).map((key) => [dbProduct[key]]);
-    result.forEach(item => console.log(item.item.product_name))
-    new Vue({
-        el:'#shopping-cart',
-        data:{
-            cartProducts: result,
-            totalPrice: 0
-        },
-        mounted() {
-            console.log(this.cartProducts)
-            this.getTotalPrice();
-        },
-        methods:{
-            getTotalPrice() {
-                this.cartProducts.forEach(product => {
-                    this.totalPrice += product.price
-                })
-            }
-        }
-    })
+    
+    
 </script>
 
 <!-- Desktop -->

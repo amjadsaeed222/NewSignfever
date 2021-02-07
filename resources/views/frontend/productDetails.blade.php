@@ -293,7 +293,7 @@
             <div class="col-12">
                 <h4>Related Departments</h4>
             </div>
-            <div class="col-12">
+            <div class="col-12 my-3">
                 <div class="row cards_row">
                     <div class="col-2 mx-1 custom_card">
                         <a href="/index/custom-danger-signs">
@@ -578,7 +578,9 @@
         mounted() {
             this.selectedSize = this.product.sizes[0];
             // this.selectedMaterial = this.selectedSize.materials[0];
-            this.selectedmaterial = this.product.materials[0];
+
+            this.selectedMaterial = this.product.materials[0]
+            // console.log(this.selected)
             // console.log(this.selectedMaterial)
             // console.log(this.selectedSize.images[0].image);
             // this.selectedImage = this.selectedSize.images[0];
@@ -608,7 +610,7 @@
                 cartProduct:{
                     // localStorage.setItem('cartProducts',)
                     window.location.href = "/shopping-cart"
-                    window.location.href = `/admin/add-to-cart/${this.product.id}/${this.selectedSize.id}/${this.selectedMaterial.id}/${this.selectedImage.id} `
+                    window.location.href = `/add-to-cart/${this.product.id}/${this.selectedSize.id}/${this.selectedMaterial.id}/${this.selectedImage.id}`
                 }
             },
             handleDesign(slug){

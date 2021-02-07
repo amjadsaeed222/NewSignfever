@@ -5,7 +5,7 @@
 
     <div class="desktop-only ">
         <!-- Category Row -->
-        <div class="row my-2 mx-4">
+        <div class="row mt-3 mb-1">
             <div class="col-2 .col-md-offset-2 mx-2 home__category">
                 <a href="/index/social-distancing"
                     ><h5 class="category__heading">
@@ -174,11 +174,12 @@
                 </p>
                 
                 <div class="row cards_row">
-                    @foreach ($products as $product)
+                   
+                    
                     <div class="col-3 custom_card">
-                        <a href="/index/{{$product->index}}">
+                        <a href="/index/custom-danger-signs">
                             <div class="custom_header">
-                                <h5 class="">{{ $product->index}}</h5>
+                                <h5 class="">Danger</h5>
                             </div>
                             <img
                                 src="/images/frontend/home/custom_templates/danger-120.jpg"
@@ -186,9 +187,7 @@
                                 class="d-block mx-auto"
                             />
                         </a>
-                    </div>    
-                    @endforeach
-                    
+                    </div>
                     <div class="col-3 custom_card">
                         <a href="/index/custom-warning-signs">
                             <div class="custom_header">
