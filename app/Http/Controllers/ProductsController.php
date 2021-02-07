@@ -968,19 +968,20 @@ class ProductsController extends Controller
         }
         return view('admin.products.view_index')->with(compact('allIndexes'));
     }
-    public function getAddToCart(Request $request, $id, $sizeId, $materialId) 
+    public function getAddToCart(Request $request, $id, $sizeId, $materialId,$imageId) 
     {
         $product = Product::find($id);
         $size=ProductSize::find($sizeId);
         $material=ProductMaterial::find($materialId);
-        
+        $image=ProductsImage::find($imageId);
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
-        $cart->add($product, $product->id,$size->title,$material->title);
-
+        $cart->add($product, $product->id,$size->title,$material->title,$image->image);
         $request->session()->put('cart', $cart);
-        dd(session ('cart'));
-        return redirect()->route('product.index');
+        $products=session::get('cart');
+        $products=json_decode(json_encode($products));
+        dd($products);
+        //return redirect()->route('product.index');
     }
 
     public function getCart() {

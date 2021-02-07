@@ -77,9 +77,8 @@ Route::group(['middleware'=>'auth:api'],function(){
 Route::match(['get', 'post'],'/cart','ProductsController@cart');
 
 // Add to Cart Route
-Route::get('/add-to-cart/{id}/{sizeId}/{materialId}', [
-    ProductsController::class,'getAddToCart',
-    'as' => 'product.index'
+Route::get('/add-to-cart/{id}/{sizeId}/{materialId}/{imageId}', [
+    ProductsController::class,'getAddToCart'
 ]);
 
 Route::get('/shopping-cart', [

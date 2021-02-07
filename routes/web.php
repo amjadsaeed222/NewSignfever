@@ -53,4 +53,4 @@ Route::post('/register/customer', 'App\Http\Controllers\Auth\customer\RegisterCo
     
 
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

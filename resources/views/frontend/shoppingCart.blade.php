@@ -250,8 +250,8 @@
 
     // var dbProduct = 
 
-
-    console.log({!! $products !!})
+    
+    
 </script>
 
 <!-- Desktop -->

@@ -2,6 +2,8 @@
 
 namespace App;
 
+use session;
+
 class Cart
 {
     public $items = null;
@@ -18,9 +20,9 @@ class Cart
         }
     }
 
-    public function add($item, $id,$size,$material) 
+    public function add($item, $id,$size,$material,$image) 
     {
-        $storedItem = ['qty' => 0, 'price' => $item->price, 'size' => $size, 'material' => $material, 'item' => $item];
+        $storedItem = ['qty' => 0, 'price' => $item->price, 'size' => $size, 'material' => $material, 'image'=> $image, 'item' => $item];
         if ($this->items) 
         {
             if (array_key_exists($id, $this->items)) 
@@ -51,7 +53,7 @@ class Cart
 			$oldCart=Session::get('cart');
 			$cart=new Cart($oldCart);
             $products = $cart->items;
-            return "hello";
+            //return "hello";
 
             return $products;
             // return view('shopping-cart',['products'=>$cart->items,'totalPrice'=>$cart->totalPrice]);

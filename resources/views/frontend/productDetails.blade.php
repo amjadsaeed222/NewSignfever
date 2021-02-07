@@ -608,7 +608,7 @@
                 cartProduct:{
                     // localStorage.setItem('cartProducts',)
                     window.location.href = "/shopping-cart"
-                    window.location.href = `/admin/add-to-cart/${this.product.id}/${this.selectedSize.id}/${this.selectedMaterial.id} `
+                    window.location.href = `/admin/add-to-cart/${this.product.id}/${this.selectedSize.id}/${this.selectedMaterial.id}/${this.selectedImage.id} `
                 }
             },
             handleDesign(slug){
