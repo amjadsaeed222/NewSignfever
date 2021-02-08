@@ -43,7 +43,7 @@ Route::get('/shopping-cart', [
 ])->name('shopping_cart');
 
 // Delete Product from Cart Route
-Route::get('/cart/delete-product/{id}', [ProductsController::class, 'deleteCartProduct']);
+Route::get('/cart/delete-product/{id}', [ProductsController::class, 'removeCart']);
 
 // Update Product Quantity from Cart
 Route::get('/cart/update-quantity/{id}/{quantity}','ProductsController@updateCartQuantity');    

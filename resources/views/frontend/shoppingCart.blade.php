@@ -111,12 +111,13 @@
                                             <p>January 27</p>
                                         </div>
                                         <div class="col-12">
-                                            <button
+                                            <a
                                                 class="btn btn-outline-danger my-2"
                                                 style="font-size: 0.8rem"
+                                                v-on:click="removeProduct(product.item.id)"
                                             >
                                                 Delete
-                                            </button>
+                                            </a>
                                         </div>
                                     </div>
                                 </td>
@@ -282,7 +283,14 @@
                 this.cartProducts.forEach(product => {
                     this.totalPrice += product.price
                 })
-            }
+            },
+            removeProduct(id) {
+
+                    // localStorage.setItem('cartProducts',)
+                    // window.location.href = "/shopping-cart"
+                    window.location.href = `/cart/delete-product/${id}`
+
+            },
         }
     })
 </script>

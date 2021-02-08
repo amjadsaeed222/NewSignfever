@@ -971,6 +971,10 @@ class ProductsController extends Controller
         }
         return view('admin.products.view_index')->with(compact('allIndexes'));
     }
+
+     
+// OLD CART HANDLING
+
     public function getAddToCart(Request $request, $id, $sizeId, $materialId, $imageId) 
     {
         $product = Product::find($id);
@@ -987,6 +991,51 @@ class ProductsController extends Controller
         return redirect()->route('shopping_cart');
     }
 
+
+    // public function removeCart($id)
+    // {
+    //     if (session::has('cart'))
+    //     {
+    //         $cart=session::get('cart');
+    //         //dd($cart);
+    //         if(array_key_exists($id,$cart))
+    //         {
+    //             unset($cart[$id]);
+    //             session::put('cart',$cart);
+    //         }
+    //     }
+    // }
+
+    public function removeCart($id)
+    {
+        
+        if (session::has('cart'))
+        {
+            $session_product=session::get('cart');
+       
+            // dd($session_product);
+            foreach($session_product->items as $key=>$val)
+            {
+                if($key != $id){
+                    continue;
+                }
+                // if($key == $id)
+                else {
+                unset($session_product->items[$id]);
+                }
+                // dd($session_product->items);
+                // dd($session_product->items);
+                session::put('cart',$session_product);
+                break;
+            }
+            $session_product=session::get('cart');
+        }
+        return redirect()->route('shopping_cart');
+
+    }
+
+
+
     public function getCart() {
         if (!Session::has('cart')) {        
         return view('frontend.emptyCart');
@@ -994,6 +1043,7 @@ class ProductsController extends Controller
 
         }
         $oldCart = Session::get('cart');
+
         $cart = new Cart($oldCart);
         $products = $cart->items;
         $products = json_encode($products);
@@ -1003,5 +1053,7 @@ class ProductsController extends Controller
         return view('frontend.shoppingCart',compact('products'));
 
     }
+
+   
     
 }
