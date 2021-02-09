@@ -28,7 +28,7 @@ Route::get('get-size/{productId}',[IndexController::class,'getSize']);
 Route::get('shopping-cart',[IndexController::class,'shoppingCart']);
 Route::get('index/{slug}',[IndexController::class,'showIndexProducts']);
 Route::post('/find/{searchString}',[ProductsController::class,'search']);
-
+Route::get('/custom-canvas',[ProductsController::class,'customCanvas']);
 
 
 // Cart Routes

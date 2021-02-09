@@ -186,14 +186,14 @@
 
                 <!-- Buttons Row -->
                 <div class="col-12">
-                    <button class="border btn">
+                    <a href="/" class="border btn">
                         <i class="fas fa-caret-left" style="color: red"></i>
                         Continue Shopping
-                    </button>
-                    <button class="border btn">
+                    </a>
+                    <!-- <button class="border btn">
                         <i class="fas fa-truck" style="color: red"></i> Estimate
                         Shipping Cost
-                    </button>
+                    </button> -->
                 </div>
             </div>
 
