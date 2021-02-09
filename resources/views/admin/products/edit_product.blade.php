@@ -175,6 +175,26 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <div class="col-sm-3">Custome</div>
+                        <div class="col-sm-9">
+                            <div class="form-check">
+                                <input 
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    id="product_custome"
+                                    name="product_custome"
+                                    <?php if($productDetails->custome) echo "checked";?>
+                                />
+                                <label
+                                    class="form-check-label"
+                                    for="product_feature"
+                                >
+                                    Make Custome Sign
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <div class="col-sm-3">Choose Images</div>
                         <div class="col-sm-9">
                             <div class="custom-file">
@@ -239,6 +259,27 @@
                                         new size.</a
                                     ></small
                                 >
+                                <div class="form-group row">
+                                    <label
+                                        for="size_price"
+                                        class="col-sm-3 col-form-label"
+                                        >Price</label
+                                    >
+                                    <div class="col-sm-9">
+                                        <input required
+                                            type="number"
+                                            class="form-control"
+                                            id="size_price"
+                                            name="size_price[]"
+                                            value={{ $attribute->price}}
+                                            placeholder="Price"
+                                            step="0.01"
+                                        />
+                                        @error('size_price')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
                                 <div
                                     class="modal fade"
                                     id="sizeModal"
@@ -396,6 +437,27 @@
                                         add new Material</a
                                     ></small
                                 >
+                                <div class="form-group row">
+                                    <label
+                                        for="material_price"
+                                        class="col-sm-3 col-form-label"
+                                        >Price</label
+                                    >
+                                    <div class="col-sm-9">
+                                        <input required
+                                            type="number"
+                                            class="form-control"
+                                            id="material_price"
+                                            name="material_price[]"
+                                            value="{{$attribute->price}}"
+                                            placeholder="Price"
+                                            step="0.01"
+                                        />
+                                        @error('material_price')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
                                 <div
                                     class="modal fade"
                                     id="materialModal"
