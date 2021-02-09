@@ -20,6 +20,9 @@
                             >Home <span class="sr-only">(current)</span></a
                         >
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/custom-canvas">Custom</a>
+                    </li>
                     <li
                         class="nav-item dropdown"
                         v-for="category in categories"
@@ -39,11 +42,6 @@
                             class="dropdown-menu"
                             aria-labelledby="navbarDropdownMenuLink"
                         >
-                            <a
-                                class="dropdown-item"
-                                :href="'/category/' + category.slug"
-                                >All @{{ category.name }}</a
-                            >
                             <a
                                 class="dropdown-item"
                                 v-for="subCat in category.sub_category"

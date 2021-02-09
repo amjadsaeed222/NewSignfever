@@ -1009,6 +1009,7 @@ class ProductsController extends Controller
     public function removeCart($id)
     {
         
+        
         if (session::has('cart'))
         {
             $session_product=session::get('cart');
@@ -1019,12 +1020,24 @@ class ProductsController extends Controller
                 if($key != $id){
                     continue;
                 }
-                // if($key == $id)
                 else {
-                unset($session_product->items[$id]);
+
+                    // Getting Details of Product
+                    $price=$session_product->items[$id]['price'];
+                    $qty=$session_product->items[$id]['qty'];
+
+                    // Calculating New Info (Price & Qty)
+                    $totalPrice=$session_product->totalPrice-$price;
+                    $totalQty=$session_product->totalQty-$qty;
+                    
+                    // Setting the new calucatin price
+                    $session_product->totalQty=$totalQty;
+                    $session_product->totalPrice=$totalPrice;
+
+                    // Poping the product from session
+                    unset($session_product->items[$id]);
+
                 }
-                // dd($session_product->items);
-                // dd($session_product->items);
                 session::put('cart',$session_product);
                 break;
             }
@@ -1037,21 +1050,25 @@ class ProductsController extends Controller
 
 
     public function getCart() {
-        if (!Session::has('cart')) {        
+        if (!Session::has('cart')) {       
         return view('frontend.emptyCart');
-
-
         }
-        $oldCart = Session::get('cart');
+        else {
 
-        $cart = new Cart($oldCart);
-        $products = $cart->items;
-        $products = json_encode($products);
-        // dd($products);
+            $oldCart = Session::get('cart');
+            $cart = new Cart($oldCart);
+            $products = $cart->items;
+            $products = json_encode($products);
+            // dd($cart);
+            // return view('shop.shopping-cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
+            return view('frontend.shoppingCart',compact('products'));
+        }
 
-        // return view('shop.shopping-cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
-        return view('frontend.shoppingCart',compact('products'));
+    }
 
+
+public function customCanvas() {
+        return view('frontend.customCanvas');
     }
 
    

@@ -55,6 +55,9 @@
             .body-content {
                 height: 100vh;
             }
+            .hidden {
+                display:none;
+            }
             @media only screen and (max-width: 768px) {
                 #categories_row {
                     display: none;

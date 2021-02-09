@@ -87,10 +87,20 @@
                     </div>
                     <div class="ml-2 header-helpers">
                         <h6>Shopping Cart</h6>
-                        <small class="">0 items, $0.00</small>
+                        <?php 
+                        if(session('cart')){
+                            $cart = session('cart');
+                            $cartItems = count((array) $cart->items);
+                            $cartPrice = $cart->totalPrice;
+                        } else {
+                            $cartItems = 0;
+                            $cartPrice = 0.00;
+                        }
+                        ?>
+                        <small class="">{{$cartItems}} items, ${{$cartPrice}}</small>
                         <div>
                             <small class="v-sm"
-                                >$29.95 until free shipping</small
+                                >Free shipping over $29.95</small
                             >
                         </div>
                     </div>
