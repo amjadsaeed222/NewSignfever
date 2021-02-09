@@ -182,7 +182,26 @@
                                     class="form-check-label"
                                     for="product_feature"
                                 >
-                                    Make featured Product
+                                    Make featured Sign
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-3">Custome</div>
+                        <div class="col-sm-9">
+                            <div class="form-check">
+                                <input 
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    id="product_custome"
+                                    name="product_custome"
+                                />
+                                <label
+                                    class="form-check-label"
+                                    for="product_feature"
+                                >
+                                    Make Custome Sign
                                 </label>
                             </div>
                         </div>
@@ -245,6 +264,26 @@
                                         new size.</a
                                     ></small
                                 >
+                                <div class="form-group row">
+                                    <label
+                                        for="product_price"
+                                        class="col-sm-3 col-form-label"
+                                        >Price</label
+                                    >
+                                    <div class="col-sm-9">
+                                        <input required
+                                            type="number"
+                                            class="form-control"
+                                            id="size_price"
+                                            name="size_price[]"
+                                            placeholder="Price"
+                                            step="0.01"
+                                        />
+                                        @error('size_price')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
                                 <div
                                     class="modal fade"
                                     id="sizeModal"
@@ -357,8 +396,11 @@
                                     </div>
                                 </div>
                             </div>
+                            
                         </div>
+                            
                     </div>
+                    
                     <div class="form-group row">
                         <div class="col-sm-10"></div>
                     </div>
@@ -402,6 +444,26 @@
                                         add new Material</a
                                     ></small
                                 >
+                                <div class="form-group row">
+                                    <label
+                                        for="material_price"
+                                        class="col-sm-3 col-form-label"
+                                        >Price</label
+                                    >
+                                    <div class="col-sm-9">
+                                        <input required
+                                            type="number"
+                                            class="form-control"
+                                            id="material_price"
+                                            name="material_price[]"
+                                            placeholder="Price"
+                                            step="0.01"
+                                        />
+                                        @error('material_price')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
                                 <div
                                     class="modal fade"
                                     id="materialModal"

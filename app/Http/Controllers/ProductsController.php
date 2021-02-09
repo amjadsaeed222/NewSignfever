@@ -57,44 +57,55 @@ class ProductsController extends Controller
             {
                 $status='1';
             }
+            if(empty($data['product_custome']))
+            {
+                $custome='0';
+            }else
+            {
+                $custome='1';
+            }
 			$product->price = $data['product_price'];
             $product->shape=$data['product_shape'];
             $product->partNo=$data['product_part_no'];
             $product->shape=$data['product_shape'];
             $product->status = $status;
-            // if(empty($data['product_feature']))
-            // {
-            //     $product->feature=false;
-            // }
-            // else
-            // {
-            //     $product->feature=true;
-            // }
+            $product->custome = $custome;
+            if(empty($data['product_feature']))
+            {
+                $product->feature='0';
+            }
+            else
+            {
+                $product->feature='1';
+            }
             $product->slug=SlugService::createslug(Product::class,'slug',$data['product_name']);
             //echo "<pre>";print_r($product);die;
+            //dd(json_encode($product));
             $product->save();
             
             //Adding Sizes
             
             $addedproductId= $product->id;
             
-            foreach($data['product_sizes'] as $size)
+            foreach($data['product_sizes'] as $key=> $val)
             {
                 $attributes=new ProductsAttribute;
                 $attributes->product_id=$addedproductId;
                 //Attribute type 1=size
                 $attributes->attribute_type=1;
-                $attributes->attribute_value=$size;
+                $attributes->attribute_value=$val;
+                $attributes->price=$data['size_price'][$key];
                 $attributes->save();
             }
             //Adding Product Materials
-            foreach($data['product_materials'] as $material)
+            foreach($data['product_materials'] as $key=> $val)
             {
                 $attributes=new ProductsAttribute;
                 $attributes->product_id=$addedproductId;
                 //Attribute type 2=material
                 $attributes->attribute_type=2;
-                $attributes->attribute_value=$material;
+                $attributes->attribute_value=$val;
+                $attributes->price=$data['material_price'][$key];
                 $attributes->save();
             }                    
                 //Adding Images in size.
@@ -163,24 +174,31 @@ class ProductsController extends Controller
             {
                 $status='1';
             }
+            if(empty($data['product_custome']))
+            {
+                $custome='0';
+            }else
+            {
+                $custome='1';
+            }
 
             // if(empty($data['description']))
             // {
             // 	$data['description'] = '';
             // }
-            // if(empty($data['product_feature']))
-            // {
-            //     $feature=false;
-            // }
-            // else
-            // {
-            //     $feature=true;
-            // }
+            if(empty($data['product_feature']))
+            {
+                $feature='0';
+            }
+            else
+            {
+                $feature='1';
+            }
             
             $updateProduct=Product::where(['slug'=>$slug])->first();
             $updateProduct->slug=null;
             $updateProduct->update(['index_Id'=> $data['product_index'],'partNo'=> $data['product_part_no'],'shape'=> $data['product_shape'],'status'=>$status,'product_name'=>$data['product_name'],
-				'description'=> $data['product_description'],'price'=>$data['product_price']]);
+				'description'=> $data['product_description'],'price'=>$data['product_price'], 'custome'=> $custome, 'feature'=> $feature]);
             // $updateProduct->update(['index_Id'=> $data['product_index'],'partNo'=> $data['product_part_no'],'shape'=> $data['product_shape'],'status'=>$status,'product_name'=>$data['product_name'],
 			// 	'description'=> $data['description'],'price'=>$data['product_price'],'feature'=> $feature]);
             //Updating Attribute of the product
@@ -189,21 +207,23 @@ class ProductsController extends Controller
             ProductsAttribute::where(['product_id'=>$product_id,'attribute_type'=>1])->delete();
             ProductsAttribute::where(['product_id'=>$product_id,'attribute_type'=>2])->delete();
             
-            foreach($data['product_sizes'] as $size)
+            foreach($data['product_sizes'] as $key=> $val)
             {
                 $attribute=new ProductsAttribute;
                 $attribute->product_id=$product_id;
                 $attribute->attribute_type=1;
-                $attribute->attribute_value=$size;
+                $attribute->attribute_value=$val;
+                $attribute->price=$data['size_price'][$key];
                 $attribute->save();
                 
             }
-            foreach($data['product_materials'] as $material)
+            foreach($data['product_materials'] as $key=>$val)
             {
                 $attribute=new ProductsAttribute;
                 $attribute->product_id=$product_id;
                 $attribute->attribute_type=2;
-                $attribute->attribute_value=$material;
+                $attribute->attribute_value=$val;
+                $attribute->price=$data['material_price'][$key];
                 $attribute->save();    
             }
             //Update Image
@@ -981,6 +1001,7 @@ class ProductsController extends Controller
         $size=ProductSize::find($sizeId);
         $material=ProductMaterial::find($materialId);
         $image=ProductsImage::find($imageId);
+        
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
         $cart->add($product, $product->id,$size->title,$material->title,$image->image);
@@ -990,22 +1011,6 @@ class ProductsController extends Controller
         // dd($session_cart);
         return redirect()->route('shopping_cart');
     }
-
-
-    // public function removeCart($id)
-    // {
-    //     if (session::has('cart'))
-    //     {
-    //         $cart=session::get('cart');
-    //         //dd($cart);
-    //         if(array_key_exists($id,$cart))
-    //         {
-    //             unset($cart[$id]);
-    //             session::put('cart',$cart);
-    //         }
-    //     }
-    // }
-
     public function removeCart($id)
     {
         
@@ -1016,12 +1021,18 @@ class ProductsController extends Controller
             // dd($session_product);
             foreach($session_product->items as $key=>$val)
             {
-                if($key != $id){
+                if($key != $id)
+                {
                     continue;
                 }
                 // if($key == $id)
-                else {
-                unset($session_product->items[$id]);
+                else 
+                {
+                    $price=$session_product->items[$id]['price'];
+                    $totalPrice=$session_product->totalPrice-$price;
+                    $session_product->totalPrice=$totalPrice;
+                    //dd($totalPrice);
+                    unset($session_product->items[$id]);
                 }
                 // dd($session_product->items);
                 // dd($session_product->items);
