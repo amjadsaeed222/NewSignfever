@@ -36,6 +36,8 @@ Route::group(['middleware'=>'auth:api'],function(){
     
     // Admin Products Routes
     
+
+    Route::get('/', [ProductsController::class,'dashboard']);
     Route::match(['get','post'],'/add-material',[ProductsController::class,'addmaterial']);
     Route::match(['get','post'],'/add-product',[ProductsController::class,'addProduct'])->middleware('web');
     

@@ -34,7 +34,7 @@ Route::get('/custom-canvas',[ProductsController::class,'customCanvas']);
 // Cart Routes
 
 // Add to Cart Route
-Route::get('/add-to-cart/{id}/{sizeId}/{materialId}/{imageId}', [
+Route::get('/add-to-cart/{id}/{sizeId}/{materialId}/{imageId}/{qty}', [
     ProductsController::class,'getAddToCart'
 ]);
 

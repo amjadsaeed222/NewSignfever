@@ -174,7 +174,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group row">
+                    <!-- <div class="form-group row">
                         <div class="col-sm-3">Custome</div>
                         <div class="col-sm-9">
                             <div class="form-check">
@@ -193,7 +193,7 @@
                                 </label>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="form-group row">
                         <div class="col-sm-3">Choose Images</div>
                         <div class="col-sm-9">
@@ -535,6 +535,7 @@
                                                                 class="ckeditor form-control"
                                                                 id="description"
                                                                 name="description"
+                                                                
                                                                 v-model="material_description"
                                                             ></textarea>
                                                             @error('description')

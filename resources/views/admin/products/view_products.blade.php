@@ -1,8 +1,6 @@
 @extends('layouts.adminLayout.admin_design')
 @section('content')
-@php
-use App\Models\Index;
-@endphp
+
 <div id="content">
   
   <div class="container">    
@@ -24,21 +22,21 @@ use App\Models\Index;
             <table class="table table-bordered data-table">
               <thead>
                 <tr>
-                  <th>Product ID</th>
-                  <th>Index Name</th>
+                  <!-- <th>Product</th> -->
                   <th>Product Name</th>
-                  <th>Price</th>
+                  <th>Index Name</th>
+                  <th>Base Price</th>
                   <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
               	@foreach($products as $product)
-                <tr class="gradeX">
-                  <td class="center">{{ $product->id }}</td>
+                <tr class="">
+                  <!-- <td class="center"><img src="" alt=""></td> -->
                   
-                  <td class="center">{{ $product->index_title }}</td>
                   <td class="center">{{ $product->product_name }}</td>
-                  <td class="center">{{ $product->price }}</td>
+                  <td class="center">{{ $product->index_title }}</td>
+                  <td class="center">${{ $product->price }}</td>
                   <td class="center">
                     
                     <a href="{{ url('/admin/edit-product/'.$product->slug) }}" class="btn btn-primary btn-mini">Edit</a> 

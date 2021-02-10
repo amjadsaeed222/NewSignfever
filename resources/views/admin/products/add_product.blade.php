@@ -89,7 +89,7 @@
                         <label
                             for="product_price"
                             class="col-sm-3 col-form-label"
-                            >Product Price</label
+                            >Base Price</label
                         >
                         <div class="col-sm-9">
                             <input required
@@ -188,20 +188,20 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <div class="col-sm-3">Custome</div>
+                        <div class="col-sm-3">Custom</div>
                         <div class="col-sm-9">
                             <div class="form-check">
                                 <input 
                                     class="form-check-input"
                                     type="checkbox"
-                                    id="product_custome"
-                                    name="product_custome"
+                                    id="product_custom"
+                                    name="product_custom"
                                 />
                                 <label
                                     class="form-check-label"
                                     for="product_feature"
                                 >
-                                    Make Custome Sign
+                                    Make Custom Sign
                                 </label>
                             </div>
                         </div>

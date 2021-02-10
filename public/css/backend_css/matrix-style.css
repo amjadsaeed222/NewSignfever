@@ -228,7 +228,6 @@ hr {
     top: 0px;
     z-index: 20;
     margin: 0;
-    
 }
 #user-nav > ul {
     margin: 0;
@@ -817,6 +816,7 @@ div.dataTables_wrapper .ui-widget-header {
     margin-right: 190px;
 }
 .widget-content {
+    display: none;
     padding: 15px;
     border-bottom: 1px solid #cdcdcd;
 }

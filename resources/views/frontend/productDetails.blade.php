@@ -169,7 +169,7 @@
                                 v-on:click="handleMaterial(material)"
                             >
                                 <p>@{{ material.title }}</p>
-                                <p>$@{{ product.price }}</p>
+                                <p>$@{{ material.price }}</p>
                             </div>
                         </div>
                         <div
@@ -181,12 +181,15 @@
                         </div>
                     </div>
                 </div>
-            <!-- <form method="POST" action="/admin/add-to-cart/product.id/selectedSize.id/selectedMaterial.id" enctype="multipart/form-data"> -->
+                <!-- <form method="POST" action="/admin/add-to-cart/product.id/selectedSize.id/selectedMaterial.id" enctype="multipart/form-data"> -->
                 <!-- @csrf -->
-            <input type="hidden" name="product_id" :value=" product.id" />
-            <input type="hidden" name="product_name" :value="product.product_name" />
-            
-            
+                <input type="hidden" name="product_id" :value=" product.id" />
+                <input
+                    type="hidden"
+                    name="product_name"
+                    :value="product.product_name"
+                />
+
                 <div class="col-12 my-4 no-gutters">
                     <h4>Order Quantity</h4>
                     <div class="col-12 no-gutters">
@@ -261,14 +264,20 @@
                             <div class="col-sm-auto">
                                 <div class="col-12">
                                     <p>
-                                        <b>$@{{ product.price * qty }}</b>
+                                        <b>$@{{ variationPrice(qty) }}</b>
                                     </p>
-                                    <input type="hidden" name="product_price" value="@{{ product.price * qty }}" />
+                                    <input
+                                        type="hidden"
+                                        name="product_price"
+                                        value="@{{ variationPrice(qty) }}"
+                                    />
                                 </div>
                                 <div class="col-12">
                                     <p>
                                         <small
-                                            ><b>$@{{ product.price }}</b></small
+                                            ><b
+                                                >$@{{ variationPrice() }}</b
+                                            ></small
                                         >
                                     </p>
                                 </div>
@@ -289,7 +298,7 @@
                     </div>
                 </div>
             </div>
-        <!-- </form> -->
+            <!-- </form> -->
             <div class="col-12">
                 <h4>Related Departments</h4>
             </div>
@@ -454,7 +463,7 @@
                             class="col-2 d-block w-100 no-gutters"
                         />
                         <p class="col-auto mx-auto">@{{ material.title }}</p>
-                        <p class="col-auto mx-auto">$@{{ product.price }}</p>
+                        <p class="col-auto mx-auto">$@{{ material.price }}</p>
                     </div>
                 </div>
             </div>
@@ -522,15 +531,24 @@
                                                 Total Price:
                                                 <b
                                                     >$@{{
-                                                        product.price * qty
+                                                        variationPrice(qty)
                                                     }}</b
                                                 >
                                             </p>
+                                            <input
+                                                type="hidden"
+                                                name="product_price"
+                                                value="@{{
+                                                    variationPrice(qty)
+                                                }}"
+                                            />
                                         </div>
                                         <div class="col-12">
                                             <p class="mx-auto">
                                                 Per Sign:
-                                                <b> $@{{ product.price }} </b>
+                                                <b>
+                                                    $@{{ variationPrice() }}
+                                                </b>
                                             </p>
                                         </div>
                                     </div>
@@ -557,7 +575,7 @@
 
 
     var dbProduct = {!! $product !!}
-    console.log(dbProduct)
+    // console.log(dbProduct)
     new Vue({
         el: "#product-details",
         data: {
@@ -610,12 +628,18 @@
                 cartProduct:{
                     // localStorage.setItem('cartProducts',)
                     window.location.href = "/shopping-cart"
-                    window.location.href = `/add-to-cart/${this.product.id}/${this.selectedSize.id}/${this.selectedMaterial.id}/${this.selectedImage.id}`
+                    window.location.href = `/add-to-cart/${this.product.id}/${this.selectedSize.id}/${this.selectedMaterial.id}/${this.selectedImage.id}/${this.qty}`
                 }
             },
             handleDesign(slug){
                 window.location.href = `/product/${slug}`
 
+            },
+            variationPrice(qty=1) {
+                var finalPrice = (this.product.price + this.selectedSize.price + this.selectedMaterial.price) * qty;
+                 finalPrice = finalPrice.toFixed(2);
+
+                return finalPrice;
             }
         },
     });
