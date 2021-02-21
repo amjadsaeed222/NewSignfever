@@ -1,5 +1,8 @@
 @extends('layouts.frontendLayout.frontend_design') @section('content')
+
 <div id="shopping-cart">
+   
+  
     <div class="desktop-only">
         <div class="row no-gutters mx-5 my-2">
             <!-- <div class="container"> -->
@@ -9,6 +12,7 @@
             <div class="col-9">
                 <!-- Table Row -->
                 <div class="col-12">
+           
                     <table class="table table-hover text-left">
                         <thead class="">
                             <tr>
@@ -247,6 +251,7 @@
             </div>
         </div>
     </div>
+    
     <div class="mobile-only">
         <div class="container text-center my-5">
             <!-- <div class="row"> -->

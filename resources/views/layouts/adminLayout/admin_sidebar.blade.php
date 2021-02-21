@@ -157,19 +157,21 @@
         </div>
         <a
             class="logout-btn btn btn-danger"
-            href="{{ url('/logout') }}"
+            href="{{ url('/admin/logout') }}"
             onclick="event.preventDefault();
         document.getElementById('logout-form').submit();"
             ><i class="icon icon-share-alt"></i>
             <span class="text">Logout</span></a
         >
-        <form
+        
+            <form
             id="logout-form"
-            action="{{ route('logout') }}"
+            action="{{ url('/admin/logout') }}"
             method="POST"
             class="d-none"
-        >
-            @csrf
+            >    
+        
+            {{ csrf_field() }}
         </form>
     </div>
 </div>

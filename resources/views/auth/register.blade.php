@@ -10,7 +10,7 @@
                 <div class="card-body">
                     {{-- <form method="POST" action="{{ route('register') }}">
                         @csrf
- --}}
+ --}}<h1>{{$url}}</h1>
                         @isset($url)
                         <form method="POST" action='{{ url("register/$url") }}' aria-label="{{ __('Register') }}">
                         @else

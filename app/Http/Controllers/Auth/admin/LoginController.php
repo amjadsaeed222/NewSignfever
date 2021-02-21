@@ -29,7 +29,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo ='/admin';
+    protected $redirectTo ='/admin/view-products';
 
     /**
      * Create a new controller instance.
@@ -38,12 +38,13 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        //$this->middleware('guest')->except('logout');
+        
         $this->middleware('guest:admin')->except('logout');
-        //$this->middleware('guest:customer')->except('logout');
+        
     }
     public function showAdminLoginForm()
     {
+        //dd("admin");
         return view('auth.login',['url'=>'admin']);
         
     }
@@ -55,28 +56,10 @@ class LoginController extends Controller
         ]);
         if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
 
-            return redirect()->intended('/admin');
+            return redirect()->intended('admin/view-products');
             
         }
         return back()->withInput($request->only('email', 'remember'));
     }
-    //Customers Login forms
-    public function showCustomerLoginForm()
-    {
-        return view('auth.login',['url'=>'customer']);
-    }
-    public function customerLogin(Request $request)
-    {
-        $credential=['email'=>$request->email,'password'=>$request->password];
-        
-        $this->validate($request,[
-            'email'=>'required|email',
-            'password'=>'required',
-        ]);
-        if (Auth::guard('customer')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
-            //dd($credential);
-            return redirect()->intended('/customer');
-        }
-        return back()->withInput($request->only('email', 'remember'));
-    }
+    
 }

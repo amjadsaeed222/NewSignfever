@@ -10,7 +10,7 @@ class CustomerDashboard extends Controller
     //
     public function __construct()
     {
-        $this->middleware('auth:customer');
+        //$this->middleware('auth:customer');
     }
     public function index()
     {

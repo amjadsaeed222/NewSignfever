@@ -42,9 +42,9 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
-        $this->middleware('guest:admin');
-        $this->middleware('guest:customer');
+        //$this->middleware('guest');
+        //$this->middleware('guest:admin');
+        //$this->middleware('guest:customer');
     }
 
     /**
@@ -57,32 +57,16 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:admins'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
-    protected function customer_validator(array $data)
-    {
-        return Validator::make($data, [
-            'firstname' => ['required', 'string', 'max:255'],
-            'lastname' => ['required', 'string', 'max:255'],
-            'phone' => ['required', 'numeric'],
-            'street' => ['required'],
-            'city' => ['required', 'string', 'max:255'],
-            'state' => ['required', 'string', 'max:255'],
-            'zipcode' => ['required'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:customers'],
-            'password' => ['required', 'string', 'min:8'],
-        ]);
-    }
+    
     public function showAdminRegisterForm()
     {
         return view('auth.register', ['url' => 'admin']);
     }
-    public function showCustomerRegisterForm()
-    {
-        return view('auth.customer_register', ['url' => 'customer']);
-    }
+    
     /**
      * Create a new user instance after a valid registration.
      *
@@ -100,27 +84,12 @@ class RegisterController extends Controller
     protected function createAdmin(Request $request)
     {
         $this->validator($request->all())->validate();
-        Admin::create([
+        User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-        return redirect()->intended('login/admin');
+        return redirect()->intended('admin/login');
     }
-    protected function createCustomer(Request $request)
-    {
-        $this->customer_validator($request->all())->validate();
-        Customer::create([
-            'firstname' => $request->firstname,
-            'lastname' => $request->lastname,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'street' => $request->street,
-            'city' => $request->city,
-            'state' => $request->state,
-            'zipcode' => $request->zipcode,
-            'password' => Hash::make($request->password),
-        ]);
-        return redirect()->intended('login/customer');
-    }
+    
 }

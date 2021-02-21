@@ -139,7 +139,8 @@ class IndexController extends Controller
         //echo "<pre>";print_r($index);die;
         $products= Product::where(['index_Id' => $index->id])->get();
         // $product->category_name = $category_name->name;
-        foreach($products as $product) {
+        foreach($products as $product) 
+        {
             $images = ProductsImage::where(['product_id'=>$product->id])->get();
             $size_ids=ProductsAttribute::where(['product_id'=>$product->id])->where(['attribute_type'=>1])->get();
             $material_ids=ProductsAttribute::where(['product_id'=>$product->id])->where(['attribute_type'=>2])->get();

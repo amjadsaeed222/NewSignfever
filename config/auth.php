@@ -82,7 +82,7 @@ return [
         ],
         'admin' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Admin::class,
+            'model' => App\Models\User::class,
         ],
         'customer' => [
             'driver' => 'eloquent',
@@ -116,6 +116,19 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+        'admin'=>[
+            'provider'=> 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'customer'=>[
+            'provider'=> 'customers',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        
     ],
 
     /*

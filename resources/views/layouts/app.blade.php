@@ -43,13 +43,22 @@
                             
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                   @if ($url=='admin')
+                                   <a class="nav-link" href="{{ url('/admin/login') }}">{{ __('Admin Login') }}</a>
+                                   @else
+                                   <a class="nav-link" href="{{ url('/customer/login') }}">{{ __('Customer Login') }}</a>
+                                    @endif
                                 </li>
                             @endif
                             
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    @if ($url=='admin')
+                                    <a class="nav-link" href="{{ url('/register/admin') }}">{{ __('Admin Register') }}</a>    
+                                    @else
+                                    <a class="nav-link" href="{{ url('/register/customer') }}">{{ __('Customer Register') }}</a>    
+                                    @endif
+                                    
                                 </li>
                             @endif
                         @else
