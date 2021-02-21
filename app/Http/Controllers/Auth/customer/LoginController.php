@@ -34,7 +34,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/customer';
+    protected $redirectTo = '/shopping-cart';
 
     /**
      * Create a new controller instance.
@@ -43,7 +43,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest:customer')->except('logout');
+       $this->middleware('guest:customer')->except('logout');
     }
     
 
@@ -54,6 +54,7 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
+
         return view('auth.login',['url'=>'consumer']);
     }
 
@@ -65,7 +66,8 @@ class LoginController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function login(Request $request)
+    /*
+     public function login(Request $request)
     {
         $this->validateLogin($request);
 
@@ -91,7 +93,7 @@ class LoginController extends Controller
 
         return $this->sendFailedLoginResponse($request);
     }
-
+    */
     /**
      * Validate the user login request.
      *
@@ -203,7 +205,7 @@ class LoginController extends Controller
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
-        return redirect('/login.customer');
+        return view('auth.login',['url'=>'customer']);
         if ($response = $this->loggedOut($request)) {
             return $response;
         }
@@ -237,8 +239,9 @@ class LoginController extends Controller
     //Customers Login forms
     public function showCustomerLoginForm()
     {
+       //dd("hello");
         return view('auth.login',['url'=>'customer']);
-    }
+    }   
     public function customerLogin(Request $request)
     {
         $credential=['email'=>$request->email,'password'=>$request->password];
@@ -249,7 +252,7 @@ class LoginController extends Controller
         ]);
         if (Auth::guard('customer')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
                 
-            return redirect()->intended('/customer');
+            return redirect()->intended('/shopping-cart');
         }
         return back()->withInput($request->only('email', 'remember'));
     }

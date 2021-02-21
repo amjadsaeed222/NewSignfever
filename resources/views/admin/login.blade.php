@@ -8,14 +8,14 @@
                 <div class="card-header">{{ isset($url) ? ucwords($url) : ""}} {{ __('Login') }}</div>
 
                 <div class="card-body">
-                    {{-- <form method="POST" action="{{ route('login') }}">
-                        @csrf --}}
-                        @isset($url)
-                        <form method="POST" action=' {{ url("$url/login") }}' aria-label="{{ __('Login') }}">
+                    <form method="POST" action="{{ route('login') }}">
+                        @csrf
+                        {{-- @isset($url)
+                        <form method="POST" action=' {{ url("login/$url") }}' aria-label="{{ __('Login') }}">
                         @else
                         <form method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
                         @endisset
-                            @csrf    
+                            @csrf     --}}
 
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
@@ -63,16 +63,10 @@
                                     {{ __('Login') }}
                                 </button>
 
-                                @if (Route::has('password.request')) 
-                                    @if ($url=='admin') 
-                                        <a class="btn btn-link" href="{{ route('password.request') }}">
-                                           {{ __('Forgot Your Password?') }}
-                                        </a>
-                                    @else
-                                        <a class="btn btn-link" href="{{ route('customer.password.request') }}">
-                                            {{ __('Forgot Your Password?') }}
-                                        </a>
-                                    @endif
+                                @if (Route::has('password.request'))
+                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                        {{ __('Forgot Your Password?') }}
+                                    </a>
                                 @endif
                             </div>
                         </div>

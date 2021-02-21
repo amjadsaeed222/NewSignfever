@@ -1060,8 +1060,10 @@ class ProductsController extends Controller
 
 
 
-    public function getCart() {
-        if (!Session::has('cart')) {       
+    public function getCart() 
+    {
+        if (!Session::has('cart')) 
+        {       
         return view('frontend.emptyCart');
         }
         else {
@@ -1072,7 +1074,9 @@ class ProductsController extends Controller
             $products = json_encode($products);
             // dd($cart);
             // return view('shop.shopping-cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
+            
             return view('frontend.shoppingCart',compact('products'));
+
         }
 
     }

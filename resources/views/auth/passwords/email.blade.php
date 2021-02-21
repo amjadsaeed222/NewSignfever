@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
+                <div class="card-header">{{ucwords($url)}} {{ __('Reset Password') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -13,9 +13,14 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-                    <form method="POST" action="{{ route('password.email') }}">
-                        @csrf
+                    @if ($url=='admin')
+                        <form method="POST" action="{{ route('password.email') }}">
+                            @csrf
+                    @else
+                        <form method="POST" action="{{ route('customer.password.email') }}">
+                            @csrf    
+                    @endif    
+                    
 
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>

@@ -20,11 +20,10 @@ use Illuminate\Support\Facades\Auth;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-require __DIR__.'/auth.php';
-Auth::routes();
+//require __DIR__.'/auth.php';
+//Auth::routes();
 
-
-Route::group(['middleware'=>'auth:api'],function(){
+Route::group(['middleware'=>'auth:admin'],function(){
     
     Route::get('/add-customer',[CustomerController::class,'addCustomer']);
     Route::match(['get', 'post'], '/add-category',[CategoryController::class,'addCategory'])->middleware('web');

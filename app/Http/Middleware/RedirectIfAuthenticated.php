@@ -32,16 +32,20 @@ class RedirectIfAuthenticated
         // } 
         // if ($guard == "admin" && Auth::guard($guard)->check()) {
               
-        //     return redirect('/admin');
+        //     return redirect('/admin/view-products');
         // }
-        //  if ($guard == "customer" && Auth::guard($guard)->check()) {
-        //     dd('login');   
-        //      return redirect('/customer');
-        //  }
-        
-        if (Auth::guard($guard)->check()) {
+        //  if ($guard == "customer" && Auth::guard($guard)->check()) 
+        //  {
             
-            return redirect('/home');
+        //      return redirect('/shopping-cart');
+        //  }
+        //dd($guard);
+        if (Auth::guard($guard)->check()) 
+        {
+            if($guard=='admin')
+                return redirect()->route('viewproducts');
+            else if ($guard=='customer')
+            return redirect()->route('shopping_cart');
         }
         return $next($request);
     }
