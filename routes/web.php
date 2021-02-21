@@ -54,10 +54,11 @@ Route::get('/execute-payment',[PaymentController::class,'execute']);
 Route::get('/cart/delete-product/{id}', [ProductsController::class, 'removeCart']);
 
 // Update Product Quantity from Cart
-Route::get('/cart/update-quantity/{id}/{quantity}','ProductsController@updateCartQuantity');    
+Route::get('/cart/update-quantity/{id}/{quantity}','ProductsController@updateCartQuantity');    // Order From
+
+Route::get("/order-form", [IndexController::class,'orderForm']);
 
 require __DIR__.'/auth.php';
-
 Auth::routes();
 
 Route::get('/admin/login', 'App\Http\Controllers\Auth\admin\LoginController@showAdminLoginForm');

@@ -249,9 +249,6 @@ class IndexController extends Controller
         
     }
 
-
-    
-
     public function allProducts(Request $request)
     {
         $products = Product::get();
@@ -271,6 +268,11 @@ class IndexController extends Controller
     public function shoppingCart() 
     {
         return view('frontend.shoppingCart');
+    }
+
+    public function orderForm() 
+    {
+        return view('frontend.orderForm');
     }
     
 
