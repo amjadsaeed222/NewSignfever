@@ -48,6 +48,10 @@ Route::get('/cart/delete-product/{id}', [ProductsController::class, 'removeCart'
 // Update Product Quantity from Cart
 Route::get('/cart/update-quantity/{id}/{quantity}','ProductsController@updateCartQuantity');    
 
+// Order From
+
+Route::get("/order-form", [IndexController::class,'orderForm']);
+
 
 
 //require __DIR__.'/auth.php';
