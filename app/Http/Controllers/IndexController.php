@@ -202,12 +202,14 @@ class IndexController extends Controller
         foreach($size_ids as $key=>$val) 
         {
             $size = ProductSize::where(['id'=>$val->attribute_value])->first();
+            $size->price = $val->price;
             $size_array[$key]=$size;
         }
 
         foreach($material_ids as  $key=>$val) 
         {
             $material = ProductMaterial::where(['id' => $val->attribute_value])->first();
+            $material->price = $val->price;
             $material_array[$key]=$material;
         }
         

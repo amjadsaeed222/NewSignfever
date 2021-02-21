@@ -87,6 +87,7 @@
                             :src="'/images/backend_images/index/' + category.image"
                             :alt="category.name"
                             class="d-block mx-auto my-5"
+                            width="300px"
                         />
                     </div>
                     <div class="col-md-5 mobile-only">
@@ -131,7 +132,7 @@
                         <span class="highlighted-text">1 day 7 hrs</span> Get
                         your signs on Wednesday. Free shipping for orders over
                         $29.95. Orders over $100 ship
-                        <b>UPS/Expendited 2nd Day</b> for free. Details:
+                        <b>UPS/Expendited 2nd Day</b> for free.
                     </div>
                 </div>
             </div>

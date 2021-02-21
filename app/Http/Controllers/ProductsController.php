@@ -57,19 +57,19 @@ class ProductsController extends Controller
             {
                 $status='1';
             }
-            if(empty($data['product_custome']))
+            if(empty($data['product_custom']))
             {
-                $custome='0';
+                $custom='0';
             }else
             {
-                $custome='1';
+                $custom='1';
             }
 			$product->price = $data['product_price'];
             $product->shape=$data['product_shape'];
             $product->partNo=$data['product_part_no'];
             $product->shape=$data['product_shape'];
             $product->status = $status;
-            $product->custome = $custome;
+            $product->custom = $custom;
             if(empty($data['product_feature']))
             {
                 $product->feature='0';
@@ -174,18 +174,21 @@ class ProductsController extends Controller
             {
                 $status='1';
             }
-            if(empty($data['product_custome']))
+            if(empty($data['product_custom']))
             {
-                $custome='0';
+                $custom='0';
             }else
             {
-                $custome='1';
+                $custom='1';
             }
 
-            // if(empty($data['description']))
-            // {
-            // 	$data['description'] = '';
-            // }
+            if(empty($data['description']))
+            {
+            	$description = '';
+            }
+            else {
+                $description = $data['description'];
+            }
             if(empty($data['product_feature']))
             {
                 $feature='0';
@@ -198,7 +201,7 @@ class ProductsController extends Controller
             $updateProduct=Product::where(['slug'=>$slug])->first();
             $updateProduct->slug=null;
             $updateProduct->update(['index_Id'=> $data['product_index'],'partNo'=> $data['product_part_no'],'shape'=> $data['product_shape'],'status'=>$status,'product_name'=>$data['product_name'],
-				'description'=> $data['product_description'],'price'=>$data['product_price'], 'custome'=> $custome, 'feature'=> $feature]);
+				'description'=> $description,'price'=>$data['product_price'], 'custom'=> $custom, 'feature'=> $feature]);
             // $updateProduct->update(['index_Id'=> $data['product_index'],'partNo'=> $data['product_part_no'],'shape'=> $data['product_shape'],'status'=>$status,'product_name'=>$data['product_name'],
 			// 	'description'=> $data['description'],'price'=>$data['product_price'],'feature'=> $feature]);
             //Updating Attribute of the product
@@ -995,7 +998,7 @@ class ProductsController extends Controller
      
 // OLD CART HANDLING
 
-    public function getAddToCart(Request $request, $id, $sizeId, $materialId, $imageId) 
+    public function getAddToCart(Request $request, $id, $sizeId, $materialId, $imageId,$qty) 
     {
         $product = Product::find($id);
         $size=ProductSize::find($sizeId);
@@ -1004,7 +1007,7 @@ class ProductsController extends Controller
         
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
-        $cart->add($product, $product->id,$size->title,$material->title,$image->image);
+        $cart->add($product, $product->id,$size->title,$material->title,$image->image,$qty);
         $request->session()->put('cart', $cart);
         $session_cart=session::get('cart');
         // $session_cart=json_encode($session_cart);
@@ -1083,6 +1086,8 @@ public function customCanvas() {
         return view('frontend.customCanvas');
     }
 
-   
+   public function dashboard() {
+       return view('admin.dashboard');
+   }
     
 }

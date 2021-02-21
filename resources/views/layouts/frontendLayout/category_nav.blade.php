@@ -20,9 +20,7 @@
                             >Home <span class="sr-only">(current)</span></a
                         >
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/custom-canvas">Custom</a>
-                    </li>
+                   
                     <li
                         class="nav-item dropdown"
                         v-for="category in categories"
@@ -49,6 +47,9 @@
                                 >@{{ subCat.title }}</a
                             >
                         </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/custom-canvas">Add Your Wording</a>
                     </li>
                 </ul>
             </div>

@@ -43,7 +43,7 @@ class RegisterController extends Controller
     public function __construct()
     {
         //$this->middleware('guest');
-        //$this->middleware('guest:admin');
+        $this->middleware('guest:admin');
         //$this->middleware('guest:customer');
     }
 
@@ -91,5 +91,6 @@ class RegisterController extends Controller
         ]);
         return redirect()->intended('admin/login');
     }
+    
     
 }

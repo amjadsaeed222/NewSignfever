@@ -129,30 +129,30 @@
                                     <div class="col-12 no-gutters">
                                         <div class="col-12">
                                             <p>
-                                                $@{{ product.item.price }}/Roll
+                                                $@{{ product.item.price }}/PC(s)
                                             </p>
                                         </div>
-                                        <div class="col-12">
+                                        <!-- <div class="col-12">
                                             <p>Package: 1 Roll</p>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </td>
                                 <td>
                                     <div class="col-12 no-gutters text-center">
                                         <div class="col-12 border">
-                                            <p class="">1</p>
+                                            <p class="">@{{product.qty}}</p>
                                         </div>
                                         <div class="col-12">
-                                            <p>Roll</p>
+                                            <p>PC(s)</p>
                                         </div>
-                                        <div class="col-12">
+                                        <!-- <div class="col-12">
                                             <button
                                                 class="btn btn-outline-info"
                                                 style="font-size: 0.8rem"
                                             >
                                                 Update
                                             </button>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </td>
                                 <td>

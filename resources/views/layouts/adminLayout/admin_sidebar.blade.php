@@ -122,7 +122,7 @@
     <div class="admin-headers ">
         <h3 class="text-center">Sign Fever</h3>
         <h5 class="text-center">Admin Panel</h5>
-        <a href="/" class="text-center">Visit Site</a>
+        <a href="/" target="_blank"  class="text-center">Visit Site</a>
     </div>
     <div class="sidebar-links">
         <button class="products-dropdown dropdown-btn">
